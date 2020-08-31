@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { useContext } from 'react'
 import UserContext from './Context'
+import Main from './components/main'
 
 const Navigation = () => {
     const context = useContext(UserContext)
