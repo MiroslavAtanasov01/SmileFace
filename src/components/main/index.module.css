@@ -1,0 +1,12 @@
+.main {
+          background-color: #fafafa;
+          max-width: 33em;
+          margin: 0 auto;
+}
+
+.header {
+          background-color: white;
+          padding: 20px;
+          border-bottom: 1px solid lightgray;
+          object-fit: contain;
+}
