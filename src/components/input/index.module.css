@@ -1,0 +1,92 @@
+.login-container {
+          -webkit-box-align: center;
+          -webkit-align-items: center;
+          -ms-flex-align: center;
+          align-items: center;
+          -webkit-appearance: none;
+          background: #fafafa;
+          background: rgba(var(--b3f, 250, 250, 250), 1);
+          border: 1px solid #dbdbdb;
+          border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+          border-radius: 3px;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          color: #262626;
+          color: rgba(var(--i1d, 38, 38, 38), 1);
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+          -webkit-flex-direction: row;
+          -ms-flex-direction: row;
+          flex-direction: row;
+          font-size: 14px;
+          position: relative;
+          margin: 0 40px 6px;
+}
+
+.label {
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          height: 36px;
+          -webkit-box-flex: 1;
+          -webkit-flex: 1 0 0;
+          -ms-flex: 1 0 0;
+          flex: 1 0 0;
+          padding: 0;
+          position: relative;
+          margin: 0;
+          min-width: 0;
+}
+
+.span {
+          color: #8e8e8e;
+          color: rgba(var(--f52, 142, 142, 142), 1);
+          font-size: 12px;
+          height: 36px;
+          left: 8px;
+          line-height: 36px;
+          overflow: hidden;
+          pointer-events: none;
+          position: absolute;
+          right: 0;
+          text-overflow: ellipsis;
+          -webkit-transform-origin: left;
+          transform-origin: left;
+          -webkit-transition: -webkit-transform ease-out 0.1s;
+          transition: -webkit-transform ease-out 0.1s;
+          transition: transform ease-out 0.1s;
+          transition: transform ease-out 0.1s, -webkit-transform ease-out 0.1s;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          white-space: nowrap;
+}
+
+.login-input {
+          font-size: 16px;
+          background: #fafafa;
+          background: rgba(var(--b3f, 250, 250, 250), 1);
+          border: 0;
+          -webkit-box-flex: 1;
+          -webkit-flex: 1 0 auto;
+          -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+          margin: 0;
+          outline: 0;
+          overflow: hidden;
+          padding: 9px 0 7px 8px;
+          text-overflow: ellipsis;
+
+          color: #262626;
+          color: rgba(var(--i1d, 38, 38, 38), 1);
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                    Helvetica, Arial, sans-serif;
+          font-size: 14px;
+          line-height: 18px;
+}
