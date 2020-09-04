@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import UserContext from './Context'
 import Main from './components/main'
 import LoginPage from './pages/login'
+import RegisterPage from './pages/register'
 
 const Navigation = () => {
     const context = useContext(UserContext)
@@ -18,6 +19,9 @@ const Navigation = () => {
                 </Route>
                 <Route path="/login"  >
                     {loggedIn ? (<Redirect to="/" />) : (<LoginPage />)}
+                </Route>
+                <Route path="/register"  >
+                    {loggedIn ? (<Redirect to="/" />) : (<RegisterPage />)}
                 </Route>
             </Switch>
         </BrowserRouter>
