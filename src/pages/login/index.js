@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import style from './index.module.css'
+import styles from './index.module.css'
 import Input from '../../components/input'
 import Button from '../../components/button'
+import Link from '../../components/link'
 
 const LoginPage = () => {
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
 
     return (
-        <div className={style.container}>
-            <div className={style.main}>
-                <h1 className={style.h1}>
+        <div className={styles.container}>
+            <div className={styles.main}>
+                <h1 className={styles['logo-name']}>
                     SmileFace
                 </h1>
                 <div>
@@ -19,7 +20,6 @@ const LoginPage = () => {
                             value={email}
                             // onChange={(e) => this.onChange(e, 'email')}
                             // onBlur={this.handlerBlurEmail}
-                            // label="Email"
                             id="email"
                             type='login'
                             placeholder="Enter your email"
@@ -30,26 +30,32 @@ const LoginPage = () => {
                             value={password}
                             // onChange={(e) => this.onChange(e, 'password')}
                             // onBlur={this.handlerBlurPassword}
-                            // label="Password"
                             id="password"
                             type='login'
                             placeholder="Password"
                         // error={passwordError}
                         />
-                        <Button />
-                        <div className={style.div}>
-                            <div className={style.div1}></div>
-                            <div className={style.div2}>or</div>
-                            <div className={style.div1}></div>
+                        <Button type='login' title="Log in" />
+                        <div className={styles.or}>
+                            <div className={styles['or-text']}>or</div>
+                            <div className={styles.line}></div>
                         </div>
                     </form>
                 </div>
+                <div>
+                    <Button type='facebook' title="Log in with Facebook" />
+                </div>
             </div>
-            <div className={style.acc}>
-                <div className={style.name}>
-                    <p>
-                        Don't have an account?
-                </p>
+            <div className={styles.acc}>
+                <div className={styles.text}>
+                    <p>Don't have an account?
+                    <Link
+                            key='Sign up'
+                            href="/register"
+                            title='Sign up'
+                            type='login'
+                        />
+                    </p>
                 </div>
             </div>
         </div>

@@ -2,19 +2,13 @@
           margin: 0 auto;
           color: #262626;
           color: rgba(var(--i1d, 38, 38, 38), 1);
-          -webkit-box-flex: 1;
-          -webkit-flex-grow: 1;
-          -ms-flex-positive: 1;
-          flex-grow: 1;
-          -webkit-box-pack: center;
-          -webkit-justify-content: center;
-          -ms-flex-pack: center;
           justify-content: center;
           margin-top: 12px;
           max-width: 350px;
+          padding-top: 2em;
 }
 
-.h1 {
+.logo-name {
           font-family: cursive;
           margin: 22px auto 12px;
           background-repeat: no-repeat;
@@ -24,9 +18,6 @@
 }
 
 .main {
-          -webkit-box-align: center;
-          -webkit-align-items: center;
-          -ms-flex-align: center;
           align-items: center;
           background-color: #fff;
           background-color: rgba(var(--d87, 255, 255, 255), 1);
@@ -37,34 +28,14 @@
           padding: 10px 0;
 }
 
-.div {
+.or {
           margin: 10px 40px 18px;
+          padding-top: 10px;
 }
 
-.div1 {
-          -webkit-box-flex: 1;
-          -webkit-flex-grow: 1;
-          -ms-flex-positive: 1;
-          flex-grow: 1;
-          -webkit-flex-shrink: 1;
-          -ms-flex-negative: 1;
-          flex-shrink: 1;
-          background-color: #dbdbdb;
-          background-color: rgba(var(--b38, 219, 219, 219), 1);
-          height: 1px;
-          position: relative;
-          top: 0.45em;
-}
-.div2 {
+.or-text {
           color: #8e8e8e;
           color: rgba(var(--f52, 142, 142, 142), 1);
-          -webkit-box-flex: 0;
-          -webkit-flex-grow: 0;
-          -ms-flex-positive: 0;
-          flex-grow: 0;
-          -webkit-flex-shrink: 0;
-          -ms-flex-negative: 0;
-          flex-shrink: 0;
           font-size: 13px;
           font-weight: 600;
           line-height: 15px;
@@ -72,12 +43,18 @@
           text-transform: uppercase;
           display: block;
           margin: 0;
+          text-align: center;
+}
+
+.line {
+          background-color: #dbdbdb;
+          background-color: rgba(var(--b38, 219, 219, 219), 1);
+          height: 1px;
+          position: relative;
+          top: 0.45em;
 }
 
 .acc {
-          -webkit-box-align: center;
-          -webkit-align-items: center;
-          -ms-flex-align: center;
           align-items: center;
           background-color: #fff;
           background-color: rgba(var(--d87, 255, 255, 255), 1);
@@ -88,7 +65,7 @@
           padding: 10px 0;
 }
 
-.name {
+.text {
           display: block;
           color: #8e8e8e;
           color: rgba(var(--f52, 142, 142, 142), 1);
@@ -98,7 +75,7 @@
           margin: -3px 0 -4px;
 }
 
-.name p {
+.text p {
           color: #262626;
           color: rgba(var(--i1d, 38, 38, 38), 1);
           font-size: 14px;

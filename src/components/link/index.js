@@ -1,0 +1,15 @@
+import React from 'react'
+import styles from './index.module.css'
+import { Link } from 'react-router-dom'
+
+const LinkComponent = ({ title, href, type }) => {
+    return (
+        <div className={styles[`${type}-link`]}>
+            <Link to={href} className={styles[`${type}-a`]}>
+                {title}
+            </Link>
+        </div>
+    )
+}
+
+export default LinkComponent

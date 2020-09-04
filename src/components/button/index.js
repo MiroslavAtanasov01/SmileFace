@@ -1,13 +1,11 @@
 import React from 'react'
 import styles from './index.module.css'
 
-const Button = () => {
+const Button = ({ type, title }) => {
     return (
-        <div className={styles.container}>
-            <button className={styles.btn}>
-                <div className={styles.main}>
-                    Log in
-                </div>
+        <div className={styles[[`${type}-container`]]}>
+            <button className={styles[`${type}-btn`]}>
+                {title}
             </button>
         </div>
     )
