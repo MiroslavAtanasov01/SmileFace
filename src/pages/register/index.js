@@ -1,59 +1,86 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
+import UserContext from '../../Context'
 import styles from './index.module.css'
 import Input from '../../components/input'
 import Button from '../../components/button'
 import Link from '../../components/link'
 
 const LoginPage = () => {
+    const history = useHistory()
+    const context = useContext(UserContext)
     const [email, setEmail] = useState(null)
     const [username, setUsername] = useState(null)
     const [password, setPassword] = useState(null)
     const [rePassword, setRePassword] = useState(null)
 
+    const onSubmit = async (e) => {
+        e.preventDefault()
+
+        try {
+            const promise = await fetch('http://localhost:3333/api/user/register', {
+                method: 'POST',
+                body: JSON.stringify({ email, username, password, rePassword }),
+                headers: { 'Content-type': 'application/json' }
+            })
+            const authToken = promise.headers.get('Authorization')
+            document.cookie = `instagram=${authToken}`
+
+            const response = await promise.json()
+
+            if (response.email && authToken) {
+                context.logIn({
+                    email: response.email,
+                    id: response._id
+                })
+                history.push(`/`)
+            } else {
+                history.push('/register')
+            }
+        } catch (e) {
+            console.log('This email or username is already taken')
+        }
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.main}>
-                <h1 className={styles['logo-name']}>
-                    SmileFace
-                </h1>
+                <h1 className={styles['logo-name']}>SmileFace</h1>
                 <div>
-                    <form>
+                    <form onSubmit={onSubmit}>
                         <Input
                             value={email}
-                            // onChange={(e) => this.onChange(e, 'email')}
+                            onChange={(event) => setEmail(event.target.value)}
                             // onBlur={this.handlerBlurEmail}
                             id="email"
                             type='login'
                             placeholder="Enter your email"
-                        // error={emailError}
                         />
                         <Input
                             value={username}
-                            // onChange={(e) => this.onChange(e, 'email')}
+                            onChange={(event) => setUsername(event.target.value)}
                             // onBlur={this.handlerBlurEmail}
                             id="username"
                             type='login'
                             placeholder="Username"
-                        // error={emailError}
                         />
                         <Input
                             name='password'
                             value={password}
-                            // onChange={(e) => this.onChange(e, 'password')}
+                            onChange={(event) => setPassword(event.target.value)}
                             // onBlur={this.handlerBlurPassword}
                             id="password"
                             type='login'
                             placeholder="Password"
-                        // error={passwordError}
                         />
                         <Input
+                            name='password'
                             value={rePassword}
-                            // onChange={(e) => this.onChange(e, 'email')}
+                            onChange={(event) => setRePassword(event.target.value)}
                             // onBlur={this.handlerBlurEmail}
                             id="rePassword"
                             type='login'
                             placeholder="Re-Password"
-                        // error={emailError}
                         />
                         <Button type='login' title="Register" />
                         <div className={styles.or}>
