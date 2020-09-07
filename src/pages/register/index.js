@@ -24,7 +24,7 @@ const LoginPage = () => {
                 headers: { 'Content-type': 'application/json' }
             })
             const authToken = promise.headers.get('Authorization')
-            document.cookie = `instagram=${authToken}`
+            document.cookie = `auth-token=${authToken}`
 
             const response = await promise.json()
 

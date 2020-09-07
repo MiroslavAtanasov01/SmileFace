@@ -14,8 +14,7 @@ const Navigation = () => {
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact>
-                    <Main />
-                    {/* {loggedIn ? (<Main />) : (<Redirect to="/login" />)} */}
+                    {loggedIn ? (<Main />) : (<Redirect to="/login" />)}
                 </Route>
                 <Route path="/login"  >
                     {loggedIn ? (<Redirect to="/" />) : (<LoginPage />)}

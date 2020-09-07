@@ -14,7 +14,7 @@ module.exports = {
         },
         getById: async (req, res, next) => {
             try {
-                const user = await models.user.getById(req.body.id)
+                const user = await models.user.findById(req.params.id)
                     .populate("followers")
                     .populate("following")
                     .populate("requests")
@@ -38,9 +38,19 @@ module.exports = {
                 return next
             }
         },
+        verify: async (req, res, next) => {
+            try {
+                const token = req.body.token || ''
+                const data = await jwt.verifyToken(token)
+                const user = await models.user.findById(data.id)
+                res.send({ status: true, user })
+            } catch (error) {
+                res.send({ status: false })
+            }
+        },
+
         login: async (req, res, next) => {
             const { email, password } = req.body
-
             try {
                 const user = await models.user.findOne({ email })
                 const match = await user.matchPassword(password)
@@ -49,7 +59,7 @@ module.exports = {
                     return
                 }
                 const token = jwt.createToken({ id: user._id })
-                res.cookie(config.development.cookie, token).header('Authorization', token).send(user)
+                res.header('Authorization', token).send(user)
             } catch {
                 return next
             }

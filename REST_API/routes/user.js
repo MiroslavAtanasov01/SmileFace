@@ -6,6 +6,7 @@ router.get('/:id', controllers.user.get.getById)
 
 router.post('/register', controllers.user.post.register)
 router.post('/login', controllers.user.post.login)
+router.post('/verify', controllers.user.post.verify)
 router.post('/logout', controllers.user.post.logout)
 
 router.delete('/:id', controllers.user.delete)
