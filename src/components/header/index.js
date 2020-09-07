@@ -13,7 +13,7 @@ const Header = () => {
                     <Link key='SmileFace' href='/' title='SmileFace' type="logo" />
                 </div>
                 <div className={styles.search}>
-                    Search....
+                    Search...
             </div>
                 <div className={styles.links}>
                     {loggedIn
