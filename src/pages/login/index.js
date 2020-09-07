@@ -79,12 +79,7 @@ const LoginPage = () => {
             <div className={styles.acc}>
                 <div className={styles.text}>
                     <p>Don't have an account?
-                    <Link
-                            key='Sign up'
-                            href="/register"
-                            title='Sign up'
-                            type='login'
-                        />
+                    <Link key='Sign up' href="/register" title='Sign up' type='login' />
                     </p>
                 </div>
             </div>
