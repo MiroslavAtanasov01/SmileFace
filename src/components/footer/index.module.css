@@ -1,0 +1,32 @@
+.footer {
+          max-width: 60em;
+          margin: 0 auto;
+          padding-bottom: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+}
+
+.copyright {
+          text-align: right;
+          color: #8e8eaa;
+          font-size: 13px;
+          font-weight: 500;
+          display: block;
+}
+
+.links {
+          display: block;
+}
+
+.select {
+          appearance: none;
+          border: none;
+          outline: none;
+          outline-color: #0095f7;
+          font-weight: 551;
+          color: #00376b;
+          font-size: 13px;
+          text-transform: uppercase;
+          cursor: pointer;
+}
