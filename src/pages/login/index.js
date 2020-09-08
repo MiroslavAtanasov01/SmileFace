@@ -9,8 +9,8 @@ import Link from '../../components/link'
 const LoginPage = () => {
     const history = useHistory()
     const context = useContext(UserContext)
-    const [email, setEmail] = useState(null)
-    const [password, setPassword] = useState(null)
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
 
     const onSubmit = async (e) => {
         e.preventDefault()

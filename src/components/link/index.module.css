@@ -10,6 +10,14 @@
           display: inline-block;
 }
 
+.logo-a {
+          text-decoration: none;
+          color: black;
+          font-weight: bold;
+          font-size: 22px;
+          font-family: serif;
+}
+
 .footer-a {
           text-decoration: none;
           color: #00376b;
@@ -20,4 +28,25 @@
 
 .footer-link {
           display: inline-block;
+}
+
+.sign-a {
+          text-decoration: none;
+          color: #0095f6;
+          font-weight: 600;
+          line-height: 28px;
+          font-size: 14px;
+          margin-left: 15px;
+}
+
+.log-a {
+          text-decoration: none;
+          background-color: #0095f6;
+          color: white;
+          border-radius: 4px;
+          border: 1px solid transparent;
+          font-weight: 600;
+          line-height: 28px;
+          font-size: 14px;
+          padding: 5px 10px;
 }
