@@ -37,3 +37,13 @@
           font-weight: 700;
           cursor: pointer;
 }
+
+.post-btn {
+          border: 1px solid transparent;
+          color: white;
+          background-color: #0095f6;
+          background-color: rgba(var(--d69, 0, 149, 246), 1);
+          border-radius: 4px;
+          margin-top: 0.5em;
+          padding: 5px 10px;
+}

@@ -31,3 +31,21 @@
           font-size: 12px;
           line-height: 18px;
 }
+
+.post-input {
+          border-radius: 3px;
+          width: 100%;
+          background-color: #fafafa;
+          border: solid 1px lightgray;
+          color: #262626;
+          font-size: 12px;
+          line-height: 16px;
+          outline: 0;
+          resize: none;
+          margin-bottom: 1em;
+          padding: 1em;
+}
+
+.post-input::placeholder {
+          font-size: 12px;
+}
