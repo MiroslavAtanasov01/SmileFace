@@ -1,0 +1,59 @@
+.container {
+          height: 66vh;
+          max-width: 50em;
+          margin: 0 auto;
+          /* background-color: red; */
+          display: flex;
+          justify-content: space-between;
+}
+
+.main {
+          background-color: #fff;
+}
+
+.title {
+          text-align: center;
+          font-size: 32px;
+          line-height: 40px;
+          font-weight: 300;
+}
+
+.upload {
+          width: 33%;
+          height: 50vh;
+          margin-top: 2em;
+          background-color: #fafafa;
+          border: solid 1px lightgray;
+          text-align: center;
+}
+
+.form {
+          padding-top: 2em;
+          width: 60%;
+}
+
+.preview {
+          width: 120px;
+}
+
+.plus {
+          cursor: pointer;
+          border: none;
+          background-color: transparent;
+          outline: 0;
+          margin-top: 80px;
+          margin-bottom: 28px;
+          background-repeat: no-repeat;
+          background-position: -114px -424px;
+          height: 60px;
+          width: 61px;
+          background-image: url(https://www.instagram.com/static/bundles/es6/sprite_felix_4800bc114a3a.png/4800bc114a3a.png);
+}
+
+.text {
+          color: #262626;
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 24px;
+          margin-bottom: 12px;
+}

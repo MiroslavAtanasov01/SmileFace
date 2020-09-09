@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from 'react'
-import { faCompass, faHeart, faUser, faComment } from "@fortawesome/free-regular-svg-icons"
+import { faCompass, faHeart, faUser, faComment, faPlusSquare } from "@fortawesome/free-regular-svg-icons"
 import styles from './index.module.css'
 import UserContext from '../../Context'
 import Link from '../link'
@@ -21,9 +21,10 @@ const Header = () => {
                     {loggedIn
                         ?
                         <Fragment>
-                            <Icons href="messages" icon={faComment} />
-                            <Icons href="explore" icon={faCompass} />
-                            <Icons href="notification" icon={faHeart} />
+                            <Icons href="/messages" icon={faComment} />
+                            <Icons href="/add-post" icon={faPlusSquare} />
+                            <Icons href="/explore" icon={faCompass} />
+                            <Icons href="/notification" icon={faHeart} />
                             <Icons href={`/profile/${user && user.id}`} icon={faUser} />
                         </Fragment>
                         :
