@@ -1,4 +1,7 @@
 const models = require('../models')
+const jwt = require('../utils/jwt');
+const config = require('../config/config')
+
 
 module.exports = {
     get: {
@@ -20,10 +23,11 @@ module.exports = {
         const { _id } = req.user;
 
         try {
-            const newPost = await models.post.create({ description, imageUrl, location, createdAt: Date.now(), postedBy: _id })
-            const post = await models.user.updateOne({ _id }, { $push: { posts: newPost } })
-            const user = await models.post.findOne({ _id: newPost._id })
-            return res.send(post, user)
+            const newPost = await models.post.create({
+                description, imageUrl, location, createdAt: Date.now(), postedBy: { _id }
+            })
+            const post = await models.user.updateOne({ _id }, { $addToSet: { posts: newPost } })
+            return res.send(post)
         } catch (err) {
             return res.status(500).send(err)
         }
