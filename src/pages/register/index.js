@@ -9,10 +9,10 @@ import Link from '../../components/link'
 const LoginPage = () => {
     const history = useHistory()
     const context = useContext(UserContext)
-    const [email, setEmail] = useState(null)
-    const [username, setUsername] = useState(null)
-    const [password, setPassword] = useState(null)
-    const [rePassword, setRePassword] = useState(null)
+    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [rePassword, setRePassword] = useState('')
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -95,14 +95,14 @@ const LoginPage = () => {
             </div>
             <div className={styles.acc}>
                 <div className={styles.text}>
-                    <p>Have an account?
+                    <span>Have an account?
                     <Link
                             key='Sign in'
                             href="/login"
                             title='Sign in'
                             type='login'
                         />
-                    </p>
+                    </span>
                 </div>
             </div>
         </div>

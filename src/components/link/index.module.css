@@ -50,3 +50,8 @@
           font-size: 14px;
           padding: 5px 10px;
 }
+
+.error-a {
+          color: rgba(var(--fe0, 0, 55, 107), 1);
+          text-decoration: none;
+}
