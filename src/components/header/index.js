@@ -21,11 +21,11 @@ const Header = () => {
                     {loggedIn
                         ?
                         <Fragment>
-                            <Icons href="/messages" icon={faComment} />
-                            <Icons href="/add-post" icon={faPlusSquare} />
-                            <Icons href="/explore" icon={faCompass} />
-                            <Icons href="/notification" icon={faHeart} />
-                            <Icons href={`/profile/${user && user.id}`} icon={faUser} />
+                            <Icons type="nav" href="/messages" icon={faComment} />
+                            <Icons type="nav" href="/add-post" icon={faPlusSquare} />
+                            <Icons type="nav" href="/explore" icon={faCompass} />
+                            <Icons type="nav" href="/notification" icon={faHeart} />
+                            <Icons type="nav" href={`/profile/${user && user.id}`} icon={faUser} />
                         </Fragment>
                         :
                         <Fragment>

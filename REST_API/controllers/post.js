@@ -4,8 +4,11 @@ module.exports = {
     get: {
         getAll: async (req, res, next) => {
             try {
-                const users = await models.post.find()
-                res.send(users)
+                const posts = await models.post.find()
+                    .populate('postedBy')
+                    .populate('likes')
+                    .populate('comments')
+                res.send(posts)
             } catch {
                 res.status(500).send("Error")
             }

@@ -1,0 +1,39 @@
+.container {
+          width: 31%;
+          display: inline-block;
+          margin: 1.2% 1%;
+          vertical-align: middle;
+          overflow: hidden;
+}
+
+.image {
+          display: block;
+          width: 100%;
+          height: auto;
+}
+
+.container:hover {
+          cursor: pointer;
+          -webkit-filter: brightness(100%);
+}
+
+.image:hover {
+          -webkit-filter: brightness(80%);
+}
+
+.likes {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: none;
+          color: white;
+}
+
+.image:hover + .likes {
+          display: block;
+}
+
+.distance {
+          padding-right: 2em;
+}

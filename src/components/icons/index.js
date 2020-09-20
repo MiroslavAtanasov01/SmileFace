@@ -2,9 +2,9 @@ import React from 'react'
 import styles from './index.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-const Icons = ({ href, icon }) => {
+const Icons = ({ href, icon, type }) => {
     return (
-        <a href={href} className={styles.social}>
+        <a href={href} className={styles[`${type}-social`]}>
             <FontAwesomeIcon icon={icon} size="lg" />
         </a >
     )
