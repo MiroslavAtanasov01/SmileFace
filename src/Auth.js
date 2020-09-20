@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import UserContext from './Context'
 import getCookie from './utils/getCookie'
+const loading = { textAlign: 'center' }
 
 const Auth = (props) => {
   const [loggedIn, setLoggedIn] = useState(null)
@@ -13,22 +14,21 @@ const Auth = (props) => {
 
   const logOut = () => {
     document.cookie = "auth-token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
-    setLoggedIn(false);
-    setUser(null);
-  };
+    setLoggedIn(false)
+    setUser(null)
+  }
 
   useEffect(() => {
     const token = getCookie('auth-token')
 
-    if (!token || token === '') {
+    if (!token) {
       logOut()
       return
     }
 
     fetch('http://localhost:3333/api/user/verify', {
       method: 'POST',
-      body: JSON.stringify({ token }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json', 'Authorization': token },
     }).then(promise => {
       return promise.json()
     }).then(response => {
@@ -41,10 +41,10 @@ const Auth = (props) => {
         logOut()
       }
     })
-  })
+  }, [])
 
   if (loggedIn === null) {
-    return <div>Loading...</div>
+    return <div style={loading}>Loading...</div>
   }
 
   return (

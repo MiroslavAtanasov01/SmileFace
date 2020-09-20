@@ -7,12 +7,11 @@ import Input from '../../components/input'
 import Button from '../../components/button'
 import getCookie from '../../utils/getCookie'
 
-const AddPOst = () => {
+const AddPost = () => {
     const [imageUrl, setImageUrl] = useState("")
     const [location, setLocation] = useState("")
     const [description, setDescription] = useState("")
     const history = useHistory()
-    const token = getCookie('auth-token')
 
     const openWidget = () => {
         window.cloudinary.createUploadWidget(
@@ -30,10 +29,15 @@ const AddPOst = () => {
         e.preventDefault()
 
         try {
-            await fetch("http://localhost:3333/api/post", {
-                method: "POST",
-                body: JSON.stringify({ imageUrl, location, description }),
-                headers: { 'Content-Type': 'application/json', 'Authorization': token },
+            await fetch('http://localhost:3333/api/post', {
+                method: 'POST',
+                body: JSON.stringify({
+                    imageUrl, location, description
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': getCookie('auth-token')
+                }
             })
             history.push('/')
         } catch (err) {
@@ -66,4 +70,4 @@ const AddPOst = () => {
 
 }
 
-export default AddPOst
+export default AddPost

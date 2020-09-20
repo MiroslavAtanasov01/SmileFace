@@ -40,7 +40,7 @@ module.exports = {
         },
         verify: async (req, res, next) => {
             try {
-                const token = req.body.token || ''
+                const token = req.headers.authorization || ''
                 const data = await jwt.verifyToken(token)
                 const user = await models.user.findById(data.id)
                 res.send({ status: true, user })
@@ -48,7 +48,6 @@ module.exports = {
                 res.send({ status: false })
             }
         },
-
         login: async (req, res, next) => {
             const { email, password } = req.body
             try {
@@ -60,12 +59,12 @@ module.exports = {
                 }
                 const token = jwt.createToken({ id: user._id })
                 res.header('Authorization', token).send(user)
-            } catch {
-                return next
+            } catch (err) {
+                next(err)
             }
         },
         logout: (req, res, next) => {
-            res.clearCookie(config.authCookieName)
+            res.clearCookie(config.development.cookie)
         }
     },
 
@@ -76,7 +75,7 @@ module.exports = {
     delete: async (req, res, next) => {
         try {
             const user = await models.user.deleteOne({ _id: req.params.id })
-            res.send(removedUser)
+            res.send(user)
         } catch {
             return next
         }

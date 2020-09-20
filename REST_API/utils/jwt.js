@@ -1,17 +1,12 @@
 const jwt = require('jsonwebtoken');
-const secret = 'secret';
+const config = require('../config/config')
 
 function createToken(data) {
-    return jwt.sign(data, secret);
+    return jwt.sign(data, config.development.privateKey, { expiresIn: '1h' });
 }
 
 function verifyToken(token) {
-    return new Promise((resolve, reject) => {
-        jwt.verify(token, secret, (err, data) => {
-            if (err) { reject(err); return; }
-            resolve(data);
-        });
-    });
+    return jwt.verify(token, config.development.privateKey)
 }
 
 module.exports = {
