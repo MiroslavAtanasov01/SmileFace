@@ -15,10 +15,13 @@ module.exports = {
         getById: async (req, res, next) => {
             try {
                 const user = await models.user.findById(req.params.id)
+                    .populate({
+                        path: "posts",
+                        options: { sort: { createdAt: -1 } }
+                    })
                     .populate("followers")
                     .populate("following")
                     .populate("requests")
-                    .populate("posts")
                 res.send(user)
             } catch {
                 res.status(500).send("Error")
@@ -52,6 +55,10 @@ module.exports = {
             const { email, password } = req.body
             try {
                 const user = await models.user.findOne({ email })
+                    .populate("post")
+                    .populate("followers")
+                    .populate("following")
+                    .populate("requests")
                 const match = await user.matchPassword(password)
                 if (!match) {
                     res.status(401).send('Invalid password')
@@ -69,7 +76,12 @@ module.exports = {
     },
 
     put: {
-
+        picture: (req, res, next) => {
+            const id = req.params.id;
+            models.user.findByIdAndUpdate({ _id: id }, { profilePicture: (req.body.picture) })
+                .then((updatedUser) => res.send(updatedUser))
+                .catch(next)
+        },
     },
 
     delete: async (req, res, next) => {

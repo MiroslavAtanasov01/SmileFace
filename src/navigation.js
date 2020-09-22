@@ -8,6 +8,7 @@ import RegisterPage from './pages/register'
 import AddPost from './pages/add-post'
 import Explore from './pages/explore'
 import ErrorPage from './pages/error'
+import ProfilePage from './pages/profile-page'
 
 const Navigation = () => {
     const context = useContext(UserContext)
@@ -23,8 +24,15 @@ const Navigation = () => {
                 <Route path="/register"  >
                     {loggedIn ? (<Redirect to="/" />) : (<RegisterPage />)}
                 </Route>
-                <Route path="/add-post"><AddPost /> </Route>
-                <Route path="/explore"><Explore /> </Route>
+                <Route path="/profile/:id">
+                    {loggedIn ? (<ProfilePage />) : (<Redirect to="/login" />)}
+                </Route>
+                <Route path="/add-post">
+                    {loggedIn ? (<AddPost />) : (<Redirect to="/login" />)}
+                </Route>
+                <Route path="/explore">
+                    {loggedIn ? (<Explore />) : (<Redirect to="/login" />)}
+                </Route>
                 <Route component={ErrorPage} />
             </Switch>
         </BrowserRouter>
