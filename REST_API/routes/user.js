@@ -9,6 +9,8 @@ router.post('/login', controllers.user.post.login)
 router.post('/verify', controllers.user.post.verify)
 router.post('/logout', controllers.user.post.logout)
 
+router.put('/picture/:id', controllers.user.put.picture)
+
 router.delete('/:id', controllers.user.delete)
 
 
