@@ -4,30 +4,27 @@ import styles from './index.module.css'
 import { useParams, useHistory } from 'react-router-dom'
 import UserContext from '../../Context'
 import PostExplore from '../../components/postExplore'
+import Spinner from '../../components/loading-spinner'
 
 const ProfilePage = () => {
-    const [userInfo, setUserInfo] = useState({ email: '', username: '', profilePicture: '', followers: [], following: [] })
-    const [posts, setPosts] = useState([])
+    const [userInfo, setUserInfo] = useState({ email: '', username: '', profilePicture: '', followers: [], following: [], posts: [] })
     const context = useContext(UserContext)
     const params = useParams()
     const history = useHistory()
 
     const logOut = () => {
         context.logOut()
-        history.push('/')
+        history.push('/login')
     }
 
     const getData = useCallback(async () => {
-        const response = await fetch(`http://localhost:3333/api/user?id=${params.id}`)
+        const response = await fetch(`http://localhost:3333/api/user/${params.id}`)
 
         if (!response.ok) {
             history.push('/error')
         } else {
-            const [user] = await response.json()
+            const user = await response.json()
             setUserInfo({ ...user })
-            const promise = await fetch('http://localhost:3333/api/post')
-            const posts = await promise.json()
-            setPosts(posts)
         }
     }, [params.id, history])
 
@@ -51,7 +48,14 @@ const ProfilePage = () => {
     }
 
     const renderPosts = () => {
-        return posts.map(post => {
+        if (userInfo.posts.length === 0) {
+            return (
+                <div className={styles.empty}>
+                    <h1>There is no posts</h1>
+                </div>
+            )
+        }
+        return userInfo.posts.map(post => {
             return (
                 <PostExplore key={post._id} {...post} />
             )
@@ -62,11 +66,17 @@ const ProfilePage = () => {
         getData()
     }, [getData])
 
+    if (userInfo.username === '') {
+        return (
+            <Spinner />
+        )
+    }
+
     return (
         <PageLayout>
             <div className={styles.container}>
                 <header className={styles.header}>
-                    <div>
+                    <div className={styles.profilePicDiv}>
                         <img className={styles.profilePic} onClick={openWidget} alt="Profile" src={userInfo.profilePicture}></img>
                     </div>
                     <section className={styles.section}>
@@ -76,7 +86,7 @@ const ProfilePage = () => {
                             <button onClick={logOut}>Logout</button>
                         </div>
                         <ul>
-                            <li><strong>{posts.length}</strong> posts</li>
+                            <li><strong>{userInfo.posts.length}</strong> posts</li>
                             <li><strong>{userInfo.followers.length}</strong> followers</li>
                             <li><strong>{userInfo.following.length}</strong> following</li>
                         </ul>

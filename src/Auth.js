@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Spinner from './components/loading-spinner'
 import UserContext from './Context'
 import getCookie from './utils/getCookie'
-import { BrowserRouter } from 'react-router-dom'
 
 const Auth = (props) => {
   const [loggedIn, setLoggedIn] = useState(null)
@@ -46,9 +45,7 @@ const Auth = (props) => {
 
   if (loggedIn === null) {
     return (
-      <BrowserRouter>
-        <Spinner />
-      </BrowserRouter>
+      <Spinner />
     )
   }
 
