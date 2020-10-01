@@ -13,8 +13,32 @@ module.exports = {
                 res.status(500).send("Error")
             }
         },
-        getById: (req, res, next) => {
+        getPosts: async (req, res, next) => {
+            const posts = []
+            const id = req.user.id
+            const user = await models.user.findById(id)
+                .populate({
+                    path: "following",
+                    populate: {
+                        path: "posts",
+                        populate: {
+                            path: "postedBy comments",
+                            populate: {
+                                path: "postedBy"
+                            }
+                        }
+                    }
+                });
 
+            user.following.forEach(user => {
+                user.posts.forEach(post => {
+                    posts.push(post);
+                });
+            });
+
+            const sorted = posts.sort((a, b) => b.createdAt - a.createdAt)
+            console.log(user);
+            return res.send(sorted)
         },
     },
 

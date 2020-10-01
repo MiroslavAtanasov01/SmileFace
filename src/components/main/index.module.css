@@ -1,5 +1,38 @@
 .main {
-          background-color: #fafafa;
-          max-width: 33em;
+          max-width: 62em;
           margin: 0 auto;
+}
+
+.posts {
+          max-width: 614px;
+}
+
+.stories {
+          background-color: white;
+          max-width: 580px;
+          border: 1px solid lightgray;
+          padding: 1em;
+          margin-bottom: 1em;
+          margin-top: 25px;
+          height: 10vh;
+}
+
+.aside {
+          position: fixed;
+          right: 20em;
+          top: 88px;
+          padding: 0;
+          max-width: 293px;
+          height: 100vh;
+          width: 100%;
+}
+
+.aside-title {
+          display: block;
+          color: #8e8e8e;
+          color: rgba(var(--f52, 142, 142, 142), 1);
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 18px;
+          margin: -3px 0 -4px;
 }

@@ -76,6 +76,17 @@ module.exports = {
     },
 
     put: {
+        followUser: async (req, res, next) => {
+            const { _id } = req.user
+            const id = req.params.id;
+            try {
+                await models.user.findByIdAndUpdate(id, { $addToSet: { followers: _id } })
+                await models.user.findByIdAndUpdate(_id, { $addToSet: { following: id } })
+                return res.send('Success!')
+            } catch (err) {
+                return res.status(500).send(err)
+            }
+        },
         picture: (req, res, next) => {
             const id = req.params.id;
             models.user.findByIdAndUpdate({ _id: id }, { profilePicture: (req.body.picture) })
