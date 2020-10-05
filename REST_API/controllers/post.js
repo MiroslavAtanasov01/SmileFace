@@ -37,9 +37,19 @@ module.exports = {
             });
 
             const sorted = posts.sort((a, b) => b.createdAt - a.createdAt)
-            console.log(user);
             return res.send(sorted)
         },
+        getImage: async (req, res, next) => {
+            try {
+                const image = await models.post.findById(req.params.id)
+                    .populate('postedBy')
+                    .populate('likes')
+                    .populate('comments')
+                res.send(image)
+            } catch (err) {
+                res.status(500).send(err)
+            }
+        }
     },
 
     post: async (req, res, next) => {

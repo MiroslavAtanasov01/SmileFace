@@ -1,0 +1,35 @@
+.container {
+          display: flex;
+          width: 60em;
+          margin: 0 auto;
+          margin-top: 5em;
+}
+
+.header {
+          padding: 0.5em;
+          display: flex;
+          justify-content: space-between;
+}
+
+.photo {
+}
+
+.image {
+          /* width: 614px; */
+          height: 600px;
+          object-fit: contain;
+}
+
+.info {
+          background-color: #fff;
+          width: 335px;
+          padding: 0.5em;
+}
+
+.description {
+          padding: 0.5em;
+}
+
+.comments {
+          height: 55vh;
+}
