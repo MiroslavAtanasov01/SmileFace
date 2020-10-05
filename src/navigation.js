@@ -9,6 +9,7 @@ import AddPost from './pages/add-post'
 import Explore from './pages/explore'
 import ErrorPage from './pages/error'
 import ProfilePage from './pages/profile-page'
+import DetailsPage from './components/details'
 
 const Navigation = () => {
     const context = useContext(UserContext)
@@ -32,6 +33,9 @@ const Navigation = () => {
                 </Route>
                 <Route path="/explore">
                     {loggedIn ? (<Explore />) : (<Redirect to="/login" />)}
+                </Route>
+                <Route path="/details/:id">
+                    {loggedIn ? (<DetailsPage />) : (<Redirect to="/login" />)}
                 </Route>
                 <Route component={ErrorPage} />
             </Switch>

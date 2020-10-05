@@ -43,11 +43,9 @@ const Main = () => {
                     {renderPosts()}
                 </div>
                 <div className={style.aside}>
-                    <div>
-                        <div className={style['aside-title']}>
-                            Suggestions For You
+                    <div className={style['aside-title']}>
+                        Suggestions For You
                             </div>
-                    </div>
                 </div>
             </div>
         </PageLayout>

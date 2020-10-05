@@ -1,14 +1,14 @@
 import React from 'react'
 import styles from './index.module.css'
-// import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Icons from '../icons'
 import { faHeart, faComment } from "@fortawesome/free-regular-svg-icons"
 
 
-const PostExplore = ({ imageUrl, likes, comments }) => {
-    // const history = useHistory()
+const PostExplore = ({ imageUrl, likes, comments, _id }) => {
+    const history = useHistory()
     const imageClick = () => {
-        // history.push(`/details/${_id}`)
+        history.push(`/details/${_id}`)
     }
 
     return (
