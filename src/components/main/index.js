@@ -32,15 +32,18 @@ const Main = () => {
     useEffect(() => {
         getPosts()
     }, [])
-
     return (
         <PageLayout>
             <div className={style.main}>
                 <div className={style.stories}>
-                    dadw
-                    </div>
+                </div>
                 <div className={style.posts}>
-                    {renderPosts()}
+                    {posts.length ? renderPosts() :
+                        <div className={style.empty}>
+                            <span>Your feed seems empty!
+                        Go follow someone and their posts will appear here!</span>
+                        </div>
+                    }
                 </div>
                 <div className={style.aside}>
                     <div className={style['aside-title']}>

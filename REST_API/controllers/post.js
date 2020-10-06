@@ -2,16 +2,22 @@ const models = require('../models')
 
 module.exports = {
     get: {
-        getAll: async (req, res, next) => {
-            try {
-                const posts = await models.post.find()
-                    .populate('postedBy')
-                    .populate('likes')
-                    .populate('comments')
-                res.send(posts)
-            } catch {
-                res.status(500).send("Error")
-            }
+        getPostsExplore: async (req, res, next) => {
+            const postsToExplore = []
+            const user = await models.user.findById(req.user.id)
+            const posts = await models.post.find()
+
+            // console.log(typeof req.user._id);
+            posts.forEach(post => {
+                if (!user.following.includes(post.postedBy)) {
+                    if (JSON.stringify(post.postedBy) !== JSON.stringify(req.user._id)) {
+                        postsToExplore.push(post)
+                    }
+                }
+            })
+
+            const sorted = postsToExplore.sort((a, b) => b.createdAt - a.createdAt)
+            return res.send(sorted)
         },
         getPosts: async (req, res, next) => {
             const posts = []
@@ -32,9 +38,9 @@ module.exports = {
 
             user.following.forEach(user => {
                 user.posts.forEach(post => {
-                    posts.push(post);
-                });
-            });
+                    posts.push(post)
+                })
+            })
 
             const sorted = posts.sort((a, b) => b.createdAt - a.createdAt)
             return res.send(sorted)
