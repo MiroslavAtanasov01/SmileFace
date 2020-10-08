@@ -5,6 +5,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import UserContext from '../../Context'
 import PostExplore from '../../components/postExplore'
 import Spinner from '../../components/loading-spinner'
+import getCookie from '../../utils/getCookie'
 
 const ProfilePage = () => {
     const [userInfo, setUserInfo] = useState({ email: '', username: '', profilePicture: '', followers: [], following: [], posts: [] })
@@ -27,6 +28,7 @@ const ProfilePage = () => {
             setUserInfo({ ...user })
         }
     }, [params.id, history])
+
 
     const openWidget = () => {
         window.cloudinary.createUploadWidget(
@@ -62,9 +64,46 @@ const ProfilePage = () => {
         })
     }
 
+    const Follow = () => {
+        const id = context.user.id
+        fetch(`http://localhost:3333/api/user/follow/${params.id}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': getCookie('auth-token')
+            },
+            body: JSON.stringify({ id })
+        })
+    }
+
+    const UnFollow = () => {
+        const id = context.user.id
+        fetch(`http://localhost:3333/api/user/unFollow/${params.id}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': getCookie('auth-token')
+            },
+            body: JSON.stringify({ id })
+        })
+    }
+
     useEffect(() => {
         getData()
-    }, [getData])
+    }, [userInfo, getData])
+
+
+    const GetFollowers = () => {
+        let result = false
+        if (userInfo.followers.length > 0) {
+            userInfo.followers.forEach(user => {
+                if (user._id === context.user.id) {
+                    result = true
+                }
+            })
+        }
+        return result
+    }
 
     if (userInfo.username === '') {
         return (
@@ -82,8 +121,16 @@ const ProfilePage = () => {
                     <section className={styles.section}>
                         <div>
                             <h2>{userInfo.username}</h2>
-                            <button >Edit Profile</button>
-                            <button onClick={logOut}>Logout</button>
+                            {context.user.id === params.id
+                                ? <div>
+                                    <button >Edit Profile</button>
+                                    <button onClick={logOut}>Logout</button>
+                                </div>
+                                : <div>
+                                    {GetFollowers()
+                                        ? <div><button onClick={UnFollow}>Unfollow</button></div>
+                                        : <div><button onClick={Follow}>Follow</button></div>}
+                                </div>}
                         </div>
                         <ul>
                             <li><strong>{userInfo.posts.length}</strong> posts</li>
@@ -97,7 +144,7 @@ const ProfilePage = () => {
                     {renderPosts()}
                 </main>
             </div>
-        </PageLayout>
+        </PageLayout >
     )
 }
 
