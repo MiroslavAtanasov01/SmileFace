@@ -15,7 +15,7 @@
 }
 
 .image {
-          /* width: 614px; */
+          width: 614px;
           height: 600px;
           object-fit: contain;
 }

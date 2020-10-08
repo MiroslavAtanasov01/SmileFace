@@ -10,7 +10,6 @@ const DetailsPage = () => {
         { postedBy: '', createdAt: '', location: '', imageUrl: '', description: '', likes: [], comments: [] }
     )
 
-
     const getData = useCallback(async () => {
         const response = await fetch(`http://localhost:3333/api/post/details/${params.id}`)
 
@@ -21,6 +20,10 @@ const DetailsPage = () => {
             setUserInfo({ ...post })
         }
     }, [history, params.id])
+
+    const onClick = () => {
+        history.push(`/profile/${userInfo.postedBy._id}`)
+    }
 
     useEffect(() => {
         getData()
@@ -35,7 +38,9 @@ const DetailsPage = () => {
                 <header className={styles.header}>
                     <Avatar alt="miro" src='static/images/avatar/1.jpg'>
                     </Avatar>
-                    <div>{userInfo.postedBy.username}</div>
+                    <button onClick={onClick}>
+                        {userInfo.postedBy.username}
+                    </button>
                     <div>Follow</div>
                 </header>
                 <div className={styles.description}>{userInfo.description}</div>

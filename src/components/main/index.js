@@ -3,6 +3,7 @@ import style from './index.module.css'
 import Post from '../post'
 import PageLayout from '../page-layout'
 import getCookie from '../../utils/getCookie'
+import Spinner from '../loading-spinner'
 
 
 const Main = () => {
@@ -32,6 +33,14 @@ const Main = () => {
     useEffect(() => {
         getPosts()
     }, [])
+
+    if (posts.length === 0) {
+        return (
+            <Spinner />
+        )
+    }
+
+
     return (
         <PageLayout>
             <div className={style.main}>
@@ -52,7 +61,6 @@ const Main = () => {
                 </div>
             </div>
         </PageLayout>
-
     )
 }
 
