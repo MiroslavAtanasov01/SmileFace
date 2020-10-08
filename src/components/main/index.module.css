@@ -24,8 +24,9 @@
           top: 88px;
           padding: 0;
           max-width: 293px;
-          height: 100vh;
+          height: 65vh;
           width: 100%;
+          display: flex;
 }
 
 .aside-title {

@@ -7,7 +7,8 @@
 
 .post-image {
           width: 100%;
-          object-fit: contain;
+          height: 600px;
+          object-fit: cover;
           border-top: 1px solid lightgray;
           border-bottom: 1px solid lightgray;
 }

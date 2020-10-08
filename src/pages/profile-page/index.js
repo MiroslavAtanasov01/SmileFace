@@ -123,13 +123,13 @@ const ProfilePage = () => {
                             <h2>{userInfo.username}</h2>
                             {context.user.id === params.id
                                 ? <div>
-                                    <button >Edit Profile</button>
-                                    <button onClick={logOut}>Logout</button>
+                                    <button className={styles.button} >Edit Profile</button>
+                                    <button className={styles.button} onClick={logOut}>Logout</button>
                                 </div>
                                 : <div>
                                     {GetFollowers()
-                                        ? <div><button onClick={UnFollow}>Unfollow</button></div>
-                                        : <div><button onClick={Follow}>Follow</button></div>}
+                                        ? <div><button className={styles.followBtn} onClick={UnFollow}>Unfollow</button></div>
+                                        : <div><button className={styles.followBtn} onClick={Follow}>Follow</button></div>}
                                 </div>}
                         </div>
                         <ul>
