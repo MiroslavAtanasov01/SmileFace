@@ -12,6 +12,22 @@ module.exports = {
                 res.status(500).send("Error")
             }
         },
+        getNotFollowedUsers: async (req, res, next) => {
+            const notFollowedUsers = []
+            try {
+                const users = await models.user.find()
+                users.forEach(user => {
+                    if (!user.followers.includes(req.user.id)) {
+                        if (JSON.stringify(req.user.id) !== JSON.stringify(user._id)) {
+                            notFollowedUsers.push(user)
+                        }
+                    }
+                })
+                res.send(notFollowedUsers)
+            } catch {
+                res.status(500).send("Error")
+            }
+        },
         getById: async (req, res, next) => {
             try {
                 const user = await models.user.findById(req.params.id)
@@ -37,8 +53,8 @@ module.exports = {
                 const user = await models.user.create({ email, username, password, rePassword })
                 const token = jwt.createToken({ id: user._id })
                 res.header('Authorization', token).send(user)
-            } catch {
-                return next
+            } catch (err) {
+                res.send(err)
             }
         },
         verify: async (req, res, next) => {

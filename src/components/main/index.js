@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import style from './index.module.css'
+import React, { useCallback, useState, useEffect, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
+import styles from './index.module.css'
 import Post from '../post'
-import PageLayout from '../page-layout'
+import Header from '../header'
 import getCookie from '../../utils/getCookie'
 import Spinner from '../loading-spinner'
-
+import UserContext from '../../Context'
+import Link from '../link'
 
 const Main = () => {
     const [posts, setPosts] = useState([])
+    const [users, setUsers] = useState([])
+    const [userInfo, setUserInfo] = useState({ email: '', username: '', profilePicture: '', followers: [], following: [], posts: [] })
+    const context = useContext(UserContext)
+    const history = useHistory()
 
-    const getPosts = async () => {
+    const getData = useCallback(async () => {
         const promise = await fetch('http://localhost:3333/api/post/posts', {
             method: 'GET',
             headers: {
@@ -20,7 +26,25 @@ const Main = () => {
         )
         const posts = await promise.json()
         setPosts(posts)
-    }
+
+        const promiseUsers = await fetch('http://localhost:3333/api/user/getNotFollowedUsers', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': getCookie('auth-token')
+            }
+        }
+        )
+        const users = await promiseUsers.json()
+        setUsers(users)
+
+        if (context.user !== null) {
+            const responseUser = await fetch(`http://localhost:3333/api/user/${context.user.id}`)
+            const userToRender = await responseUser.json()
+            setUserInfo({ ...userToRender })
+        }
+
+    }, [context])
 
     const renderPosts = () => {
         return posts.map(post => {
@@ -30,37 +54,95 @@ const Main = () => {
         })
     }
 
-    useEffect(() => {
-        getPosts()
-    }, [])
+    const onClick = () => {
+        history.push(`/profile/${context.user.id}`)
+    }
 
-    if (posts.length === 0) {
+    const onClickUsers = (id) => {
+        history.push(`/profile/${id}`)
+    }
+
+    const Follow = (id) => {
+        const userId = context.user.id
+        fetch(`http://localhost:3333/api/user/follow/${id}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': getCookie('auth-token')
+            },
+            body: JSON.stringify({ userId })
+        })
+    }
+
+    const renderUsers = () => {
+        return users.map(user => {
+            return (
+                <div className={styles.users} key={user._id}>
+                    <div onClick={() => onClickUsers(user._id)} >
+                        <img alt="" src={user.profilePicture} className={styles.userPic} />
+                        <span >{user.username}</span>
+                    </div>
+                    <button className={styles.btn} onClick={() => Follow(user._id)}>Follow</button>
+                </div>
+            )
+        })
+    }
+
+    useEffect(() => {
+        getData()
+    }, [getData, userInfo])
+
+
+    if (userInfo.username === '') {
         return (
             <Spinner />
         )
     }
 
-
     return (
-        <PageLayout>
-            <div className={style.main}>
-                <div className={style.stories}>
+        <div>
+            <Header />
+            <div className={styles.main}>
+                <div className={styles.stories}>
                 </div>
-                <div className={style.posts}>
+                <div className={styles.posts}>
                     {posts.length ? renderPosts() :
-                        <div className={style.empty}>
+                        <div className={styles.empty}>
                             <span>Your feed seems empty!
                         Go follow someone and their posts will appear here!</span>
                         </div>
                     }
                 </div>
-                <div className={style.aside}>
-                    <div className={style['aside-title']}>
-                        Suggestions For You
-                            </div>
+                <div className={styles.aside}>
+                    <div className={styles.profile}>
+                        <img alt="" src={userInfo.profilePicture} className={styles.profilePic} />
+                        <span onClick={onClick}>{userInfo.username}</span>
+                    </div>
+                    <div className={styles['aside-title']}>
+                        <span>Suggestions For You</span>
+                        <button>See All</button>
+                    </div>
+                    <div className={styles.renderUsers}>
+                        {renderUsers()}
+                    </div>
+                    <div className={styles.footer}>
+                        <div className={styles.links}>
+                            <Link key='About' href='/about' title='About' type="main" />
+                            <Link key='Contacts' href='/contacts' title='Contacts' type="main" />
+                            <Link key='Top Accounts' href='/topAccounts' title='Top accounts' type="main" />
+                            <select name="languages" className={styles.select} >
+                                <option value="en">English</option>
+                                <option value="de">Deutsch</option>
+                                <option value="bg">Български</option>
+                            </select>
+                        </div>
+                        <div>
+                            <p className={styles.copyright}>&copy; 2020 SMILEFACE FROM MIROSLAV</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </PageLayout>
+        </div>
     )
 }
 
