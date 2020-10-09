@@ -3,6 +3,7 @@ const router = require('express').Router()
 const auth = require('../utils/auth')
 
 router.get('/', controllers.user.get.getAll)
+router.get('/getNotFollowedUsers', auth(), controllers.user.get.getNotFollowedUsers)
 router.get('/:id', controllers.user.get.getById)
 
 router.post('/register', controllers.user.post.register)

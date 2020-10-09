@@ -7,7 +7,6 @@ module.exports = {
             const user = await models.user.findById(req.user.id)
             const posts = await models.post.find()
 
-            // console.log(typeof req.user._id);
             posts.forEach(post => {
                 if (!user.following.includes(post.postedBy)) {
                     if (JSON.stringify(post.postedBy) !== JSON.stringify(req.user._id)) {
