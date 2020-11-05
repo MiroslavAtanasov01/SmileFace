@@ -98,7 +98,7 @@ const LoginPage = () => {
                     <span>Have an account?
                     <Link
                             key='Sign in'
-                            href="/login"
+                            to="/login"
                             title='Sign in'
                             type='login'
                         />

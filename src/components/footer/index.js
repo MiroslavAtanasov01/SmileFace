@@ -8,9 +8,9 @@ const Footer = () => {
         <div className={styles.main}>
             <footer className={styles.footer}>
                 <div className={styles.links}>
-                    <Link key='About' href='/about' title='ABOUT' type="footer" />
-                    <Link key='Contacts' href='/contacts' title='CONTACTS' type="footer" />
-                    <Link key='Top Accounts' href='/topAccounts' title='TOP ACCOUNTS' type="footer" />
+                    <Link key='About' to='/about' title='ABOUT' type="footer" />
+                    <Link key='Contacts' to='/contacts' title='CONTACTS' type="footer" />
+                    <Link key='Top Accounts' to='/topAccounts' title='TOP ACCOUNTS' type="footer" />
                     <select name="languages" className={styles.select} >
                         <option value="en">English</option>
                         <option value="de">Deutsch</option>

@@ -12,7 +12,7 @@ const Header = () => {
         <header className={styles.container}>
             <div className={styles.main}>
                 <div className={styles.logo}>
-                    <Link key='SmileFace' href='/' title='SmileFace' type="logo" />
+                    <Link key='SmileFace' to='/' title='SmileFace' type="logo" />
                 </div>
                 <div className={styles.search}>
                     <input type="text" placeholder="Search.."></input>
@@ -21,16 +21,16 @@ const Header = () => {
                     {loggedIn
                         ?
                         <Fragment>
-                            <Icons type="nav" href="/messages" icon={faComment} />
-                            <Icons type="nav" href="/add-post" icon={faPlusSquare} />
-                            <Icons type="nav" href="/explore" icon={faCompass} />
-                            <Icons type="nav" href="/notification" icon={faHeart} />
-                            <Icons type="nav" href={`/profile/${user && user.id}`} icon={faUser} />
+                            <Icons type="nav" to="/messages" icon={faComment} />
+                            <Icons type="nav" to="/add-post" icon={faPlusSquare} />
+                            <Icons type="nav" to="/explore" icon={faCompass} />
+                            <Icons type="nav" to="/notification" icon={faHeart} />
+                            <Icons type="nav" to={`/profile/${user && user.id}`} icon={faUser} />
                         </Fragment>
                         :
                         <Fragment>
-                            <Link key='Log In' href='/login' title='Log In' type="log" />
-                            <Link key='Sign Up' href='/register' title='Sign Up' type="sign" />
+                            <Link key='Log In' to='/login' title='Log In' type="log" />
+                            <Link key='Sign Up' to='/register' title='Sign Up' type="sign" />
                         </Fragment>
                     }
                 </div>
