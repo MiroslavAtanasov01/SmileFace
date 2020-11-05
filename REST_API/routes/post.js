@@ -9,4 +9,7 @@ router.get('/details/:id', controllers.post.get.getImage)
 
 router.post('/', auth(), controllers.post.post)
 
+router.put('/like', auth(), controllers.post.put.like)
+router.put('/unlike', auth(), controllers.post.put.unlike)
+
 module.exports = router

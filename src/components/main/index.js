@@ -4,7 +4,6 @@ import styles from './index.module.css'
 import Post from '../post'
 import Header from '../header'
 import getCookie from '../../utils/getCookie'
-import Spinner from '../loading-spinner'
 import UserContext from '../../Context'
 import Link from '../link'
 
@@ -16,27 +15,29 @@ const Main = () => {
     const history = useHistory()
 
     const getData = useCallback(async () => {
-        const promise = await fetch('http://localhost:3333/api/post/posts', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('auth-token')
+        if (context.loggedIn === true) {
+            const promise = await fetch('http://localhost:3333/api/post/posts', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': getCookie('auth-token')
+                }
             }
-        }
-        )
-        const posts = await promise.json()
-        setPosts(posts)
+            )
+            const posts = await promise.json()
+            setPosts(posts)
 
-        const promiseUsers = await fetch('http://localhost:3333/api/user/getNotFollowedUsers', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('auth-token')
+            const promiseUsers = await fetch('http://localhost:3333/api/user/getNotFollowedUsers', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': getCookie('auth-token')
+                }
             }
+            )
+            const users = await promiseUsers.json()
+            setUsers(users)
         }
-        )
-        const users = await promiseUsers.json()
-        setUsers(users)
 
         if (context.user !== null) {
             const responseUser = await fetch(`http://localhost:3333/api/user/${context.user.id}`)
@@ -92,13 +93,6 @@ const Main = () => {
         getData()
     }, [getData, userInfo])
 
-
-    if (userInfo.username === '') {
-        return (
-            <Spinner />
-        )
-    }
-
     return (
         <div>
             <Header />
@@ -127,9 +121,9 @@ const Main = () => {
                     </div>
                     <div className={styles.footer}>
                         <div className={styles.links}>
-                            <Link key='About' href='/about' title='About' type="main" />
-                            <Link key='Contacts' href='/contacts' title='Contacts' type="main" />
-                            <Link key='Top Accounts' href='/topAccounts' title='Top accounts' type="main" />
+                            <Link key='About' to='/about' title='About' type="main" />
+                            <Link key='Contacts' to='/contacts' title='Contacts' type="main" />
+                            <Link key='Top Accounts' to='/topAccounts' title='Top Accounts' type="main" />
                             <select name="languages" className={styles.select} >
                                 <option value="en">English</option>
                                 <option value="de">Deutsch</option>

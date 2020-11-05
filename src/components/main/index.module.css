@@ -1,5 +1,5 @@
 .main {
-          max-width: 62em;
+          max-width: 60em;
           margin: 0 auto;
           min-height: 74vh;
 }
@@ -20,7 +20,7 @@
 
 .aside {
           position: fixed;
-          right: 20em;
+          right: 17em;
           top: 88px;
           padding: 0;
           max-width: 293px;

@@ -16,11 +16,11 @@ const PostExplore = ({ imageUrl, likes, comments, _id }) => {
             <img alt="post" className={styles.image} src={imageUrl} onClick={() => imageClick()}></img>
             <div className={styles.likes}>
                 <span className={styles.distance}>
-                    <Icons type="image" href="" icon={faHeart} />
+                    <Icons type="image" to="" icon={faHeart} />
                     {likes.length}
                 </span>
                 <span>
-                    <Icons type="image" href="" icon={faComment} />
+                    <Icons type="image" to="" icon={faComment} />
                     {comments.length}
                 </span>
             </div>

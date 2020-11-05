@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Link } from 'react-router-dom'
 
 
-const Icons = ({ href, icon, type }) => {
+const Icons = ({ to, icon, type, onClick }) => {
     return (
-        <Link to={href} className={styles[`${type}-social`]}>
+        <Link onClick={onClick} to={to} className={styles[`${type}-social`]}>
             <FontAwesomeIcon icon={icon} size="lg" />
         </Link >
     )

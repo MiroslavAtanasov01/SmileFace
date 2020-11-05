@@ -71,7 +71,26 @@ module.exports = {
     },
 
     put: {
-
+        like: async (req, res, next) => {
+            const { _id } = req.user
+            const id = req.body.postId
+            try {
+                await models.post.findByIdAndUpdate(id, { $addToSet: { likes: _id } })
+                return res.send('Success!')
+            } catch (err) {
+                return res.status(500).send(err)
+            }
+        },
+        unlike: async (req, res, next) => {
+            const { _id } = req.user
+            const id = req.body.postId
+            try {
+                await models.post.findByIdAndUpdate(id, { $pull: { likes: _id } })
+                return res.send('Success!')
+            } catch (err) {
+                return res.status(500).send(err)
+            }
+        },
     },
 
     delete: {
