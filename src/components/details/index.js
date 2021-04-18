@@ -25,6 +25,17 @@ const DetailsPage = () => {
         history.push(`/profile/${userInfo.postedBy._id}`)
     }
 
+    const renderComments = () => {
+        return userInfo.comments.map(e => {
+            return (
+                <div key={e._id} className={styles.comment}>
+                    <strong><p>{userInfo.postedBy.username}</p></strong>
+                    <p>{e.comment}</p>
+                </div>
+            )
+        })
+    }
+
     useEffect(() => {
         getData()
     }, [getData])
@@ -44,7 +55,7 @@ const DetailsPage = () => {
                     <div>Follow</div>
                 </header>
                 <div className={styles.description}>{userInfo.description}</div>
-                <div className={styles.comments}>{userInfo.comments}</div>
+                <div className={styles.comments}>{renderComments()}</div>
                 <button>
                     like
                 </button>

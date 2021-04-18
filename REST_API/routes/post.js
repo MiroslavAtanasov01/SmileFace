@@ -11,5 +11,6 @@ router.post('/', auth(), controllers.post.post)
 
 router.put('/like', auth(), controllers.post.put.like)
 router.put('/unlike', auth(), controllers.post.put.unlike)
+router.put('/postComment', auth(), controllers.post.put.postComment)
 
 module.exports = router

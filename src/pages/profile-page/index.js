@@ -116,7 +116,10 @@ const ProfilePage = () => {
             <div className={styles.container}>
                 <header className={styles.header}>
                     <div className={styles.profilePicDiv}>
-                        <img className={styles.profilePic} onClick={openWidget} alt="Profile" src={userInfo.profilePicture}></img>
+                        {context.user.id === params.id
+                            ? < img className={styles.profilePic} onClick={openWidget} alt="Profile" src={userInfo.profilePicture}></img>
+                            : < img className={styles.profilePic} alt="Profile" src={userInfo.profilePicture}></img>
+                        }
                     </div>
                     <section className={styles.section}>
                         <div>

@@ -39,7 +39,6 @@ const AddPost = () => {
                     'Authorization': getCookie('auth-token')
                 }
             })
-            history.push('/')
         } catch (err) {
             console.error(err)
         }
