@@ -1,38 +1,76 @@
 .post {
-          background-color: white;
-          max-width: 614px;
-          border: 1px solid lightgray;
-          margin-bottom: 45px;
+    background-color: white;
+    max-width: 614px;
+    border: 1px solid lightgray;
+    margin-bottom: 45px;
 }
 
 .post-image {
-          width: 100%;
-          height: 600px;
-          object-fit: cover;
-          border-top: 1px solid lightgray;
-          border-bottom: 1px solid lightgray;
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
 }
 
 .post-text {
-          font-weight: normal;
-          padding: 20px;
+    font-weight: normal;
+    padding: 20px;
 }
 
 .post-header {
-          display: flex;
-          align-items: center;
-          padding: 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
 }
 
 .post-avatar {
-          margin-right: 10px;
-          border-radius: 50px;
-          width: 40px;
-          height: 40px;
-          object-fit: cover;
-          cursor: pointer;
+    margin-right: 10px;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .post-username {
-          cursor: pointer;
+    cursor: pointer;
+}
+
+
+.post-comments {
+    font-weight: normal;
+    border-top: 1px solid rgb(207, 207, 207);
+    display: inline-block;
+    width: 100%;
+    display: flex;
+}
+
+.post-textarea {
+    width: 100%;
+    border: 1px solid transparent;
+    outline: none;
+    resize: none;
+}
+
+.post-textarea::placeholder {
+    text-align: center;
+    color: rgb(185, 185, 185);
+}
+
+.div-textarea {
+    width: 89%;
+}
+
+.div {
+    padding-left: 1.5em;
+}
+
+.comment {
+    display: flex;
+    height: 100%
+}
+
+.comment p {
+    margin-right: 0.5em;
 }

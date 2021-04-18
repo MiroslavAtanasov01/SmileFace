@@ -69,7 +69,6 @@ module.exports = {
             return res.status(500).send(err)
         }
     },
-
     put: {
         like: async (req, res, next) => {
             const { _id } = req.user
@@ -87,6 +86,18 @@ module.exports = {
             try {
                 await models.post.findByIdAndUpdate(id, { $pull: { likes: _id } })
                 return res.send('Success!')
+            } catch (err) {
+                return res.status(500).send(err)
+            }
+        },
+        postComment: async (req, res, next) => {
+            const { comment, postId } = req.body
+            const { _id } = req.user
+
+            try {
+                const newComment = await models.comment.create({ comment, createdAt: Date.now(), postedBy: { _id } })
+                const post = await models.post.findByIdAndUpdate(postId, { $addToSet: { comments: newComment._id } })
+                return res.send(newComment, post)
             } catch (err) {
                 return res.status(500).send(err)
             }

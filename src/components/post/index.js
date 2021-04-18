@@ -1,17 +1,41 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import style from './index.module.css'
 import { useHistory } from 'react-router-dom'
 import Icons from '../icons'
+import Button from '../button'
 import getCookie from '../../utils/getCookie'
 import UserContext from '../../Context'
-import { faHeart, faGrinStars } from "@fortawesome/free-regular-svg-icons"
+import { faHeart, faGrinStars, faComment } from "@fortawesome/free-regular-svg-icons"
 
-const Post = ({ username, caption, imageUrl, likes, postedBy, _id }) => {
+const Post = ({ username, createdAt, caption, imageUrl, likes, postedBy, _id, comments }) => {
     const history = useHistory()
     const context = useContext(UserContext)
+    const [comment, setComment] = useState('')
 
     const onClick = () => {
         history.push(`profile/${postedBy._id}`)
+    }
+
+    const onSubmit = async (e) => {
+        if (comment !== '') {
+            e.preventDefault()
+            const postId = _id
+
+            try {
+                await fetch('http://localhost:3333/api/post/postComment', {
+                    method: 'PUT',
+                    body: JSON.stringify({ postId, comment }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': getCookie('auth-token')
+                    }
+                })
+                setComment('')
+            } catch (err) {
+                console.error(err)
+            }
+        }
+
     }
 
     const likePost = (action) => {
@@ -26,6 +50,33 @@ const Post = ({ username, caption, imageUrl, likes, postedBy, _id }) => {
         })
     }
 
+    const goToComments = () => {
+        history.push(`/details/${_id}`)
+    }
+
+    const renderComments = () => {
+        return comments.map(e => {
+            return (
+                <div key={e._id} className={style.comment}>
+                    <strong><p>{e.postedBy.username}</p></strong>
+                    <p>{e.comment}</p>
+                </div>
+            )
+        })
+    }
+
+    const formatDate = (date) => {
+        return date
+            .substring(0, 10)
+            .split('-')
+            .join(' ')
+    }
+
+
+    useEffect(() => {
+
+    }, [comment])
+
     return (
         <div className={style.post}>
             <div className={style['post-header']} onClick={onClick}>
@@ -36,8 +87,28 @@ const Post = ({ username, caption, imageUrl, likes, postedBy, _id }) => {
             {likes.includes(context.user.id) ?
                 <Icons type="nav" to="" onClick={() => likePost('unlike')} icon={faGrinStars} /> :
                 <Icons type="nav" to="" onClick={() => likePost('like')} icon={faHeart} />}
-            <span>{likes.length} likes</span>
-            <h4 className={style['post-text']}><strong>{username}</strong> {caption}</h4>
+            <span onClick={() => goToComments()} >
+                <Icons type="nav" to="" onClick={() => onClick()} icon={faComment} />
+            </span>
+            <div className={style.div}>
+                <div>{likes.length} likes</div>
+                <div>{formatDate(createdAt)}</div>
+            </div>
+            <div>
+                {renderComments()}
+            </div>
+            <form className={style['post-comments']} onSubmit={onSubmit}>
+                <div className={style['div-textarea']}>
+                    <textarea
+                        value={comment}
+                        className={style['post-textarea']}
+                        placeholder="Add a comment"
+                        onChange={(e) => setComment(e.target.value)}>
+                    </textarea>
+                </div>
+                <Button type='postComment' title="Post" />
+            </form >
+
         </div>
 
     )
