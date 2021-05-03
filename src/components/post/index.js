@@ -84,9 +84,9 @@ const Post = ({ username, createdAt, caption, imageUrl, likes, postedBy, _id, co
 
     return (
         <div className={style.post}>
-            <div className={style['post-header']} onClick={onClick}>
-                <img className={style['post-avatar']} alt="" src={postedBy.profilePicture} />
-                <h3 className={style['post-username']}>{postedBy.username}</h3>
+            <div className={style['post-header']} >
+                <img onClick={onClick} className={style['post-avatar']} alt="" src={postedBy.profilePicture} />
+                <h3 onClick={onClick} className={style['post-username']}>{postedBy.username}</h3>
             </div>
             <img className={style['post-image']} src={imageUrl} alt="" />
             {likes.includes(context.user.id) ?

@@ -4,6 +4,7 @@ const auth = require('../utils/auth')
 
 router.get('/', auth(), controllers.post.get.getPostsExplore)
 router.get('/posts', auth(), controllers.post.get.getPosts)
+router.get('/search', controllers.user.get.searchUsers)
 
 router.get('/details/:id', controllers.post.get.getImage)
 

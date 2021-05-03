@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.username {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.avatar {
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.link {
+    color: #000;
+    text-decoration: none;
+    margin: 1em;
+    position: relative;
+}

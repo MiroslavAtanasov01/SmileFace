@@ -4,6 +4,7 @@ import styles from './index.module.css'
 import UserContext from '../../Context'
 import Link from '../link'
 import Icons from '../icons'
+import Search from '../search'
 
 const Header = () => {
     const { user } = useContext(UserContext);
@@ -14,9 +15,7 @@ const Header = () => {
                 <div className={styles.logo}>
                     <Link key='SmileFace' to='/' title='SmileFace' type="logo" />
                 </div>
-                <div className={styles.search}>
-                    <input type="text" placeholder="Search.."></input>
-                </div>
+                <Search />
                 <div className={styles.links}>
                     <Fragment>
                         <Icons type="nav" to="/messages" icon={faComment} />

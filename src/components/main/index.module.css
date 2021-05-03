@@ -2,6 +2,7 @@
     max-width: 60em;
     margin: 0 auto;
     min-height: 74vh;
+    padding-top: 2em;
 }
 
 .posts {
@@ -129,4 +130,11 @@
 
 .footer {
     margin-top: 1.5em;
+}
+
+
+@media (max-width: 1420px) {
+    .aside {
+        display: none;
+    }
 }

@@ -43,6 +43,23 @@ module.exports = {
                 res.status(500).send("Error")
             }
         },
+        searchUsers: async (req, res, next) => {
+            const query = req.query.q;
+
+            try {
+                const users = await models.user.find({ "username": { "$regex": `${query}`, "$options": "i" } });
+                if (users === null) {
+                    return res.status(404).send({
+                        message: "No users matching your criteria were found"
+                    });
+                }
+                return res.send(users);
+            } catch (error) {
+                return res.status(500).send({
+                    error: error.message
+                });
+            }
+        },
     },
 
     post: {
