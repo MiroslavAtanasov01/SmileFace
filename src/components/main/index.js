@@ -3,9 +3,10 @@ import { useHistory } from 'react-router-dom'
 import styles from './index.module.css'
 import Post from '../post'
 import Header from '../header'
+import Footer from '../footer'
 import getCookie from '../../utils/getCookie'
 import UserContext from '../../Context'
-import Link from '../link'
+import Spinner from '../loading-spinner'
 
 const Main = () => {
     const [posts, setPosts] = useState([])
@@ -97,15 +98,18 @@ const Main = () => {
         <div>
             <Header />
             <div className={styles.main}>
-                <div className={styles.stories}>
-                </div>
                 <div className={styles.posts}>
-                    {posts.length ? renderPosts() :
-                        <div className={styles.empty}>
-                            <span>Your feed seems empty!
-                        Go follow someone and their posts will appear here!</span>
-                        </div>
+                    {userInfo.username ? <div>
+                        {posts.length ? renderPosts() :
+                            <div className={styles.empty}>
+                                <span>Your feed seems empty!
+                            Go follow someone and their posts will appear here!</span>
+                            </div>
+                        }
+                    </div> :
+                        <Spinner />
                     }
+
                 </div>
                 <div className={styles.aside}>
                     <div className={styles.profile}>
@@ -114,28 +118,14 @@ const Main = () => {
                     </div>
                     <div className={styles['aside-title']}>
                         <span>Suggestions For You</span>
-                        <button>See All</button>
+                        {/* <button>See All</button> */}
                     </div>
                     <div className={styles.renderUsers}>
                         {renderUsers()}
                     </div>
-                    <div className={styles.footer}>
-                        <div className={styles.links}>
-                            <Link key='About' to='/about' title='About' type="main" />
-                            <Link key='Contacts' to='/contacts' title='Contacts' type="main" />
-                            <Link key='Top Accounts' to='/topAccounts' title='Top Accounts' type="main" />
-                            <select name="languages" className={styles.select} >
-                                <option value="en">English</option>
-                                <option value="de">Deutsch</option>
-                                <option value="bg">Български</option>
-                            </select>
-                        </div>
-                        <div>
-                            <p className={styles.copyright}>&copy; 2020 SMILEFACE FROM MIROSLAV</p>
-                        </div>
-                    </div>
                 </div>
             </div>
+            <Footer />
         </div>
     )
 }

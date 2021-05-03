@@ -26,14 +26,15 @@ const DetailsPage = () => {
     }
 
     const renderComments = () => {
-        return userInfo.comments.map(e => {
-            return (
-                <div key={e._id} className={styles.comment}>
-                    <strong><p>{userInfo.postedBy.username}</p></strong>
-                    <p>{e.comment}</p>
-                </div>
-            )
-        })
+        return userInfo.comments
+            .map(e => {
+                return (
+                    <div key={e._id} className={styles.comment}>
+                        <strong><p>{userInfo.postedBy.username}</p></strong>
+                        <p>{e.comment}</p>
+                    </div>
+                )
+            })
     }
 
     useEffect(() => {
