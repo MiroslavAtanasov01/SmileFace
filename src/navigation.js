@@ -39,7 +39,9 @@ const Navigation = () => {
                 <Route path="/details/:id">
                     {loggedIn ? (<DetailsPage />) : (<Redirect to="/login" />)}
                 </Route>
-                <Route component={ErrorPage} />
+                <Route >
+                    {loggedIn ? (<ErrorPage />) : (<Redirect to="/login" />)}
+                </Route>
             </Switch>
         </BrowserRouter>
     )

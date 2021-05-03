@@ -6,6 +6,7 @@ import Textarea from '../../components/textarea'
 import Input from '../../components/input'
 import Button from '../../components/button'
 import getCookie from '../../utils/getCookie'
+import PageTitle from '../../components/helmet'
 
 const AddPost = () => {
     const [imageUrl, setImageUrl] = useState("")
@@ -47,6 +48,7 @@ const AddPost = () => {
 
     return (
         <PageLayout>
+            <PageTitle title="Add Post | SmileFace" />
             <div className={styles.main}>
                 <h1 className={styles.title}>Add New Photo</h1>
                 <div className={styles.container}>

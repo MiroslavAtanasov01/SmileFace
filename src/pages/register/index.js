@@ -6,6 +6,7 @@ import Input from '../../components/input'
 import Button from '../../components/button'
 import Link from '../../components/link'
 import Footer from '../../components/footer'
+import PageTitle from '../../components/helmet'
 
 const LoginPage = () => {
     const history = useHistory()
@@ -45,6 +46,7 @@ const LoginPage = () => {
 
     return (
         <div>
+            <PageTitle title="Register | SmileFace" />
             <div className={styles.container}>
                 <div className={styles.main}>
                     <h1 className={styles['logo-name']}>SmileFace</h1>

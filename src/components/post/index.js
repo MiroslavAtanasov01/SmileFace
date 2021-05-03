@@ -89,9 +89,9 @@ const Post = ({ username, createdAt, caption, imageUrl, likes, postedBy, _id, co
                 <h3 onClick={onClick} className={style['post-username']}>{postedBy.username}</h3>
             </div>
             <img className={style['post-image']} src={imageUrl} alt="" />
-            {likes.includes(context.user.id) ?
-                <Icons type="nav" to="" onClick={() => likePost('unlike')} icon={faGrinStars} /> :
-                <Icons type="nav" to="" onClick={() => likePost('like')} icon={faHeart} />}
+            {likes.includes(context.user.id)
+                ? <Icons type="nav" to="" onClick={() => likePost('unlike')} icon={faGrinStars} />
+                : <Icons type="nav" to="" onClick={() => likePost('like')} icon={faHeart} />}
             <span onClick={() => goToComments()} >
                 <Icons type="nav" to="" onClick={() => onClick()} icon={faComment} />
             </span>
