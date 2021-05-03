@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from 'react'
-import { faCompass, faHeart, faUser, faComment, faPlusSquare } from "@fortawesome/free-regular-svg-icons"
+import { faCompass, faHeart, faUser, faPlusSquare } from "@fortawesome/free-regular-svg-icons"
 import styles from './index.module.css'
 import UserContext from '../../Context'
 import Link from '../link'
@@ -18,7 +18,6 @@ const Header = () => {
                 <Search />
                 <div className={styles.links}>
                     <Fragment>
-                        <Icons type="nav" to="/messages" icon={faComment} />
                         <Icons type="nav" to="/add-post" icon={faPlusSquare} />
                         <Icons type="nav" to="/explore" icon={faCompass} />
                         <Icons type="nav" to="/notification" icon={faHeart} />

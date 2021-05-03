@@ -3,6 +3,7 @@ import PageLayout from '../../components/page-layout'
 import styles from './index.module.css'
 import PostExplore from '../../components/postExplore'
 import getCookie from '../../utils/getCookie'
+import PageTitle from '../../components/helmet'
 
 const Explore = () => {
     const [posts, setPosts] = useState([])
@@ -34,6 +35,7 @@ const Explore = () => {
 
     return (
         <PageLayout>
+            <PageTitle title="Explore | SmileFace" />
             <div className={styles.container}>
                 {renderPosts()}
             </div>

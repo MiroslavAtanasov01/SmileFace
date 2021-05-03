@@ -6,6 +6,7 @@ import UserContext from '../../Context'
 import PostExplore from '../../components/postExplore'
 import Spinner from '../../components/loading-spinner'
 import getCookie from '../../utils/getCookie'
+import PageTitle from '../../components/helmet'
 
 const ProfilePage = () => {
     const [userInfo, setUserInfo] = useState({ email: '', username: '', profilePicture: '', followers: [], following: [], posts: [] })
@@ -113,6 +114,7 @@ const ProfilePage = () => {
 
     return (
         <PageLayout>
+            <PageTitle title={`${userInfo.username} | SmileFace`} />
             <div className={styles.container}>
                 <header className={styles.header}>
                     <div className={styles.profilePicDiv}>
