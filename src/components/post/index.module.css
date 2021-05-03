@@ -66,11 +66,27 @@
     padding-left: 1.5em;
 }
 
-.comment {
-    display: flex;
-    height: 100%
+.commentsMargin {
+    margin-top: 0.1em;
+    margin-bottom: 0.5em;
+    margin-left: 1.5em;
 }
 
-.comment p {
+.comment {
+    display: flex;
+    height: 100%;
+    margin-top: 0.1em;
+}
+
+.comment span {
     margin-right: 0.5em;
+}
+
+.textComment {
+    word-break: break-word;
+}
+
+.allComments {
+    color: rgb(153, 153, 153);
+    cursor: pointer;
 }

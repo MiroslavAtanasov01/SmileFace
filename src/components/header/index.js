@@ -6,7 +6,7 @@ import Link from '../link'
 import Icons from '../icons'
 
 const Header = () => {
-    const { loggedIn, user } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     return (
         <header className={styles.container}>
@@ -18,26 +18,17 @@ const Header = () => {
                     <input type="text" placeholder="Search.."></input>
                 </div>
                 <div className={styles.links}>
-                    {loggedIn
-                        ?
-                        <Fragment>
-                            <Icons type="nav" to="/messages" icon={faComment} />
-                            <Icons type="nav" to="/add-post" icon={faPlusSquare} />
-                            <Icons type="nav" to="/explore" icon={faCompass} />
-                            <Icons type="nav" to="/notification" icon={faHeart} />
-                            <Icons type="nav" to={`/profile/${user && user.id}`} icon={faUser} />
-                        </Fragment>
-                        :
-                        <Fragment>
-                            <Link key='Log In' to='/login' title='Log In' type="log" />
-                            <Link key='Sign Up' to='/register' title='Sign Up' type="sign" />
-                        </Fragment>
-                    }
+                    <Fragment>
+                        <Icons type="nav" to="/messages" icon={faComment} />
+                        <Icons type="nav" to="/add-post" icon={faPlusSquare} />
+                        <Icons type="nav" to="/explore" icon={faCompass} />
+                        <Icons type="nav" to="/notification" icon={faHeart} />
+                        <Icons type="nav" to={`/profile/${user && user.id}`} icon={faUser} />
+                    </Fragment>
                 </div>
             </div>
         </header>
     )
-
 }
 
 export default Header

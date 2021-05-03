@@ -28,9 +28,7 @@ module.exports = {
                         path: "posts",
                         populate: {
                             path: "postedBy comments",
-                            populate: {
-                                path: "postedBy"
-                            }
+                            populate: { path: "postedBy" },
                         }
                     }
                 });

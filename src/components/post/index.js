@@ -16,6 +16,10 @@ const Post = ({ username, createdAt, caption, imageUrl, likes, postedBy, _id, co
         history.push(`profile/${postedBy._id}`)
     }
 
+    const onClickUsers = (id) => {
+        history.push(`/profile/${id}`)
+    }
+
     const onSubmit = async (e) => {
         if (comment !== '') {
             e.preventDefault()
@@ -55,14 +59,16 @@ const Post = ({ username, createdAt, caption, imageUrl, likes, postedBy, _id, co
     }
 
     const renderComments = () => {
-        return comments.map(e => {
-            return (
-                <div key={e._id} className={style.comment}>
-                    <strong><p>{e.postedBy.username}</p></strong>
-                    <p>{e.comment}</p>
-                </div>
-            )
-        })
+        return comments
+            .slice(-3)
+            .map((e, i) => {
+                return (
+                    <div key={e._id} className={style.comment}>
+                        <strong><span onClick={() => onClickUsers(e.postedBy._id)}>{e.postedBy.username}</span></strong>
+                        <span className={style.textComment}>{e.comment}</span>
+                    </div>
+                )
+            })
     }
 
     const formatDate = (date) => {
@@ -74,7 +80,6 @@ const Post = ({ username, createdAt, caption, imageUrl, likes, postedBy, _id, co
 
 
     useEffect(() => {
-
     }, [comment])
 
     return (
@@ -94,8 +99,9 @@ const Post = ({ username, createdAt, caption, imageUrl, likes, postedBy, _id, co
                 <div>{likes.length} likes</div>
                 <div>{formatDate(createdAt)}</div>
             </div>
-            <div>
+            <div className={style.commentsMargin}>
                 {renderComments()}
+                {comments.length > 3 ? <span onClick={() => goToComments()} className={style.allComments}>View all comments</span> : null}
             </div>
             <form className={style['post-comments']} onSubmit={onSubmit}>
                 <div className={style['div-textarea']}>
