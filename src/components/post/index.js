@@ -95,10 +95,16 @@ const Post = ({ username, createdAt, caption, imageUrl, likes, postedBy, _id, co
             <span onClick={() => goToComments()} >
                 <Icons type="nav" to="" onClick={() => onClick()} icon={faComment} />
             </span>
-            <div className={style.div}>
-                <div>{likes.length} likes</div>
-                <div>{formatDate(createdAt)}</div>
-            </div>
+            { likes.length
+                ? <div className={style.div}>
+                    {likes.length > 1
+                        ? <div>{likes.length} likes</div>
+                        : <div>{likes.length} like</div>
+                    }
+                </div>
+                : <div></div>
+            }
+            <div className={style.div}>{formatDate(createdAt)}</div>
             <div className={style.commentsMargin}>
                 {renderComments()}
                 {comments.length > 3 ? <span onClick={() => goToComments()} className={style.allComments}>View all comments</span> : null}
@@ -114,9 +120,7 @@ const Post = ({ username, createdAt, caption, imageUrl, likes, postedBy, _id, co
                 </div>
                 <Button type='postComment' title="Post" />
             </form >
-
         </div>
-
     )
 }
 
