@@ -1,8 +1,8 @@
 .search-box {
     position: absolute;
-    top: 40px;
+    top: 70px;
     /* right: 46em; */
-    width: 243px;
+    width: 270px;
     max-height: 300px;
     overflow-y: auto;
     overflow-x: hidden;

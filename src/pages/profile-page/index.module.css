@@ -1,99 +1,99 @@
 .container {
-          max-width: 60em;
-          margin: 0 auto;
-          min-height: 74vh;
+    max-width: 60em;
+    margin: 0 auto;
+    min-height: 74vh;
 }
 
 .main {
-          border-top: 1px solid lightgray;
+    border-top: 1px solid lightgray;
 }
 
 .header {
-          display: flex;
-          margin-top: 30px;
-          margin-bottom: 44px;
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 44px;
 }
 
 .section {
-          margin-left: 2em;
+    margin-left: 2em;
 }
 
 .section div {
-          display: flex;
-          padding-bottom: 1em;
+    display: flex;
+    padding-bottom: 1em;
 }
 
 .section div h2 {
-          display: block;
-          color: rgba(var(--i1d, 38, 38, 38), 1);
-          font-weight: 300;
-          font-size: 28px;
-          line-height: 32px;
-          margin: -5px 0 -6px;
-          margin-right: 1em;
+    display: block;
+    color: rgba(var(--i1d, 38, 38, 38), 1);
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 32px;
+    margin: -5px 0 -6px;
+    margin-right: 1em;
 }
 
 .button {
-          margin-right: 1em;
-          background-color: transparent;
-          border: 1px solid #dbdbdb;
-          border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
-          color: rgba(var(--f75, 38, 38, 38), 1);
-          border-radius: 4px;
-          position: relative;
-          text-decoration: none;
-          cursor: pointer;
-          display: block;
-          font-weight: 600;
-          padding: 5px 9px;
+    margin-right: 1em;
+    background-color: transparent;
+    border: 1px solid #dbdbdb;
+    border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+    color: rgba(var(--f75, 38, 38, 38), 1);
+    border-radius: 4px;
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    font-weight: 600;
+    padding: 5px 9px;
 }
 
 .section div h1 {
-          display: inline;
-          font-weight: 600;
-          font-size: 16px;
-          margin: 0;
+    display: inline;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0;
 }
 
 .section ul {
-          padding: 0;
+    padding: 0;
 }
 
 .section ul li {
-          display: inline-block;
-          margin-right: 3em;
+    display: inline-block;
+    margin-right: 3em;
 }
 
 .profilePicDiv {
-          width: 150px;
-          height: 150px;
-          margin: 0 5em;
+    width: 150px;
+    height: 150px;
+    margin: 0 5em;
 }
 
 .profilePic {
-          width: 100%;
-          height: 100%;
-          cursor: pointer;
-          border-radius: 50%;
-          object-fit: cover;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .empty {
-          text-align: center;
-          padding-top: 2em;
+    text-align: center;
+    padding-top: 2em;
 }
 
 .followBtn {
-          margin-right: 1em;
-          background-color: #0095f6;
-          border: 1px solid #dbdbdb;
-          border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
-          color: #fff;
-          border-radius: 4px;
-          position: relative;
-          text-decoration: none;
-          cursor: pointer;
-          display: block;
-          font-weight: 600;
-          padding: 8px 24px;
+    margin-right: 1em;
+    background-color: #0095f6;
+    border: 1px solid #dbdbdb;
+    border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+    color: #fff;
+    border-radius: 4px;
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    font-weight: 600;
+    padding: 8px 24px;
 }

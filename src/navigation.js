@@ -9,6 +9,7 @@ import AddPost from './pages/add-post'
 import Explore from './pages/explore'
 import ErrorPage from './pages/error'
 import ProfilePage from './pages/profile-page'
+import SettingsProfile from './pages/settingsProfile'
 import DetailsPage from './components/details'
 import Edit from './components/post/edit'
 
@@ -42,6 +43,9 @@ const Navigation = () => {
                 </Route>
                 <Route path="/edit/:id">
                     {loggedIn ? (<Edit />) : (<Redirect to="/login" />)}
+                </Route>
+                <Route path="/settings/:id">
+                    {loggedIn ? (<SettingsProfile />) : (<Redirect to="/login" />)}
                 </Route>
                 <Route >
                     {loggedIn ? (<ErrorPage />) : (<Redirect to="/login" />)}

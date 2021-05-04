@@ -131,12 +131,27 @@ module.exports = {
                 return res.status(500).send(err)
             }
         },
-        picture: (req, res, next) => {
+        picture: async (req, res, next) => {
             const id = req.params.id;
-            models.user.findByIdAndUpdate({ _id: id }, { profilePicture: (req.body.picture) })
-                .then((updatedUser) => res.send(updatedUser))
-                .catch(next)
+            try {
+                const picture = await models.user.findByIdAndUpdate({ _id: id }, { profilePicture: (req.body.picture) })
+                return res.send(picture)
+            } catch (err) {
+                return res.status(500).send(err)
+            }
         },
+        editUser: async (req, res, next) => {
+            const id = req.params.id;
+            const { name, bio } = req.body
+            try {
+                const updatedUser = await models.user.findByIdAndUpdate({ _id: id }, {
+                    username: name, description: bio
+                })
+                return res.send(updatedUser)
+            } catch (err) {
+                return res.status(500).send(err)
+            }
+        }
     },
 
     delete: async (req, res, next) => {
