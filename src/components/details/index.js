@@ -6,6 +6,7 @@ import UserContext from '../../Context'
 import getCookie from '../../utils/getCookie'
 import Spinner from '../loading-spinner'
 import Button from '../button'
+import PageTitle from '../helmet'
 
 const DetailsPage = () => {
     const params = useParams()
@@ -175,6 +176,7 @@ const DetailsPage = () => {
 
     return (
         <article className={styles.container}>
+            <PageTitle title="SmileFace" />
             <div className={styles.photo}>
                 <img className={styles.image} alt='post-photos' src={userInfo.imageUrl} />
             </div>

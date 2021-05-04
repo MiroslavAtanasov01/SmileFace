@@ -15,6 +15,7 @@ router.post('/logout', controllers.user.post.logout)
 router.put('/picture/:id', controllers.user.put.picture)
 router.put('/follow/:id', auth(), controllers.user.put.followUser)
 router.put('/unFollow/:id', auth(), controllers.user.put.unFollowUser)
+router.put('/edit/:id', auth(), controllers.user.put.editUser)
 
 router.delete('/:id', controllers.user.delete)
 

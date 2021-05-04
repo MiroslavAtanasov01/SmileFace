@@ -50,6 +50,10 @@ const ProfilePage = () => {
             }).open();
     }
 
+    const settings = () => {
+        history.push(`/settings/${params.id}`)
+    }
+
     const renderPosts = () => {
         if (userInfo.posts.length === 0) {
             return (
@@ -128,7 +132,7 @@ const ProfilePage = () => {
                             <h2>{userInfo.username}</h2>
                             {context.user.id === params.id
                                 ? <div>
-                                    <button className={styles.button} >Edit Profile</button>
+                                    <button className={styles.button} onClick={settings}>Edit Profile</button>
                                     <button className={styles.button} onClick={logOut}>Logout</button>
                                 </div>
                                 : <div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Input from '../input';
+import Input2 from '../input2';
 import SearchBox from './search-box';
 
 const Search = () => {
@@ -8,7 +8,7 @@ const Search = () => {
 
     return (
         <div>
-            <Input
+            <Input2
                 name="search"
                 onChange={(e) => {
                     setDisplay(true);
