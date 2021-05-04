@@ -100,9 +100,28 @@ module.exports = {
                 return res.status(500).send(err)
             }
         },
+        editPost: async (req, res, next) => {
+            const id = req.params.id
+            const { location, description } = req.body
+
+            try {
+                const editedPost = await models.post.findByIdAndUpdate(id, { location: location, description: description })
+                return res.send(editedPost)
+            } catch (err) {
+                return res.status(500).send(err)
+            }
+        }
     },
+    deletePost: async (req, res, next) => {
+        const postId = req.params.id
+        const { id } = req.body
 
-    delete: {
-
+        try {
+            const post = await models.post.findByIdAndDelete(postId)
+            const user = await models.user.updateOne({ id }, { $pull: { posts: postId } })
+            return res.send(user)
+        } catch (err) {
+            return res.status(500).send(err)
+        }
     }
 }

@@ -10,6 +10,7 @@ import Explore from './pages/explore'
 import ErrorPage from './pages/error'
 import ProfilePage from './pages/profile-page'
 import DetailsPage from './components/details'
+import Edit from './components/post/edit'
 
 const Navigation = () => {
     const context = useContext(UserContext)
@@ -38,6 +39,9 @@ const Navigation = () => {
                 </Route>
                 <Route path="/details/:id">
                     {loggedIn ? (<DetailsPage />) : (<Redirect to="/login" />)}
+                </Route>
+                <Route path="/edit/:id">
+                    {loggedIn ? (<Edit />) : (<Redirect to="/login" />)}
                 </Route>
                 <Route >
                     {loggedIn ? (<ErrorPage />) : (<Redirect to="/login" />)}

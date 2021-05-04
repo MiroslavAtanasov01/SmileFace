@@ -112,17 +112,23 @@ const Main = () => {
 
                 </div>
                 <div className={styles.aside}>
-                    <div className={styles.profile}>
-                        <img alt="" src={userInfo.profilePicture} className={styles.profilePic} />
-                        <span onClick={onClick}>{userInfo.username}</span>
-                    </div>
-                    <div className={styles['aside-title']}>
-                        <span>Suggestions For You</span>
-                        {/* <button>See All</button> */}
-                    </div>
-                    <div className={styles.renderUsers}>
-                        {renderUsers()}
-                    </div>
+                    {userInfo.profilePicture
+                        ? <div>
+                            <div className={styles.profile}>
+                                <img alt="" src={userInfo.profilePicture} className={styles.profilePic} />
+                                <span onClick={onClick}>{userInfo.username}</span>
+                            </div>
+                            <div className={styles['aside-title']}>
+                                <span>Suggestions For You</span>
+                                {/* <button>See All</button> */}
+                            </div>
+                            <div className={styles.renderUsers}>
+                                {renderUsers()}
+                            </div>
+                        </div>
+                        : <div></div>
+                    }
+
                 </div>
             </div>
             <Footer />

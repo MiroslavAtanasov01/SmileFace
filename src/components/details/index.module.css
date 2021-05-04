@@ -3,6 +3,7 @@
     width: 60em;
     margin: 0 auto;
     margin-top: 5em;
+    height: 85vh;
 }
 
 .header {
@@ -30,7 +31,19 @@
 }
 
 .comments {
-    height: 55vh;
+    flex-direction: column;
+    height: 50%;
+    width: auto;
+    border-bottom: 1px solid rgb(219, 219, 219);
+    overflow-y: scroll;
+}
+
+.comments::-webkit-scrollbar {
+    width: 0 !important
+}
+
+.com {
+    word-break: break-word;
 }
 
 .comment {
@@ -39,4 +52,19 @@
 
 .comments p {
     margin-right: 0.5em;
+}
+
+.post-comments {
+    font-weight: normal;
+    border-top: 1px solid rgb(207, 207, 207);
+    display: inline-block;
+    width: 100%;
+    display: flex;
+}
+
+.post-textarea {
+    width: 100%;
+    border: 1px solid transparent;
+    outline: none;
+    resize: none;
 }
