@@ -1,6 +1,7 @@
 const models = require('../models')
 const config = require('../config/config')
 const jwt = require('../utils/jwt')
+const bcrypt = require('bcrypt')
 
 module.exports = {
     get: {
@@ -150,6 +151,34 @@ module.exports = {
                 return res.send(updatedUser)
             } catch (err) {
                 return res.status(500).send(err)
+            }
+        },
+        changePassword: async (req, res) => {
+            const { oldPassword, password, repeatPassword } = req.body
+
+            if (password === repeatPassword) {
+                try {
+                    const token = req.headers.authorization || ''
+                    const data = jwt.verifyToken(token)
+                    const user = await models.user.findById(data.id)
+                    const match = await user.matchPassword(oldPassword)
+
+                    if (match) {
+                        const salt = bcrypt.genSaltSync(10);
+                        const hash = bcrypt.hashSync(password, salt)
+
+                        user.password = hash;
+
+                        await models.user.findByIdAndUpdate(data.id, user)
+                        return res.clearCookie("auth-token").send({ message: "Password successfully changed!" })
+                    } else {
+                        return res.status(401).send({ error: "Wrong current password!" })
+                    }
+                } catch (error) {
+                    return res.status(500).send(err)
+                }
+            } else {
+                return res.status(401).send({ error: "Password and repeat password don't match!" })
             }
         }
     },

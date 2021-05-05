@@ -12,6 +12,7 @@ import ProfilePage from './pages/profile-page'
 import SettingsProfile from './pages/settingsProfile'
 import DetailsPage from './components/details'
 import Edit from './components/post/edit'
+import ChangePassword from './pages/changePassword'
 
 const Navigation = () => {
     const context = useContext(UserContext)
@@ -46,6 +47,9 @@ const Navigation = () => {
                 </Route>
                 <Route path="/settings/:id">
                     {loggedIn ? (<SettingsProfile />) : (<Redirect to="/login" />)}
+                </Route>
+                <Route path="/changePassword">
+                    {loggedIn ? (<ChangePassword />) : (<Redirect to="/login" />)}
                 </Route>
                 <Route >
                     {loggedIn ? (<ErrorPage />) : (<Redirect to="/login" />)}
