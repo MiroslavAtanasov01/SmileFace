@@ -123,5 +123,17 @@ module.exports = {
         } catch (err) {
             return res.status(500).send(err)
         }
-    }
+    },
+    deleteComment: async (req, res, next) => {
+        const id = req.params.id
+        const { postId } = req.body
+
+        try {
+            const comment = await models.comment.findByIdAndDelete(id)
+            const post = await models.post.updateOne({ postId }, { $pull: { comments: id } })
+            return res.send(post)
+        } catch (err) {
+            return res.status(500).send(err)
+        }
+    },
 }

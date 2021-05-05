@@ -16,5 +16,6 @@ router.put('/unlike', auth(), controllers.post.put.unlike)
 router.put('/postComment', auth(), controllers.post.put.postComment)
 
 router.delete('/delete/:id', auth(), controllers.post.deletePost)
+router.delete('/deleteComment/:id', auth(), controllers.post.deleteComment)
 
 module.exports = router

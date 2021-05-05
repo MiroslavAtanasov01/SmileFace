@@ -102,6 +102,20 @@ const DetailsPage = () => {
 
     }
 
+    const DeleteComment = (id) => {
+        return function () {
+            const postId = params.id
+            fetch(`http://localhost:3333/api/post/deleteComment/${id}`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': getCookie('auth-token')
+                },
+                body: JSON.stringify({ postId })
+            })
+        }
+    }
+
     const renderComments = () => {
         return userInfo.comments
             .map(e => {
@@ -110,6 +124,10 @@ const DetailsPage = () => {
                         {/* <strong><p>{e.postedBy}</p></strong> */}
                         <strong><p>dada</p></strong>
                         <p className={styles.com}>{e.comment}</p>
+                        {user._id === e.postedBy
+                            ? <span onClick={DeleteComment(e._id)}>x</span>
+                            : null
+                        }
                     </div>
                 )
             })
