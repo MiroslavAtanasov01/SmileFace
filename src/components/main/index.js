@@ -77,17 +77,19 @@ const Main = () => {
     }
 
     const renderUsers = () => {
-        return users.map(user => {
-            return (
-                <div className={styles.users} key={user._id}>
-                    <div onClick={() => onClickUsers(user._id)} >
-                        <img alt="" src={user.profilePicture} className={styles.userPic} />
-                        <span >{user.username}</span>
+        return users
+            .slice(0, 5)
+            .map(user => {
+                return (
+                    <div className={styles.users} key={user._id}>
+                        <div onClick={() => onClickUsers(user._id)} >
+                            <img alt="" src={user.profilePicture} className={styles.userPic} />
+                            <span >{user.username}</span>
+                        </div>
+                        <button className={styles.btn} onClick={() => Follow(user._id)}>Follow</button>
                     </div>
-                    <button className={styles.btn} onClick={() => Follow(user._id)}>Follow</button>
-                </div>
-            )
-        })
+                )
+            })
     }
 
     useEffect(() => {
