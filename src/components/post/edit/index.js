@@ -15,8 +15,7 @@ const Edit = () => {
     const editPost = async (e) => {
         e.preventDefault();
 
-
-        if (location !== '' || description !== '') {
+        if (description.length <= 200) {
             try {
                 await fetch(`http://localhost:3333/api/post/edit/${params.id}`, {
                     method: 'PUT',
@@ -32,6 +31,8 @@ const Edit = () => {
             } catch (err) {
                 console.error(err)
             }
+        } else {
+            console.log('The Description should be max 200 character')
         }
     };
 

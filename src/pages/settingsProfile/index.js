@@ -2,12 +2,13 @@ import React, { useState, useContext } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import styles from './index.module.css'
 import PageTitle from '../../components/helmet';
-import Input2 from '../../components/input2';
+import Input from '../../components/input';
 import Textarea from '../../components/textarea';
 import UserContext from '../../Context'
 import { Link } from 'react-router-dom';
 import getCookie from '../../utils/getCookie'
 import PageLayout from '../../components/page-layout';
+import { usernameValidator } from '../../utils/registerValidators'
 
 const SettingsProfile = () => {
     const context = useContext(UserContext)
@@ -16,30 +17,48 @@ const SettingsProfile = () => {
     const params = useParams()
     const history = useHistory()
 
+    const [usernameError, setUsernameError] = useState('')
+
     const updateUser = (e) => {
         e.preventDefault();
 
         if (context.user !== null) {
-            if (name !== '' && bio !== '' && context.user.id === params.id) {
-                fetch(`http://localhost:3333/api/user/edit/${params.id}`, {
-                    method: "PUT",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': getCookie('auth-token')
-                    },
-                    body: JSON.stringify({ name, bio })
-                })
-                history.push(`/profile/${params.id}`)
+            if (name !== '' && usernameError === "" && context.user.id === params.id) {
+                if (bio <= 200) {
+                    fetch(`http://localhost:3333/api/user/edit/${params.id}`, {
+                        method: "PUT",
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': getCookie('auth-token')
+                        },
+                        body: JSON.stringify({ name, bio })
+                    })
+                    history.push(`/profile/${params.id}`)
+                } else {
+                    console.log('The Description should be max 200 character')
+                }
+            } else {
+                console.log('Please enter valid username')
             }
         }
     };
+
+    const handlerBlurUsername = () => { setUsernameError(usernameValidator(name)) }
 
     return (
         <div>
             <PageTitle title="Settings | Smile" />
             <PageLayout>
                 <form className={styles.form}>
-                    <Input2 onChange={(e) => setName(e.target.value)} placeholder="Name" />
+                    <Input
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
+                        onBlur={handlerBlurUsername}
+                        id="username"
+                        type='login'
+                        placeholder="Username"
+                        error={usernameError}
+                    />
                     <Textarea onChange={(e) => setBio(e.target.value)} placeholder="Bio" />
 
                     <div className={styles.actions}>

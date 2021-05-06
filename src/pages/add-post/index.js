@@ -29,20 +29,28 @@ const AddPost = () => {
     const submitPost = async (e) => {
         e.preventDefault()
 
-        try {
-            await fetch('http://localhost:3333/api/post', {
-                method: 'POST',
-                body: JSON.stringify({
-                    imageUrl, location, description
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': getCookie('auth-token')
+        if (imageUrl) {
+            if (description.length <= 200) {
+                try {
+                    await fetch('http://localhost:3333/api/post', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            imageUrl, location, description
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': getCookie('auth-token')
+                        }
+                    })
+                    history.push('/')
+                } catch (err) {
+                    console.error(err)
                 }
-            })
-            history.push('/')
-        } catch (err) {
-            console.error(err)
+            } else {
+                console.log('The Description should be max 200 character')
+            }
+        } else {
+            console.log('Please upload photo')
         }
     }
 
