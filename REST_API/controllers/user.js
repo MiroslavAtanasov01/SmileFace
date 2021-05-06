@@ -67,12 +67,22 @@ module.exports = {
         register: async (req, res, next) => {
             const { email, username, password, rePassword } = req.body
 
-            try {
-                const user = await models.user.create({ email, username, password, rePassword })
-                const token = jwt.createToken({ id: user._id })
-                res.header('Authorization', token).send(user)
-            } catch (err) {
-                res.send(err)
+            if (email && username && password && password === rePassword) {
+                try {
+                    const userError = await models.user.findOne({ email })
+
+                    if (userError) {
+                        return res.status(401).send({ error: `User e-mail ${email} already exists` });
+                    }
+
+                    const user = await models.user.create({ email, username, password })
+                    const token = jwt.createToken({ id: user._id })
+                    res.header('Authorization', token).send(user)
+                } catch (err) {
+                    return res.status(500).send(err)
+                }
+            } else {
+                res.status(401).send({ error: 'Please enter valid credentials' })
             }
         },
         verify: async (req, res, next) => {
@@ -87,21 +97,25 @@ module.exports = {
         },
         login: async (req, res, next) => {
             const { email, password } = req.body
-            try {
-                const user = await models.user.findOne({ email })
-                    .populate("post")
-                    .populate("followers")
-                    .populate("following")
-                    .populate("requests")
-                const match = await user.matchPassword(password)
-                if (!match) {
-                    res.status(401).send('Invalid password')
-                    return
+            if (email && password) {
+                try {
+                    const user = await models.user.findOne({ email })
+                        .populate("post")
+                        .populate("followers")
+                        .populate("following")
+                        .populate("requests")
+                    const match = await user.matchPassword(password)
+                    if (!match) {
+                        res.status(401).send({ error: 'Invalid user e-mail or password!' })
+                        return
+                    }
+                    const token = jwt.createToken({ id: user._id })
+                    res.header('Authorization', token).send(user)
+                } catch (err) {
+                    next(err)
                 }
-                const token = jwt.createToken({ id: user._id })
-                res.header('Authorization', token).send(user)
-            } catch (err) {
-                next(err)
+            } else {
+                res.status(401).send({ error: 'Please enter valid credentials' })
             }
         },
         logout: (req, res, next) => {
@@ -156,7 +170,7 @@ module.exports = {
         changePassword: async (req, res) => {
             const { oldPassword, password, repeatPassword } = req.body
 
-            if (password === repeatPassword) {
+            if (oldPassword && password === repeatPassword) {
                 try {
                     const token = req.headers.authorization || ''
                     const data = jwt.verifyToken(token)

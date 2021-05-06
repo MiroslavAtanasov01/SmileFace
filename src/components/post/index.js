@@ -118,7 +118,7 @@ const Post = ({ username, createdAt, caption, imageUrl, likes, postedBy, _id, co
                         onChange={(e) => setComment(e.target.value)}>
                     </textarea>
                 </div>
-                <Button type='postComment' title="Post" />
+                <Button type='postComment' title="Post" disabled={comment ? false : true} />
             </form >
         </div>
     )
