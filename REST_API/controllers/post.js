@@ -59,12 +59,20 @@ module.exports = {
         const { description, imageUrl, location } = req.body
         const { _id } = req.user
 
-        try {
-            const newPost = await models.post.create({ description, imageUrl, location, createdAt: Date.now(), postedBy: { _id } })
-            const post = await models.user.updateOne({ _id }, { $addToSet: { posts: newPost } })
-            return res.send(post)
-        } catch (err) {
-            return res.status(500).send(err)
+        if (imageUrl) {
+            if (description.length <= 200) {
+                try {
+                    const newPost = await models.post.create({ description, imageUrl, location, createdAt: Date.now(), postedBy: { _id } })
+                    const post = await models.user.updateOne({ _id }, { $addToSet: { posts: newPost } })
+                    return res.send(post)
+                } catch (err) {
+                    return res.status(500).send(err)
+                }
+            } else {
+                console.log('The Description should be max 200 character')
+            }
+        } else {
+            console.log('Please upload photo')
         }
     },
     put: {
@@ -92,23 +100,28 @@ module.exports = {
             const { comment, postId } = req.body
             const { _id } = req.user
 
-            try {
-                const newComment = await models.comment.create({ comment, createdAt: Date.now(), postedBy: { _id } })
-                const post = await models.post.findByIdAndUpdate(postId, { $addToSet: { comments: newComment._id } })
-                return res.send(newComment, post)
-            } catch (err) {
-                return res.status(500).send(err)
+            if (comment && comment.length <= 200) {
+                try {
+                    const newComment = await models.comment.create({ comment, createdAt: Date.now(), postedBy: { _id } })
+                    const post = await models.post.findByIdAndUpdate(postId, { $addToSet: { comments: newComment._id } })
+                    return res.send(newComment, post)
+                } catch (err) {
+                    return res.status(500).send(err)
+                }
             }
         },
         editPost: async (req, res, next) => {
             const id = req.params.id
             const { location, description } = req.body
-
-            try {
-                const editedPost = await models.post.findByIdAndUpdate(id, { location: location, description: description })
-                return res.send(editedPost)
-            } catch (err) {
-                return res.status(500).send(err)
+            if (description.length <= 200) {
+                try {
+                    const editedPost = await models.post.findByIdAndUpdate(id, { location: location, description: description })
+                    return res.send(editedPost)
+                } catch (err) {
+                    return res.status(500).send(err)
+                }
+            } else {
+                console.log('The Description should be max 200 character')
             }
         }
     },

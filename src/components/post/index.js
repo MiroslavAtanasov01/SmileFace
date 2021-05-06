@@ -21,11 +21,11 @@ const Post = ({ username, createdAt, caption, imageUrl, likes, postedBy, _id, co
     }
 
     const onSubmit = async (e) => {
-        if (comment !== '') {
-            e.preventDefault()
-            const postId = _id
+        e.preventDefault()
+        const postId = _id
 
-            try {
+        try {
+            if (comment && comment.length <= 200) {
                 await fetch('http://localhost:3333/api/post/postComment', {
                     method: 'PUT',
                     body: JSON.stringify({ postId, comment }),
@@ -34,10 +34,12 @@ const Post = ({ username, createdAt, caption, imageUrl, likes, postedBy, _id, co
                         'Authorization': getCookie('auth-token')
                     }
                 })
-                setComment('')
-            } catch (err) {
-                console.error(err)
+            } else {
+                console.log('The comment should be max 200 character')
             }
+            setComment('')
+        } catch (err) {
+            console.error(err)
         }
 
     }

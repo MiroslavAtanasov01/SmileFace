@@ -161,11 +161,11 @@ const DetailsPage = () => {
     }
 
     const AddComment = async (e) => {
-        if (comment !== '') {
-            e.preventDefault()
-            const postId = params.id
+        e.preventDefault()
+        const postId = params.id
 
-            try {
+        try {
+            if (comment && comment.length <= 200) {
                 await fetch('http://localhost:3333/api/post/postComment', {
                     method: 'PUT',
                     body: JSON.stringify({ postId, comment }),
@@ -174,12 +174,13 @@ const DetailsPage = () => {
                         'Authorization': getCookie('auth-token')
                     }
                 })
-                setComment('')
-            } catch (err) {
-                console.error(err)
+            } else {
+                console.log('The comment should be max 200 character')
             }
+            setComment('')
+        } catch (err) {
+            console.error(err)
         }
-
     }
 
     useEffect(() => {
@@ -242,7 +243,7 @@ const DetailsPage = () => {
                             onChange={(e) => setComment(e.target.value)}>
                         </textarea>
                     </div>
-                    <Button type='postComment' title="Post" />
+                    <Button type='postComment' title="Post" disabled={comment ? false : true} />
                 </form >
             </div>
         </article>

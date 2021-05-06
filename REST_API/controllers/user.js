@@ -189,7 +189,7 @@ module.exports = {
                         return res.status(401).send({ error: "Wrong current password!" })
                     }
                 } catch (error) {
-                    return res.status(500).send(err)
+                    return res.status(500).send(error)
                 }
             } else {
                 return res.status(401).send({ error: "Password and repeat password don't match!" })
