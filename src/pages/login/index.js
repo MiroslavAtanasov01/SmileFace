@@ -7,40 +7,53 @@ import Button from '../../components/button'
 import Link from '../../components/link'
 import Footer from '../../components/footer'
 import PageTitle from '../../components/helmet'
+import { passwordValidator, emailValidator } from '../../utils/loginValidator'
 
 const LoginPage = () => {
     const history = useHistory()
     const context = useContext(UserContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [emailError, setEmailError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
 
     const onSubmit = async (e) => {
         e.preventDefault()
 
-        try {
-            const promise = await fetch('http://localhost:3333/api/user/login', {
-                method: 'POST',
-                body: JSON.stringify({ email, password }),
-                headers: { 'Content-type': 'application/json' }
-            })
-            const authToken = promise.headers.get('Authorization')
-            document.cookie = `auth-token=${authToken}`
-
-            const response = await promise.json()
-
-            if (response.email && authToken) {
-                context.logIn({
-                    email: response.email,
-                    id: response._id
+        if (email && password && emailError === '' && passwordError === '') {
+            try {
+                const promise = await fetch('http://localhost:3333/api/user/login', {
+                    method: 'POST',
+                    body: JSON.stringify({ email, password }),
+                    headers: { 'Content-type': 'application/json' }
                 })
-                history.push(`/`)
-            } else {
-                history.push('/login')
+                const authToken = promise.headers.get('Authorization')
+                document.cookie = `auth-token=${authToken}`
+
+                const response = await promise.json()
+                console.log(response.error)
+
+
+                if (response.email && authToken) {
+                    context.logIn({
+                        email: response.email,
+                        id: response._id
+                    })
+                    history.push(`/`)
+                } else {
+                    history.push('/login')
+                }
+            } catch (e) {
+                console.log('Invalid user e-mail or password!')
             }
-        } catch (e) {
-            console.log('Incorrect email/password')
+        } else {
+            console.log('Please enter valid credentials')
         }
+
     }
+
+    const handlerBlurEmail = () => { setEmailError(emailValidator(email)) }
+    const handlerBlurPassword = () => { setPasswordError(passwordValidator(password)) }
 
     return (
         <div>
@@ -55,19 +68,21 @@ const LoginPage = () => {
                             <Input
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}
-                                // onBlur={this.handlerBlurEmail}
+                                onBlur={handlerBlurEmail}
                                 id="email"
                                 type='login'
                                 placeholder="Enter your email"
+                                error={emailError}
                             />
                             <Input
                                 name='password'
                                 value={password}
                                 onChange={(event) => setPassword(event.target.value)}
-                                // onBlur={this.handlerBlurPassword}
+                                onBlur={handlerBlurPassword}
                                 id="password"
                                 type='login'
                                 placeholder="Password"
+                                error={passwordError}
                             />
                             <Button type='login' title="Log in" />
                             <div className={styles.or}>

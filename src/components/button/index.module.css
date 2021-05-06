@@ -49,6 +49,8 @@
     cursor: pointer;
 }
 
+
+
 .plus-btn {
     cursor: pointer;
     border: none;
@@ -75,4 +77,9 @@
 .postComment-container {
     margin-top: 0.5em;
     width: 10%;
+}
+
+.postComment-btn:disabled {
+    color: #a7dafc;
+    cursor: default;
 }

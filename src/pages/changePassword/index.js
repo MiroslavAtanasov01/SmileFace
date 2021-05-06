@@ -4,43 +4,56 @@ import styles from './index.module.css'
 import PageTitle from '../../components/helmet'
 import PageLayout from '../../components/page-layout'
 import UserContext from '../../Context'
-import Input2 from '../../components/input2'
+import Input from '../../components/input'
 import { Link } from 'react-router-dom'
 import getCookie from '../../utils/getCookie'
+import { rePasswordValidator, passwordValidator, oldPasswordValidator } from '../../utils/registerValidators'
 
 const ChangePassword = () => {
     const context = useContext(UserContext)
+    const history = useHistory()
     const [oldPassword, setOldPassword] = useState('')
     const [password, setPassword] = useState('')
     const [rePassword, setRePassword] = useState('')
-    const history = useHistory()
+
+    const [oldPasswordError, setOldPasswordError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+    const [rePasswordError, setrePasswordError] = useState('')
 
     const changePassword = async (e) => {
         e.preventDefault()
 
-        try {
-            const promise = await fetch("http://localhost:3333/api/user/changePassword", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': getCookie('auth-token')
-                },
-                body: JSON.stringify({ oldPassword, password, repeatPassword: rePassword })
-            })
+        if (password && rePassword && password === rePassword && passwordError === "" && rePasswordError === "") {
 
-            const response = await promise.json()
-            console.log(response)
+            try {
+                const promise = await fetch("http://localhost:3333/api/user/changePassword", {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        'Authorization': getCookie('auth-token')
+                    },
+                    body: JSON.stringify({ oldPassword, password, repeatPassword: rePassword })
+                })
 
-            if (response.error) {
-                console.err(response.error)
-            } else {
-                context.logOut()
-                history.push("/login")
+                const response = await promise.json()
+
+                if (!response.error) {
+                    context.logOut()
+                    history.push("/login")
+                } else {
+                    console.log(response.error)
+                }
+            } catch (err) {
+                console.log('error')
             }
-        } catch (err) {
-            console.log('error')
+        } else {
+            console.log('Please enter valid credentials')
         }
     }
+
+    const handlerBlurOldPassword = () => { setOldPasswordError(oldPasswordValidator(oldPassword)) }
+    const handlerBlurPassword = () => { setPasswordError(passwordValidator(password)) }
+    const handlerBlurRePassword = () => { setrePasswordError(rePasswordValidator(password, rePassword)) }
 
     return (
         <div>
@@ -52,9 +65,36 @@ const ChangePassword = () => {
                             <Link to='/'>SmileFace</Link>
                         </div>
                         <form className={styles.form}>
-                            <Input2 type="password" placeholder="Old Password" onChange={(e) => setOldPassword(e.target.value)} />
-                            <Input2 type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                            <Input2 type="password" placeholder="Repeat Password" onChange={(e) => setRePassword(e.target.value)} />
+                            <Input
+                                name='password'
+                                value={oldPassword}
+                                onChange={(event) => setOldPassword(event.target.value)}
+                                onBlur={handlerBlurOldPassword}
+                                id="oldPassword"
+                                type='login'
+                                placeholder="Old-Password"
+                                error={oldPasswordError}
+                            />
+                            <Input
+                                name='password'
+                                value={password}
+                                onChange={(event) => setPassword(event.target.value)}
+                                onBlur={handlerBlurPassword}
+                                id="password"
+                                type='login'
+                                placeholder="Password"
+                                error={passwordError}
+                            />
+                            <Input
+                                name='password'
+                                value={rePassword}
+                                onChange={(event) => setRePassword(event.target.value)}
+                                onBlur={handlerBlurRePassword}
+                                id="rePassword"
+                                type='login'
+                                placeholder="Re-Password"
+                                error={rePasswordError}
+                            />
                             <button onClick={changePassword} className={styles.btn}>Change password</button>
                         </form>
                     </div>

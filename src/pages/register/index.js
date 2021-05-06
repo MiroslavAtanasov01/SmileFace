@@ -7,6 +7,7 @@ import Button from '../../components/button'
 import Link from '../../components/link'
 import Footer from '../../components/footer'
 import PageTitle from '../../components/helmet'
+import { rePasswordValidator, passwordValidator, usernameValidator, emailValidator } from '../../utils/registerValidators'
 
 const LoginPage = () => {
     const history = useHistory()
@@ -16,33 +17,49 @@ const LoginPage = () => {
     const [password, setPassword] = useState('')
     const [rePassword, setRePassword] = useState('')
 
+    const [emailError, setEmailError] = useState('')
+    const [usernameError, setUsernameError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+    const [rePasswordError, setrePasswordError] = useState('')
+
     const onSubmit = async (e) => {
         e.preventDefault()
 
-        try {
-            const promise = await fetch('http://localhost:3333/api/user/register', {
-                method: 'POST',
-                body: JSON.stringify({ email, username, password, rePassword }),
-                headers: { 'Content-type': 'application/json' }
-            })
-            const authToken = promise.headers.get('Authorization')
-            document.cookie = `auth-token=${authToken}`
+        if (email && username && password && rePassword && password === rePassword
+            && emailError === "" && usernameError === "" && passwordError === "" && rePasswordError === "") {
 
-            const response = await promise.json()
-
-            if (response.email && authToken) {
-                context.logIn({
-                    email: response.email,
-                    id: response._id
+            try {
+                const promise = await fetch('http://localhost:3333/api/user/register', {
+                    method: 'POST',
+                    body: JSON.stringify({ email, username, password, rePassword }),
+                    headers: { 'Content-type': 'application/json' }
                 })
-                history.push(`/`)
-            } else {
-                history.push('/register')
+                const authToken = promise.headers.get('Authorization')
+                document.cookie = `auth-token=${authToken}`
+
+                const response = await promise.json()
+
+                if (response.email && authToken) {
+                    context.logIn({
+                        email: response.email,
+                        id: response._id
+                    })
+                    history.push(`/`)
+                } else {
+                    console.log(response.error);
+                }
+            } catch (e) {
+                console.log('This email is already taken')
             }
-        } catch (e) {
-            console.log('This email or username is already taken')
+        } else {
+            console.log('Please enter valid credentials')
         }
     }
+
+    const handlerBlurEmail = () => { setEmailError(emailValidator(email)) }
+    const handlerBlurUsername = () => { setUsernameError(usernameValidator(username)) }
+    const handlerBlurPassword = () => { setPasswordError(passwordValidator(password)) }
+    const handlerBlurRePassword = () => { setrePasswordError(rePasswordValidator(password, rePassword)) }
 
     return (
         <div>
@@ -55,36 +72,40 @@ const LoginPage = () => {
                             <Input
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}
-                                // onBlur={this.handlerBlurEmail}
+                                onBlur={handlerBlurEmail}
                                 id="email"
                                 type='login'
                                 placeholder="Enter your email"
+                                error={emailError}
                             />
                             <Input
                                 value={username}
                                 onChange={(event) => setUsername(event.target.value)}
-                                // onBlur={this.handlerBlurEmail}
+                                onBlur={handlerBlurUsername}
                                 id="username"
                                 type='login'
                                 placeholder="Username"
+                                error={usernameError}
                             />
                             <Input
                                 name='password'
                                 value={password}
                                 onChange={(event) => setPassword(event.target.value)}
-                                // onBlur={this.handlerBlurPassword}
+                                onBlur={handlerBlurPassword}
                                 id="password"
                                 type='login'
                                 placeholder="Password"
+                                error={passwordError}
                             />
                             <Input
                                 name='password'
                                 value={rePassword}
                                 onChange={(event) => setRePassword(event.target.value)}
-                                // onBlur={this.handlerBlurEmail}
+                                onBlur={handlerBlurRePassword}
                                 id="rePassword"
                                 type='login'
                                 placeholder="Re-Password"
+                                error={rePasswordError}
                             />
                             <Button type='login' title="Register" />
                             <div className={styles.or}>
