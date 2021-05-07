@@ -130,7 +130,7 @@ module.exports = {
         const { id } = req.body
 
         try {
-            const post = await models.post.findByIdAndDelete(postId)
+            await models.post.findByIdAndDelete(postId)
             const user = await models.user.updateOne({ id }, { $pull: { posts: postId } })
             return res.send(user)
         } catch (err) {
@@ -142,7 +142,7 @@ module.exports = {
         const { postId } = req.body
 
         try {
-            const comment = await models.comment.findByIdAndDelete(id)
+            await models.comment.findByIdAndDelete(id)
             const post = await models.post.updateOne({ postId }, { $pull: { comments: id } })
             return res.send(post)
         } catch (err) {

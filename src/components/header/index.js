@@ -1,9 +1,12 @@
-import React, { Fragment, useContext } from 'react'
-import { faCompass, faHeart, faUser, faPlusSquare } from "@fortawesome/free-regular-svg-icons"
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom';
 import styles from './index.module.css'
 import UserContext from '../../Context'
-import Link from '../link'
-import Icons from '../icons'
+import homeIcon from '../../images/home-run.svg'
+import addPostIcon from '../../images/plus.svg'
+import userIcon from '../../images/user.svg'
+import exploreIcon from '../../images/camera.svg'
+import Logo from '../logo'
 import Search from '../search'
 
 const Header = () => {
@@ -11,20 +14,18 @@ const Header = () => {
 
     return (
         <header className={styles.container}>
-            <div className={styles.main}>
-                <div className={styles.logo}>
-                    <Link key='SmileFace' to='/' title='SmileFace' type="logo" />
-                </div>
+            <nav className={styles.nav}>
+                <Logo />
                 <Search />
                 <div className={styles.links}>
-                    <Fragment>
-                        <Icons type="nav" to="/add-post" icon={faPlusSquare} />
-                        <Icons type="nav" to="/explore" icon={faCompass} />
-                        <Icons type="nav" to="/notification" icon={faHeart} />
-                        <Icons type="nav" to={`/profile/${user && user.id}`} icon={faUser} />
-                    </Fragment>
+                    <ul className={styles["nav-icons"]}>
+                        <li><Link to="/"><img className={styles.icon} src={homeIcon} alt="home" /></Link></li>
+                        <li><Link to="/add-post"><img className={styles.icon} src={addPostIcon} alt="add-post" /></Link></li>
+                        <li><Link to="/explore"><img className={styles.icon} src={exploreIcon} alt="explore" /></Link></li>
+                        <li><Link to={`/profile/${user && user.id}`}><img className={styles.icon} src={userIcon} alt="profile" /></Link></li>
+                    </ul>
                 </div>
-            </div>
+            </nav>
         </header>
     )
 }
