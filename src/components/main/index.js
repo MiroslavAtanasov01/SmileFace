@@ -1,19 +1,17 @@
 import React, { useCallback, useState, useEffect, useContext } from 'react'
-import { useHistory } from 'react-router-dom'
 import styles from './index.module.css'
 import Post from '../post'
 import Header from '../header'
-import Footer from '../footer'
 import getCookie from '../../utils/getCookie'
 import UserContext from '../../Context'
 import Spinner from '../loading-spinner'
+import PageTitle from '../helmet'
+import Aside from '../aside'
 
 const Main = () => {
     const [posts, setPosts] = useState([])
-    const [users, setUsers] = useState([])
     const [userInfo, setUserInfo] = useState({ email: '', username: '', profilePicture: '', followers: [], following: [], posts: [] })
     const context = useContext(UserContext)
-    const history = useHistory()
 
     const getData = useCallback(async () => {
         if (context.loggedIn === true) {
@@ -27,17 +25,6 @@ const Main = () => {
             )
             const posts = await promise.json()
             setPosts(posts)
-
-            const promiseUsers = await fetch('http://localhost:3333/api/user/getNotFollowedUsers', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': getCookie('auth-token')
-                }
-            }
-            )
-            const users = await promiseUsers.json()
-            setUsers(users)
         }
 
         if (context.user !== null) {
@@ -56,48 +43,13 @@ const Main = () => {
         })
     }
 
-    const onClick = () => {
-        history.push(`/profile/${context.user.id}`)
-    }
-
-    const onClickUsers = (id) => {
-        history.push(`/profile/${id}`)
-    }
-
-    const Follow = (id) => {
-        const userId = context.user.id
-        fetch(`http://localhost:3333/api/user/follow/${id}`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('auth-token')
-            },
-            body: JSON.stringify({ userId })
-        })
-    }
-
-    const renderUsers = () => {
-        return users
-            .slice(0, 5)
-            .map(user => {
-                return (
-                    <div className={styles.users} key={user._id}>
-                        <div onClick={() => onClickUsers(user._id)} >
-                            <img alt="" src={user.profilePicture} className={styles.userPic} />
-                            <span >{user.username}</span>
-                        </div>
-                        <button className={styles.btn} onClick={() => Follow(user._id)}>Follow</button>
-                    </div>
-                )
-            })
-    }
-
     useEffect(() => {
         getData()
     }, [getData, userInfo])
 
     return (
         <div>
+            <PageTitle title="SmileFace" />
             <Header />
             <div className={styles.main}>
                 <div className={styles.posts}>
@@ -108,32 +60,10 @@ const Main = () => {
                             Go follow someone and their posts will appear here!</span>
                             </div>
                         }
-                    </div> :
-                        <Spinner />
-                    }
-
+                    </div> : <Spinner />}
                 </div>
-                <div className={styles.aside}>
-                    {userInfo.profilePicture
-                        ? <div>
-                            <div className={styles.profile}>
-                                <img alt="" src={userInfo.profilePicture} className={styles.profilePic} />
-                                <span onClick={onClick}>{userInfo.username}</span>
-                            </div>
-                            <div className={styles['aside-title']}>
-                                <span>Suggestions For You</span>
-                                {/* <button>See All</button> */}
-                            </div>
-                            <div className={styles.renderUsers}>
-                                {renderUsers()}
-                            </div>
-                        </div>
-                        : <div></div>
-                    }
-
-                </div>
+                <Aside />
             </div>
-            <Footer />
         </div>
     )
 }

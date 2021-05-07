@@ -48,25 +48,21 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.methods = {
     matchPassword: function (password) {
-        return bcrypt.compare(password, this.password);
+        return bcrypt.compare(password, this.password)
     }
 };
 
 UserSchema.pre('save', function (next) {
     if (this.isModified('password')) {
         bcrypt.genSalt(10, (err, salt) => {
-            if (err) {
-                return next(err)
-            }
+            if (err) { return next(err) }
             bcrypt.hash(this.password, salt, (err, hash) => {
-                if (err) {
-                    return next(err)
-                }
-                this.password = hash;
-                next();
+                if (err) { return next(err) }
+                this.password = hash
+                next()
             });
         });
-        return;
+        return
     }
     next();
 });

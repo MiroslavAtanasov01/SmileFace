@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <div className={styles.main}>
             <footer className={styles.footer}>
-                <div className={styles.copyright}>&copy; 2020 SMILEFACE FROM MIROSLAV</div>
+                <div className={styles.copyright}>&copy; {new Date().getFullYear()} SMILEFACE FROM MIROSLAV</div>
             </footer>
         </div>
     )

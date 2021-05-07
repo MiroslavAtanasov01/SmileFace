@@ -48,7 +48,7 @@ module.exports = {
             const query = req.query.q;
 
             try {
-                const users = await models.user.find({ "username": { "$regex": `${query}`, "$options": "i" } });
+                const users = await models.user.find({ "username": { "$regex": `${query}`, "$options": "i" } })
                 if (users === null) {
                     return res.status(404).send({
                         message: "No users matching your criteria were found"
@@ -72,7 +72,7 @@ module.exports = {
                     const userError = await models.user.findOne({ email })
 
                     if (userError) {
-                        return res.status(401).send({ error: `User e-mail ${email} already exists` });
+                        return res.status(401).send({ error: `User e-mail ${email} already exists` })
                     }
 
                     const user = await models.user.create({ email, username, password })

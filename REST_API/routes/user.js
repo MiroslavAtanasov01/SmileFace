@@ -5,7 +5,6 @@ const auth = require('../utils/auth')
 router.get('/', controllers.user.get.getAll)
 router.get('/getNotFollowedUsers', auth(), controllers.user.get.getNotFollowedUsers)
 router.get('/:id', controllers.user.get.getById)
-// router.get('/search', controllers.user.get.searchUsers)
 
 router.post('/register', controllers.user.post.register)
 router.post('/login', controllers.user.post.login)

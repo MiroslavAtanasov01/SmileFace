@@ -108,14 +108,7 @@ const LoginPage = () => {
                                 error={rePasswordError}
                             />
                             <Button type='login' title="Register" />
-                            <div className={styles.or}>
-                                <div className={styles['or-text']}>or</div>
-                                <div className={styles.line}></div>
-                            </div>
                         </form>
-                    </div>
-                    <div>
-                        <Button type='facebook' title="Log in with Facebook" />
                     </div>
                 </div>
                 <div className={styles.acc}>
