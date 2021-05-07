@@ -1,0 +1,18 @@
+.allComments {
+    color: rgb(153, 153, 153);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.comment {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.comment a {
+    margin-right: 5px;
+}
+
+.textComment {
+    word-break: break-word;
+}
