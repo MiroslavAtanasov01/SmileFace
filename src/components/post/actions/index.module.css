@@ -1,0 +1,8 @@
+.action:first-child {
+    margin-right: 15px;
+}
+
+.action {
+    cursor: pointer;
+    height: 25px;
+}

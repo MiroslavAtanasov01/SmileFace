@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import styles from './index.module.css'
 import UserContext from '../../Context'
 import homeIcon from '../../images/home-run.svg'

@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './index.module.css'
 import { useHistory } from 'react-router-dom'
-import Icons from '../icons'
-import { faHeart, faComment } from "@fortawesome/free-regular-svg-icons"
+import heartIcon from '../../images/heart.svg'
+import commentIcon from '../../images/comment.svg'
 
 
 const PostExplore = ({ imageUrl, likes, comments, _id }) => {
@@ -16,11 +16,11 @@ const PostExplore = ({ imageUrl, likes, comments, _id }) => {
             <img alt="post" className={styles.image} src={imageUrl} onClick={() => imageClick()}></img>
             <div className={styles.likes}>
                 <span className={styles.distance}>
-                    <Icons type="image" to="" icon={faHeart} />
+                    <img className={styles.icon} src={heartIcon} alt="heart" />
                     {likes.length}
                 </span>
                 <span>
-                    <Icons type="image" to="" icon={faComment} />
+                    <img className={styles.icon} src={commentIcon} alt="comment" />
                     {comments.length}
                 </span>
             </div>
