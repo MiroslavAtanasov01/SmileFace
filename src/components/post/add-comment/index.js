@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import styles from './index.module.css'
 import Button from '../../button'
 import getCookie from '../../../utils/getCookie'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const AddComment = ({ _id }) => {
     const [comment, setComment] = useState('')
@@ -21,7 +23,7 @@ const AddComment = ({ _id }) => {
                     }
                 })
             } else {
-                console.log('The comment should be max 200 character')
+                toast.error('The comment should be max 200 character')
             }
             setComment('')
         } catch (err) {
@@ -34,6 +36,7 @@ const AddComment = ({ _id }) => {
 
     return (
         <form className={styles.container} onSubmit={onSubmit}>
+            <ToastContainer transition={Zoom} />
             <textarea
                 value={comment}
                 className={styles.textarea}

@@ -7,6 +7,8 @@ import Input from '../../components/input'
 import Button from '../../components/button'
 import getCookie from '../../utils/getCookie'
 import PageTitle from '../../components/helmet'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const AddPost = () => {
     const [imageUrl, setImageUrl] = useState("")
@@ -47,16 +49,17 @@ const AddPost = () => {
                     console.error(err)
                 }
             } else {
-                console.log('The Description should be max 200 character')
+                toast.error('The Description should be max 200 character')
             }
         } else {
-            console.log('Please upload photo')
+            toast.error('Please upload photo')
         }
     }
 
     return (
         <PageLayout>
             <PageTitle title="Add Post | SmileFace" />
+            <ToastContainer transition={Zoom} />
             <div className={styles.main}>
                 <h1 className={styles.title}>Add New Photo</h1>
                 <div className={styles.container}>

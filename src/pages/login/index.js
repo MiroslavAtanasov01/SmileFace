@@ -8,6 +8,8 @@ import Link from '../../components/link'
 import Footer from '../../components/footer'
 import PageTitle from '../../components/helmet'
 import { passwordValidator, emailValidator } from '../../utils/loginValidator'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const LoginPage = () => {
     const history = useHistory()
@@ -31,7 +33,6 @@ const LoginPage = () => {
                 document.cookie = `auth-token=${authToken}`
 
                 const response = await promise.json()
-                console.log(response.error)
 
 
                 if (response.email && authToken) {
@@ -44,10 +45,10 @@ const LoginPage = () => {
                     history.push('/login')
                 }
             } catch (e) {
-                console.log('Invalid user e-mail or password!')
+                toast.error('Invalid user e-mail or password!')
             }
         } else {
-            console.log('Please enter valid credentials')
+            toast.error('Please enter valid credentials')
         }
 
     }
@@ -58,6 +59,7 @@ const LoginPage = () => {
     return (
         <div>
             <PageTitle title="Login | SmileFace" />
+            <ToastContainer transition={Zoom} />
             <div className={styles.container}>
                 <div className={styles.main}>
                     <h1 className={styles['logo-name']}>

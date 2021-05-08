@@ -7,6 +7,8 @@ import getCookie from '../../utils/getCookie'
 import Spinner from '../loading-spinner'
 import Button from '../button'
 import PageTitle from '../helmet'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const DetailsPage = () => {
     const params = useParams()
@@ -175,7 +177,7 @@ const DetailsPage = () => {
                     }
                 })
             } else {
-                console.log('The comment should be max 200 character')
+                toast.error('The comment should be max 200 character')
             }
             setComment('')
         } catch (err) {
@@ -196,6 +198,7 @@ const DetailsPage = () => {
     return (
         <article className={styles.container}>
             <PageTitle title="SmileFace" />
+            <ToastContainer transition={Zoom} />
             <div className={styles.photo}>
                 <img className={styles.image} alt='post-photos' src={userInfo.imageUrl} />
             </div>

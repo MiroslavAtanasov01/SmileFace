@@ -69,10 +69,10 @@ module.exports = {
                     return res.status(500).send(err)
                 }
             } else {
-                console.log('The Description should be max 200 character')
+                return res.status(500).send('The Description should be max 200 character')
             }
         } else {
-            console.log('Please upload photo')
+            return res.status(500).send('Please upload photo')
         }
     },
     put: {
@@ -121,7 +121,7 @@ module.exports = {
                     return res.status(500).send(err)
                 }
             } else {
-                console.log('The Description should be max 200 character')
+                return res.status(500).send('The Description should be max 200 character')
             }
         }
     },
