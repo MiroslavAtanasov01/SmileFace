@@ -8,6 +8,8 @@ import Link from '../../components/link'
 import Footer from '../../components/footer'
 import PageTitle from '../../components/helmet'
 import { rePasswordValidator, passwordValidator, usernameValidator, emailValidator } from '../../utils/registerValidators'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const LoginPage = () => {
     const history = useHistory()
@@ -46,13 +48,13 @@ const LoginPage = () => {
                     })
                     history.push(`/`)
                 } else {
-                    console.log(response.error);
+                    toast.error(response.error)
                 }
             } catch (e) {
-                console.log('This email is already taken')
+                toast.error('This email is already taken')
             }
         } else {
-            console.log('Please enter valid credentials')
+            toast.error('Please enter valid credentials')
         }
     }
 
@@ -64,6 +66,7 @@ const LoginPage = () => {
     return (
         <div>
             <PageTitle title="Register | SmileFace" />
+            <ToastContainer transition={Zoom} />
             <div className={styles.container}>
                 <div className={styles.main}>
                     <h1 className={styles['logo-name']}>SmileFace</h1>

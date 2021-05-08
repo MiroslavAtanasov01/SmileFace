@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import getCookie from '../../utils/getCookie'
 import PageLayout from '../../components/page-layout';
 import { usernameValidator } from '../../utils/registerValidators'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const SettingsProfile = () => {
     const context = useContext(UserContext)
@@ -35,10 +37,10 @@ const SettingsProfile = () => {
                     })
                     history.push(`/profile/${params.id}`)
                 } else {
-                    console.log('The Description should be max 200 character')
+                    toast.error('The Description should be max 200 character')
                 }
             } else {
-                console.log('Please enter valid username')
+                toast.error('Please enter valid username')
             }
         }
     };
@@ -48,6 +50,7 @@ const SettingsProfile = () => {
     return (
         <div>
             <PageTitle title="Settings | Smile" />
+            <ToastContainer transition={Zoom} />
             <PageLayout>
                 <form className={styles.form}>
                     <Input

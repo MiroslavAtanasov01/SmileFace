@@ -4,6 +4,9 @@ import styles from './index.module.css';
 import Input from '../../input';
 import Textarea from "../../textarea";
 import getCookie from '../../../utils/getCookie'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 
 const Edit = () => {
     const [location, setLocation] = useState('');
@@ -32,12 +35,13 @@ const Edit = () => {
                 console.error(err)
             }
         } else {
-            console.log('The Description should be max 200 character')
+            toast.error('The Description should be max 200 character')
         }
     };
 
     return (
         <div className={styles.container}>
+            <ToastContainer transition={Zoom} />
             <form className={styles.form}>
                 <Input
                     value={location}

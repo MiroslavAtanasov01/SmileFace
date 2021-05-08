@@ -8,6 +8,8 @@ import Input from '../../components/input'
 import { Link } from 'react-router-dom'
 import getCookie from '../../utils/getCookie'
 import { rePasswordValidator, passwordValidator, oldPasswordValidator } from '../../utils/registerValidators'
+import { ToastContainer, toast, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const ChangePassword = () => {
     const context = useContext(UserContext)
@@ -41,13 +43,13 @@ const ChangePassword = () => {
                     context.logOut()
                     history.push("/login")
                 } else {
-                    console.log(response.error)
+                    toast.error(response.error)
                 }
             } catch (err) {
-                console.log('error')
+                console.error(err)
             }
         } else {
-            console.log('Please enter valid credentials')
+            toast.error('Please enter valid credentials')
         }
     }
 
@@ -59,6 +61,7 @@ const ChangePassword = () => {
         <div>
             <PageLayout>
                 <PageTitle title="Change Password | SmileFace" />
+                <ToastContainer transition={Zoom} />
                 <div className={styles.container}>
                     <div className={styles["form-container"]}>
                         <div className={styles.logo}>
