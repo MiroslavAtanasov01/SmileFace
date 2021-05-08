@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import styles from './index.module.css'
 import getCookie from '../../utils/getCookie'
 import UserContext from '../../Context'
+import dataService from '../../services/dataService'
 
 const Aside = () => {
     const [users, setUsers] = useState([])
@@ -12,20 +13,13 @@ const Aside = () => {
 
     const getData = useCallback(async () => {
         if (context.loggedIn === true) {
-            const promiseUsers = await fetch('http://localhost:3333/api/user/getNotFollowedUsers', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': getCookie('auth-token')
-                }
-            }
-            )
+            const promiseUsers = await dataService({ method: 'GET', url: `/user/getNotFollowedUsers`, token: getCookie('auth-token') })
             const users = await promiseUsers.json()
             setUsers(users)
         }
 
         if (context.user !== null) {
-            const responseUser = await fetch(`http://localhost:3333/api/user/${context.user.id}`)
+            const responseUser = await dataService({ method: 'GET', url: `/user/${context.user.id}` })
             const userToRender = await responseUser.json()
             setUserInfo({ ...userToRender })
         }
@@ -33,23 +27,16 @@ const Aside = () => {
     }, [context])
 
     const goToProfile = () => {
-        history.push(`/profile/${context.user.id}`)
+        history.push(`/ profile / ${context.user.id}`)
     }
 
     const goToProfileUser = (id) => {
-        history.push(`/profile/${id}`)
+        history.push(`/ profile / ${id}`)
     }
 
-    const Follow = (id) => {
+    const Follow = async (id) => {
         const userId = context.user.id
-        fetch(`http://localhost:3333/api/user/follow/${id}`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('auth-token')
-            },
-            body: JSON.stringify({ userId })
-        })
+        await dataService({ method: 'PUT', url: `/user/follow/${id}`, data: { userId }, token: getCookie('auth-token') })
     }
 
     const renderUsers = () => {

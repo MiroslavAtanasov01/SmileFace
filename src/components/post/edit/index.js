@@ -6,6 +6,7 @@ import Textarea from "../../textarea";
 import getCookie from '../../../utils/getCookie'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import dataService from '../../../services/dataService'
 
 
 const Edit = () => {
@@ -20,15 +21,8 @@ const Edit = () => {
 
         if (description.length <= 200) {
             try {
-                await fetch(`http://localhost:3333/api/post/edit/${params.id}`, {
-                    method: 'PUT',
-                    body: JSON.stringify({
-                        location, description
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': getCookie('auth-token')
-                    }
+                await dataService({
+                    method: 'PUT', url: `/post/edit/${params.id}`, data: { location, description }, token: getCookie('auth-token')
                 })
                 history.push('/')
             } catch (err) {

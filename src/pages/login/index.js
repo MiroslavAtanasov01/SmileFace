@@ -10,6 +10,7 @@ import PageTitle from '../../components/helmet'
 import { passwordValidator, emailValidator } from '../../utils/loginValidator'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import dataService from '../../services/dataService'
 
 const LoginPage = () => {
     const history = useHistory()
@@ -24,11 +25,8 @@ const LoginPage = () => {
 
         if (email && password && emailError === '' && passwordError === '') {
             try {
-                const promise = await fetch('http://localhost:3333/api/user/login', {
-                    method: 'POST',
-                    body: JSON.stringify({ email, password }),
-                    headers: { 'Content-type': 'application/json' }
-                })
+                const promise = await dataService({ method: 'POST', url: '/user/login', data: { email, password } })
+
                 const authToken = promise.headers.get('Authorization')
                 document.cookie = `auth-token=${authToken}`
 
@@ -42,10 +40,10 @@ const LoginPage = () => {
                     })
                     history.push(`/`)
                 } else {
-                    history.push('/login')
+                    toast.error('Invalid user e-mail or password!')
                 }
             } catch (e) {
-                toast.error('Invalid user e-mail or password!')
+                console.error(e)
             }
         } else {
             toast.error('Please enter valid credentials')

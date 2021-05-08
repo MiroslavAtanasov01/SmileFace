@@ -9,6 +9,7 @@ import Button from '../button'
 import PageTitle from '../helmet'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import dataService from "../../services/dataService"
 
 const DetailsPage = () => {
     const params = useParams()
@@ -21,7 +22,7 @@ const DetailsPage = () => {
     const [comment, setComment] = useState('')
 
     const getData = useCallback(async () => {
-        const response = await fetch(`http://localhost:3333/api/post/details/${params.id}`)
+        const response = await dataService({ method: 'GET', url: `/post/details/${params.id}` })
 
         if (!response.ok) {
             history.push('/error')
@@ -31,7 +32,7 @@ const DetailsPage = () => {
         }
 
         if (context.user !== null) {
-            const responseUser = await fetch(`http://localhost:3333/api/user/${context.user.id}`)
+            const responseUser = await dataService({ method: 'GET', url: `/user/${context.user.id}` })
 
             if (!responseUser.ok) {
                 history.push('/error')
@@ -47,44 +48,32 @@ const DetailsPage = () => {
         history.push(`/profile/${userInfo.postedBy._id}`)
     }
 
-    const Follow = () => {
+    const Follow = async () => {
         const id = user.id
-        fetch(`http://localhost:3333/api/user/follow/${userInfo.postedBy._id}`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('auth-token')
-            },
-            body: JSON.stringify({ id })
+        await dataService({
+            method: 'PUT', url: `/user/follow/${userInfo.postedBy._id}`,
+            data: { id }, token: getCookie('auth-token')
         })
+
     }
 
-    const UnFollow = () => {
+    const UnFollow = async () => {
         const id = user.id
-        fetch(`http://localhost:3333/api/user/unFollow/${userInfo.postedBy._id}`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('auth-token')
-            },
-            body: JSON.stringify({ id })
+        await dataService({
+            method: 'PUT', url: `/user/unFollow/${userInfo.postedBy._id}`,
+            data: { id }, token: getCookie('auth-token')
         })
+
     }
 
     const EditPost = () => {
         history.push(`/edit/${params.id}`)
     }
 
-    const DeletePost = () => {
+    const DeletePost = async () => {
         const id = userInfo.postedBy._id
-
-        fetch(`http://localhost:3333/api/post/delete/${params.id}`, {
-            method: "DELETE",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('auth-token')
-            },
-            body: JSON.stringify({ id })
+        await dataService({
+            method: 'DELETE', url: `/post/delete/${params.id}`, data: { id }, token: getCookie('auth-token')
         })
         history.push(`/profile/${userInfo.postedBy._id}`)
     }
@@ -105,15 +94,10 @@ const DetailsPage = () => {
     }
 
     const DeleteComment = (id) => {
-        return function () {
+        return async function () {
             const postId = params.id
-            fetch(`http://localhost:3333/api/post/deleteComment/${id}`, {
-                method: "DELETE",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': getCookie('auth-token')
-                },
-                body: JSON.stringify({ postId })
+            await dataService({
+                method: 'DELETE', url: `/post/deleteComment/${id}`, data: { postId }, token: getCookie('auth-token')
             })
         }
     }
@@ -135,15 +119,10 @@ const DetailsPage = () => {
             })
     }
 
-    const likePost = (action) => {
+    const likePost = async (action) => {
         const postId = params.id
-        fetch(`http://localhost:3333/api/post/${action}`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('auth-token')
-            },
-            body: JSON.stringify({ postId })
+        await dataService({
+            method: 'PUT', url: `/post/${action}`, data: { postId }, token: getCookie('auth-token')
         })
     }
 
@@ -168,13 +147,8 @@ const DetailsPage = () => {
 
         try {
             if (comment && comment.length <= 200) {
-                await fetch('http://localhost:3333/api/post/postComment', {
-                    method: 'PUT',
-                    body: JSON.stringify({ postId, comment }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': getCookie('auth-token')
-                    }
+                await dataService({
+                    method: 'PUT', url: `/post/postComment`, data: { postId, comment }, token: getCookie('auth-token')
                 })
             } else {
                 toast.error('The comment should be max 200 character')

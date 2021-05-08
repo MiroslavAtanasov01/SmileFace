@@ -7,6 +7,7 @@ import PostExplore from '../../components/postExplore'
 import Spinner from '../../components/loading-spinner'
 import getCookie from '../../utils/getCookie'
 import PageTitle from '../../components/helmet'
+import dataService from '../../services/dataService'
 
 const ProfilePage = () => {
     const [userInfo, setUserInfo] = useState({ email: '', username: '', profilePicture: '', followers: [], following: [], posts: [] })
@@ -20,7 +21,7 @@ const ProfilePage = () => {
     }
 
     const getData = useCallback(async () => {
-        const response = await fetch(`http://localhost:3333/api/user/${params.id}`)
+        const response = await dataService({ method: 'GET', url: `/user/${params.id}` })
 
         if (!response.ok) {
             history.push('/error')
@@ -36,16 +37,11 @@ const ProfilePage = () => {
             {
                 cloudName: 'dzzbxneof',
                 uploadPreset: 'softuni',
-            }, (error, result) => {
+            }, async (error, result) => {
                 if (result.event === 'success') {
                     setUserInfo({ ...userInfo, profilePicture: result.info.url })
                     const picture = result.info.url
-
-                    fetch(`http://localhost:3333/api/user/picture/${params.id}`, {
-                        method: "PUT",
-                        headers: { 'Content-type': 'application/json' },
-                        body: JSON.stringify({ picture })
-                    })
+                    await dataService({ method: 'PUT', url: `/user/picture/${params.id}`, data: { picture } })
                 }
             }).open();
     }
@@ -69,27 +65,17 @@ const ProfilePage = () => {
         })
     }
 
-    const Follow = () => {
+    const Follow = async () => {
         const id = context.user.id
-        fetch(`http://localhost:3333/api/user/follow/${params.id}`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('auth-token')
-            },
-            body: JSON.stringify({ id })
+        await dataService({
+            method: 'PUT', url: `/user/follow/${params.id}`, data: { id }, token: getCookie('auth-token')
         })
     }
 
-    const UnFollow = () => {
+    const UnFollow = async () => {
         const id = context.user.id
-        fetch(`http://localhost:3333/api/user/unFollow/${params.id}`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('auth-token')
-            },
-            body: JSON.stringify({ id })
+        await dataService({
+            method: 'PUT', url: `/user/unFollow/${params.id}`, data: { id }, token: getCookie('auth-token')
         })
     }
 

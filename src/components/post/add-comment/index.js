@@ -4,6 +4,7 @@ import Button from '../../button'
 import getCookie from '../../../utils/getCookie'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import dataService from '../../../services/dataService'
 
 const AddComment = ({ _id }) => {
     const [comment, setComment] = useState('')
@@ -14,13 +15,8 @@ const AddComment = ({ _id }) => {
 
         try {
             if (comment && comment.length <= 200) {
-                await fetch('http://localhost:3333/api/post/postComment', {
-                    method: 'PUT',
-                    body: JSON.stringify({ postId, comment }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': getCookie('auth-token')
-                    }
+                await dataService({
+                    method: 'PUT', url: `/post/postComment`, data: { postId, comment }, token: getCookie('auth-token')
                 })
             } else {
                 toast.error('The comment should be max 200 character')
