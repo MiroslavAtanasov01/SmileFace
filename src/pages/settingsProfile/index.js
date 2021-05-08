@@ -11,6 +11,7 @@ import PageLayout from '../../components/page-layout';
 import { usernameValidator } from '../../utils/registerValidators'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import dataService from '../../services/dataService'
 
 const SettingsProfile = () => {
     const context = useContext(UserContext)
@@ -21,20 +22,16 @@ const SettingsProfile = () => {
 
     const [usernameError, setUsernameError] = useState('')
 
-    const updateUser = (e) => {
+    const updateUser = async (e) => {
         e.preventDefault();
 
         if (context.user !== null) {
             if (name !== '' && usernameError === "" && context.user.id === params.id) {
-                if (bio <= 200) {
-                    fetch(`http://localhost:3333/api/user/edit/${params.id}`, {
-                        method: "PUT",
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': getCookie('auth-token')
-                        },
-                        body: JSON.stringify({ name, bio })
+                if (bio.length <= 200) {
+                    await dataService({
+                        method: 'PUT', url: `/user/edit/${params.id}`, data: { name, bio }, token: getCookie('auth-token')
                     })
+
                     history.push(`/profile/${params.id}`)
                 } else {
                     toast.error('The Description should be max 200 character')

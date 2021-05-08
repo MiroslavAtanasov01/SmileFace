@@ -10,6 +10,7 @@ import getCookie from '../../utils/getCookie'
 import { rePasswordValidator, passwordValidator, oldPasswordValidator } from '../../utils/registerValidators'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import dataService from '../../services/dataService'
 
 const ChangePassword = () => {
     const context = useContext(UserContext)
@@ -28,13 +29,10 @@ const ChangePassword = () => {
         if (password && rePassword && password === rePassword && passwordError === "" && rePasswordError === "") {
 
             try {
-                const promise = await fetch("http://localhost:3333/api/user/changePassword", {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                        'Authorization': getCookie('auth-token')
-                    },
-                    body: JSON.stringify({ oldPassword, password, repeatPassword: rePassword })
+                const promise = await dataService({
+                    method: 'PUT', url: `/user/changePassword`, data: {
+                        oldPassword, password, repeatPassword: rePassword
+                    }, token: getCookie('auth-token')
                 })
 
                 const response = await promise.json()

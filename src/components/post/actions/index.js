@@ -6,20 +6,14 @@ import commentIcon from '../../../images/comment.svg'
 import UserContext from '../../../Context';
 import getCookie from '../../../utils/getCookie'
 import { Link } from 'react-router-dom'
+import dataService from '../../../services/dataService'
 
 const PostActions = ({ likes, _id }) => {
     const context = useContext(UserContext);
 
-    const likePost = (action) => {
+    const likePost = async (action) => {
         const postId = _id
-        fetch(`http://localhost:3333/api/post/${action}`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('auth-token')
-            },
-            body: JSON.stringify({ postId })
-        })
+        await dataService({ method: 'PUT', url: `/post/${action}`, data: { postId }, token: getCookie('auth-token') })
     }
 
     return (

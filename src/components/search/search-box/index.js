@@ -10,11 +10,11 @@ const Search = (props) => {
             fetch(`http://localhost:3333/api/post/search?q=${props.query}`)
                 .then(res => res.json())
                 .then(users => setUsers(users))
-                .catch(err => console.error(err));
+                .catch(err => console.error(err))
         } else {
-            setUsers([]);
+            setUsers([])
         }
-    }, [props.query]);
+    }, [props.query])
 
     return (
         <div onMouseLeave={props.onMouseLeave}>

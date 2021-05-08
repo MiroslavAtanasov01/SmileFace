@@ -9,6 +9,7 @@ import getCookie from '../../utils/getCookie'
 import PageTitle from '../../components/helmet'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import dataService from '../../services/dataService'
 
 const AddPost = () => {
     const [imageUrl, setImageUrl] = useState("")
@@ -34,16 +35,7 @@ const AddPost = () => {
         if (imageUrl) {
             if (description.length <= 200) {
                 try {
-                    await fetch('http://localhost:3333/api/post', {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            imageUrl, location, description
-                        }),
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': getCookie('auth-token')
-                        }
-                    })
+                    await dataService({ method: 'POST', url: `/post`, data: { imageUrl, location, description }, token: getCookie('auth-token') })
                     history.push('/')
                 } catch (err) {
                     console.error(err)

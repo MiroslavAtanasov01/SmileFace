@@ -10,6 +10,7 @@ import PageTitle from '../../components/helmet'
 import { rePasswordValidator, passwordValidator, usernameValidator, emailValidator } from '../../utils/registerValidators'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import dataService from '../../services/dataService'
 
 const LoginPage = () => {
     const history = useHistory()
@@ -31,11 +32,8 @@ const LoginPage = () => {
             && emailError === "" && usernameError === "" && passwordError === "" && rePasswordError === "") {
 
             try {
-                const promise = await fetch('http://localhost:3333/api/user/register', {
-                    method: 'POST',
-                    body: JSON.stringify({ email, username, password, rePassword }),
-                    headers: { 'Content-type': 'application/json' }
-                })
+                const promise = await dataService({ method: 'POST', url: '/user/register', data: { email, username, password, rePassword } })
+
                 const authToken = promise.headers.get('Authorization')
                 document.cookie = `auth-token=${authToken}`
 
