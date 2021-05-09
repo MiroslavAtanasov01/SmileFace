@@ -1,0 +1,36 @@
+.username {
+    color: rgba(var(--i1d, 38, 38, 38), 1);
+    font-weight: 300;
+    font-size: 28px;
+    margin-right: 1em;
+}
+
+.followBtn {
+    margin-right: 1em;
+    background-color: #0095f6;
+    border: 1px solid #dbdbdb;
+    border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+    color: #fff;
+    border-radius: 4px;
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    font-weight: 600;
+    padding: 5px 9px;
+}
+
+.button {
+    margin-right: 1em;
+    background-color: transparent;
+    border: 1px solid #dbdbdb;
+    border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
+    color: rgba(var(--f75, 38, 38, 38), 1);
+    border-radius: 4px;
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    font-weight: 600;
+    padding: 5px 9px;
+}

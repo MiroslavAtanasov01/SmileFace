@@ -27,11 +27,11 @@ const Aside = () => {
     }, [context])
 
     const goToProfile = () => {
-        history.push(`/ profile / ${context.user.id}`)
+        history.push(`/profile/${context.user.id}`)
     }
 
     const goToProfileUser = (id) => {
-        history.push(`/ profile / ${id}`)
+        history.push(`/profile/${id}`)
     }
 
     const Follow = async (id) => {
