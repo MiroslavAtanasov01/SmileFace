@@ -1,20 +1,26 @@
 .container {
-          width: 60em;
-          margin: 0 auto;
-          height: 75vh;
+    width: 60em;
+    margin: 0 auto;
+    min-height: 87vh;
+    padding-top: 6em;
 }
 
-.title {
-          font-size: 24px;
-          font-weight: 600;
-          margin: 20px 0;
-          text-align: center;
+.container h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 20px 0;
+    text-align: center;
 }
 
-.text {
-          text-align: center;
-          font-size: 16px;
-          line-height: 24px;
-          margin: 16px 0;
-          display: block;
+.container span {
+    text-align: center;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 16px 0;
+    display: block;
+}
+
+.container span a {
+    color: rgba(var(--fe0, 0, 55, 107), 1);
+    text-decoration: none;
 }

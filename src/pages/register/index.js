@@ -4,7 +4,7 @@ import UserContext from '../../Context'
 import styles from './index.module.css'
 import Input from '../../components/input'
 import Button from '../../components/button'
-import Link from '../../components/link'
+import { Link } from 'react-router-dom'
 import Footer from '../../components/footer'
 import PageTitle from '../../components/helmet'
 import { rePasswordValidator, passwordValidator, usernameValidator, emailValidator } from '../../utils/registerValidators'
@@ -115,12 +115,7 @@ const LoginPage = () => {
                 <div className={styles.acc}>
                     <div className={styles.text}>
                         <span>Have an account?
-                    <Link
-                                key='Sign in'
-                                to="/login"
-                                title='Sign in'
-                                type='login'
-                            />
+                        <Link to="/login"> Sign in</Link>
                         </span>
                     </div>
                 </div>

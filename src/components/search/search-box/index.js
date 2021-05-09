@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import styles from './index.module.css';
-import Profile from '../result-profile/index';
+import React, { useEffect, useState } from 'react'
+import styles from './index.module.css'
+import Profile from '../result-profile/index'
 
 const Search = (props) => {
-    const [users, setUsers] = useState();
+    const [users, setUsers] = useState()
 
     useEffect(() => {
         if (props.query !== "") {

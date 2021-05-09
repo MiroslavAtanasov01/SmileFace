@@ -18,26 +18,6 @@
     cursor: pointer;
 }
 
-/* .btn:hover {
-          border: 1px solid transparent;
-          background-color: #0095f6;
-          background-color: rgba(var(--d69, 0, 149, 246), 1);
-} */
-
-.facebook-container {
-    margin: 8px 40px;
-    padding-top: 10px;
-    text-align: center;
-}
-
-.facebook-btn {
-    border: none;
-    background-color: #fff;
-    color: #385185;
-    font-weight: 700;
-    cursor: pointer;
-}
-
 .post-btn {
     border: 1px solid transparent;
     color: white;
@@ -49,7 +29,22 @@
     cursor: pointer;
 }
 
+.postComment-btn {
+    border: 1px solid transparent;
+    color: #0095f6;
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+}
 
+.postComment-container {
+    width: 10%;
+}
+
+.postComment-btn:disabled {
+    color: #a7dafc;
+    cursor: default;
+}
 
 .plus-btn {
     cursor: pointer;
@@ -63,23 +58,4 @@
     height: 60px;
     width: 61px;
     background-image: url(https://www.instagram.com/static/bundles/es6/sprite_felix_4800bc114a3a.png/4800bc114a3a.png);
-}
-
-
-.postComment-btn {
-    border: 1px solid transparent;
-    color: #0095f6;
-    background-color: white;
-    cursor: pointer;
-    width: 100%;
-}
-
-.postComment-container {
-    /* margin-top: 0.5em; */
-    width: 10%;
-}
-
-.postComment-btn:disabled {
-    color: #a7dafc;
-    cursor: default;
 }

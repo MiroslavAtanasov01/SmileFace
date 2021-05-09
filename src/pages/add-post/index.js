@@ -35,7 +35,10 @@ const AddPost = () => {
         if (imageUrl) {
             if (description.length <= 200) {
                 try {
-                    await dataService({ method: 'POST', url: `/post`, data: { imageUrl, location, description }, token: getCookie('auth-token') })
+                    await dataService({
+                        method: 'POST', url: `/post`, data:
+                            { imageUrl, location, description }, token: getCookie('auth-token')
+                    })
                     history.push('/')
                 } catch (err) {
                     console.error(err)
@@ -57,8 +60,7 @@ const AddPost = () => {
                 <div className={styles.container}>
                     <div className={styles.upload}>
                         {!imageUrl
-                            ? <div>  <Button type='plus' onClick={openWidget} />
-                                <p className={styles.text}>Upload image</p> </div>
+                            ? <div>  <Button type='plus' onClick={openWidget} /> <p>Upload image</p> </div>
                             : <img className={styles.preview} src={imageUrl} alt="preview" />}
                     </div>
                     <div className={styles.form}>

@@ -34,15 +34,11 @@
     display: block;
 }
 
+
 .distance {
     padding-right: 2em;
 }
 
-.icon:first-child {
-    margin-right: 15px;
-}
-
 .icon {
-    cursor: pointer;
-    height: 25px;
+    margin-right: 5px;
 }

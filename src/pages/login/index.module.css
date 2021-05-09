@@ -37,26 +37,6 @@
     padding-top: 10px;
 }
 
-.or-text {
-    color: #8e8e8e;
-    color: rgba(var(--f52, 142, 142, 142), 1);
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 15px;
-    margin: 0 18px;
-    text-transform: uppercase;
-    display: block;
-    margin: 0;
-    text-align: center;
-}
-
-.line {
-    background-color: #dbdbdb;
-    background-color: rgba(var(--b38, 219, 219, 219), 1);
-    height: 1px;
-    position: relative;
-    top: 0.45em;
-}
 
 .acc {
     align-items: center;

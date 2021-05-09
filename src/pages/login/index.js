@@ -4,7 +4,7 @@ import UserContext from '../../Context'
 import styles from './index.module.css'
 import Input from '../../components/input'
 import Button from '../../components/button'
-import Link from '../../components/link'
+import { Link } from 'react-router-dom'
 import Footer from '../../components/footer'
 import PageTitle from '../../components/helmet'
 import { passwordValidator, emailValidator } from '../../utils/loginValidator'
@@ -85,20 +85,13 @@ const LoginPage = () => {
                                 error={passwordError}
                             />
                             <Button type='login' title="Log in" />
-                            <div className={styles.or}>
-                                <div className={styles['or-text']}>or</div>
-                                <div className={styles.line}></div>
-                            </div>
                         </form>
-                    </div>
-                    <div>
-                        <Button type='facebook' title="Log in with Facebook" />
                     </div>
                 </div>
                 <div className={styles.acc}>
                     <div className={styles.text}>
                         <span>Don't have an account?
-                    <Link key='Sign up' to="/register" title='Sign up' type='login' />
+                    <Link to="/register"> Sign up</Link>
                         </span>
                     </div>
                 </div>
