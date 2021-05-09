@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import styles from './index.module.css';
-import Input from '../../input';
-import Textarea from "../../textarea";
+import styles from './index.module.css'
+import Input from '../../input'
+import Textarea from "../../textarea"
 import getCookie from '../../../utils/getCookie'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -10,8 +10,8 @@ import dataService from '../../../services/dataService'
 
 
 const Edit = () => {
-    const [location, setLocation] = useState('');
-    const [description, setDescription] = useState('');
+    const [location, setLocation] = useState('')
+    const [description, setDescription] = useState('')
     const params = useParams()
     const history = useHistory()
 
@@ -41,11 +41,11 @@ const Edit = () => {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="Location"
-                    type="text" />
+                    type="post" />
                 <Textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Caption..." />
+                    placeholder="Description" />
                 <button onClick={editPost} className={styles.btn}>Save changes</button>
             </form>
         </div>

@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import styles from './index.module.css'
-import PageTitle from '../../components/helmet';
-import Input from '../../components/input';
-import Textarea from '../../components/textarea';
+import PageTitle from '../../components/helmet'
+import Input from '../../components/input'
+import Textarea from '../../components/textarea'
 import UserContext from '../../Context'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import getCookie from '../../utils/getCookie'
-import PageLayout from '../../components/page-layout';
+import PageLayout from '../../components/page-layout'
 import { usernameValidator } from '../../utils/registerValidators'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -55,11 +55,11 @@ const SettingsProfile = () => {
                         onChange={(event) => setName(event.target.value)}
                         onBlur={handlerBlurUsername}
                         id="username"
-                        type='login'
+                        type='post'
                         placeholder="Username"
                         error={usernameError}
                     />
-                    <Textarea onChange={(e) => setBio(e.target.value)} placeholder="Bio" />
+                    <Textarea onChange={(e) => setBio(e.target.value)} placeholder="Description" />
 
                     <div className={styles.actions}>
                         <button onClick={updateUser}>Save changes</button>

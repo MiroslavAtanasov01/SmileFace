@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
-import styles from './index.module.css';
+import React, { useContext } from 'react'
+import styles from './index.module.css'
 import heartIcon from '../../../images/heart.svg'
 import redHeartIcon from '../../../images/redHeart.svg'
 import commentIcon from '../../../images/comment.svg'
-import UserContext from '../../../Context';
+import UserContext from '../../../Context'
 import getCookie from '../../../utils/getCookie'
 import { Link } from 'react-router-dom'
 import dataService from '../../../services/dataService'
 
 const PostActions = ({ likes, _id }) => {
-    const context = useContext(UserContext);
+    const context = useContext(UserContext)
 
     const likePost = async (action) => {
         const postId = _id

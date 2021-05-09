@@ -132,7 +132,7 @@ const ProfilePage = () => {
                             <li><strong>{userInfo.followers.length}</strong> followers</li>
                             <li><strong>{userInfo.following.length}</strong> following</li>
                         </ul>
-                        <div><h1>{userInfo.email}</h1></div>
+                        <div><h1>{userInfo.description}</h1></div>
                     </section>
                 </header>
                 <main className={styles.main}>

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from './index.module.css';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import styles from './index.module.css'
 
 const Logo = () => {
     return (
@@ -10,4 +10,4 @@ const Logo = () => {
     )
 };
 
-export default Logo;
+export default Logo

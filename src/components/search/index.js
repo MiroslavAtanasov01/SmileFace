@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import Input2 from '../input2';
-import SearchBox from './search-box';
+import React, { useState } from 'react'
+import Input2 from '../input2'
+import SearchBox from './search-box'
 
 const Search = () => {
-    const [displaySearch, setDisplay] = useState(false);
-    const [query, setQuery] = useState();
+    const [displaySearch, setDisplay] = useState(false)
+    const [query, setQuery] = useState()
 
     return (
         <div>
@@ -12,7 +12,7 @@ const Search = () => {
                 name="search"
                 onChange={(e) => {
                     setDisplay(true);
-                    setQuery(e.target.value);
+                    setQuery(e.target.value)
                 }}
                 type="text"
                 placeholder="Search" />

@@ -1,15 +1,12 @@
-import React from 'react';
-import styles from './index.module.css';
+import React from 'react'
+import styles from './index.module.css'
 
-const Textarea = (props) => {
+const Textarea = ({ value, onChange, placeholder }) => {
     return (
         <div className={styles.container}>
-            <textarea
-                defaultValue={props.value}
-                onChange={props.onChange}
-                placeholder={props.placeholder}></textarea>
+            <textarea defaultValue={value} onChange={onChange} placeholder={placeholder}></textarea>
         </div>
     )
 }
 
-export default Textarea;
+export default Textarea
