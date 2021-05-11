@@ -1,25 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './index.module.css'
 import { Link } from 'react-router-dom'
 import getCookie from '../../../utils/getCookie'
 import dataService from "../../../services/dataService"
-import { useParams, useHistory } from 'react-router-dom'
+import PostMenu from '../post-menu'
 
 const PostHeader = ({ userInfo, user }) => {
-    const params = useParams()
-    const history = useHistory()
-
-    const EditPost = () => {
-        history.push(`/edit/${params.id}`)
-    }
-
-    const DeletePost = async () => {
-        const id = userInfo.postedBy._id
-        await dataService({
-            method: 'DELETE', url: `/post/delete/${params.id}`, data: { id }, token: getCookie('auth-token')
-        })
-        history.push(`/profile/${userInfo.postedBy._id}`)
-    }
+    const [display, setDisplay] = useState(false)
 
     const GetFollowers = () => {
         let result = false
@@ -33,7 +20,6 @@ const PostHeader = ({ userInfo, user }) => {
             }
             return result
         }
-
     }
 
     const Follow = async () => {
@@ -63,18 +49,17 @@ const PostHeader = ({ userInfo, user }) => {
                     <div className={styles.location}>{userInfo.location}</div>
                 </div>
             </div>
-
             {user._id === userInfo.postedBy._id
                 ? <div>
-                    <button onClick={EditPost}>Edit Post</button>
-                    {/* <button onClick={DeletePost}>Delete Post</button> */}
+                    <svg className={styles.circle} onClick={() => setDisplay(!display)} aria-label="More options" fill="#262626" height="16" viewBox="0 0 48 48" width="16"><circle clipRule="evenodd" cx="8" cy="24" fillRule="evenodd" r="4.5"></circle><circle clipRule="evenodd" cx="24" cy="24" fillRule="evenodd" r="4.5"></circle><circle clipRule="evenodd" cx="40" cy="24" fillRule="evenodd" r="4.5"></circle></svg>
+                    {display
+                        ? <PostMenu userInfo={userInfo} closeMenu={() => setDisplay(false)} /> : null}
                 </div>
                 : <div>
                     {GetFollowers()
                         ? <div><button className={styles.followBtn} onClick={UnFollow}>Unfollow</button></div>
                         : <div><button className={styles.followBtn} onClick={Follow}>Follow</button></div>}
-                </div>
-            }
+                </div>}
         </header>
     )
 }

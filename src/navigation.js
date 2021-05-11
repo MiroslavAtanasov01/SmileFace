@@ -11,7 +11,6 @@ import ErrorPage from './pages/error'
 import ProfilePage from './pages/profile-page'
 import SettingsProfile from './pages/settingsProfile'
 import DetailsPage from './components/details'
-import Edit from './components/post/edit'
 import ChangePassword from './pages/changePassword'
 
 const Navigation = () => {
@@ -41,9 +40,6 @@ const Navigation = () => {
                 </Route>
                 <Route path="/details/:id">
                     {loggedIn ? (<DetailsPage />) : (<Redirect to="/login" />)}
-                </Route>
-                <Route path="/edit/:id">
-                    {loggedIn ? (<Edit />) : (<Redirect to="/login" />)}
                 </Route>
                 <Route path="/settings/:id">
                     {loggedIn ? (<SettingsProfile />) : (<Redirect to="/login" />)}
