@@ -47,7 +47,10 @@ module.exports = {
                 const image = await models.post.findById(req.params.id)
                     .populate('postedBy')
                     .populate('likes')
-                    .populate('comments')
+                    .populate({
+                        path: 'comments',
+                        populate: { path: "postedBy" },
+                    })
                 res.send(image)
             } catch (err) {
                 res.status(500).send(err)

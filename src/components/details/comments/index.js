@@ -23,12 +23,11 @@ const Comments = ({ userInfo, user }) => {
             .map(e => {
                 return (
                     <div key={e._id} className={styles.comment}>
-                        {/* <strong><p>{e.postedBy}</p></strong> */}
                         <div>
-                            <strong><p>dada</p></strong>
+                            <strong><p>{e.postedBy.username}</p></strong>
                             <p className={styles.com}>{e.comment}</p>
                         </div>
-                        {user._id === e.postedBy
+                        {user._id === e.postedBy._id
                             ? <span onClick={DeleteComment(e._id)}>
                                 <FontAwesomeIcon className={styles.icon} icon={faTrashAlt} />
                             </span>
