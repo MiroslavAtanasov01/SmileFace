@@ -6,9 +6,7 @@ const Profile = (props) => {
     return (
         <Link className={styles.link} to={`/profile/${props.id}`}>
             <div className={styles.container}>
-                <img
-                    src={props.imageUrl}
-                    alt="user" className={styles.avatar} />
+                <img src={props.imageUrl} alt="user" className={styles.avatar} />
                 <div className={styles.info}>
                     <span className={styles.username}>{props.username}</span>
                 </div>

@@ -1,7 +1,6 @@
 .search-box {
     position: absolute;
-    top: 70px;
-    /* right: 46em; */
+    top: 65px;
     width: 250px;
     max-height: 300px;
     overflow-y: auto;
@@ -12,6 +11,7 @@
     border-top: 1px solid #fff;
     border-radius: 3px;
     z-index: 9;
+    padding: 0 10px 0 10px;
 }
 
 .arrow {
@@ -21,7 +21,7 @@
     transform: rotate(45deg);
     position: absolute;
     left: 0;
-    right: 150px;
+    right: 87px;
     content: " ";
     background-color: #fff;
     margin: auto;

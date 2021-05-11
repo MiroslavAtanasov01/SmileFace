@@ -1,17 +1,17 @@
+.link {
+    color: #000;
+    text-decoration: none;
+    margin: 5px;
+    position: relative;
+}
+
 .container {
     display: flex;
     align-items: center;
 }
 
-.username {
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.info {
-    display: flex;
-    flex-direction: column;
-    margin-left: 10px;
+.container:hover {
+    background-color: rgba(247, 247, 247, 0.938);
 }
 
 .avatar {
@@ -21,9 +21,14 @@
     object-fit: cover;
 }
 
-.link {
-    color: #000;
-    text-decoration: none;
-    margin: 1em;
-    position: relative;
+.username {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(58, 58, 58);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
 }

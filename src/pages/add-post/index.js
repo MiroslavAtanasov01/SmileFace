@@ -32,22 +32,22 @@ const AddPost = () => {
     const submitPost = async (e) => {
         e.preventDefault()
 
-        if (imageUrl) {
-            if (description.length <= 200) {
-                try {
-                    await dataService({
-                        method: 'POST', url: `/post`, data:
-                            { imageUrl, location, description }, token: getCookie('auth-token')
-                    })
-                    history.push('/')
-                } catch (err) {
-                    console.error(err)
-                }
-            } else {
-                toast.error('The Description should be max 200 character')
-            }
-        } else {
+        if (!imageUrl) {
             toast.error('Please upload photo')
+        } else if (location.length > 20) {
+            toast.error('The Location should be max 20 character')
+        } else if (description.length > 200) {
+            toast.error('The Description should be max 200 character')
+        } else {
+            try {
+                await dataService({
+                    method: 'POST', url: `/post`, data:
+                        { imageUrl, location, description }, token: getCookie('auth-token')
+                })
+                history.push('/')
+            } catch (err) {
+                console.error(err)
+            }
         }
     }
 

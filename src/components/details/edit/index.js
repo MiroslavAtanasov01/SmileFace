@@ -17,19 +17,22 @@ const Edit = ({ closeMenu }) => {
     const editPost = async (e) => {
         e.preventDefault();
 
-        if (description.length <= 200) {
+        if (location.length > 20) {
+            toast.error('The Location should be max 20 character')
+        } else if (description.length > 200) {
+            toast.error('The Description should be max 200 character')
+        } else {
             try {
                 await dataService({
-                    method: 'PUT', url: `/post/edit/${params.id}`, data: { location, description }, token: getCookie('auth-token')
+                    method: 'PUT', url: `/post/edit/${params.id}`,
+                    data: { location, description }, token: getCookie('auth-token')
                 })
                 closeMenu()
             } catch (err) {
                 console.error(err)
             }
-        } else {
-            toast.error('The Description should be max 200 character')
         }
-    };
+    }
 
     return (
         <div className={styles.popUp}>
