@@ -103,8 +103,8 @@ module.exports = {
             if (comment && comment.length <= 200) {
                 try {
                     const newComment = await models.comment.create({ comment, createdAt: Date.now(), postedBy: { _id } })
-                    const post = await models.post.findByIdAndUpdate(postId, { $addToSet: { comments: newComment._id } })
-                    return res.send(newComment, post)
+                    await models.post.findByIdAndUpdate(postId, { $addToSet: { comments: newComment._id } })
+                    return res.send(newComment)
                 } catch (err) {
                     return res.status(500).send(err)
                 }
