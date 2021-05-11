@@ -61,8 +61,8 @@ const emailValidator = (email) => {
 const usernameValidator = (username) => {
     let usernameError = ''
 
-    if (username.length < 3) {
-        usernameError = "Username must be at least 3 characters long!"
+    if (username.length < 3 || username.length > 20) {
+        usernameError = "Username must be between 3 and 20 characters"
     }
     if (!/^[\w.]+$/.test(username)) {
         usernameError = "Username can only contain english letters, numbers, underscores and dots!"
@@ -71,7 +71,7 @@ const usernameValidator = (username) => {
         usernameError = "Please enter your username"
     }
 
-    if (username && /^[\w.]+$/.test(username) && username.length >= 3) {
+    if (username && /^[\w.]+$/.test(username) && username.length >= 3 && username.length <= 20) {
         usernameError = ""
     }
 

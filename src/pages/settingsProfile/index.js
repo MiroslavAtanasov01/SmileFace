@@ -15,8 +15,8 @@ import dataService from '../../services/dataService'
 
 const SettingsProfile = () => {
     const context = useContext(UserContext)
-    const [name, setName] = useState('');
-    const [bio, setBio] = useState('');
+    const [name, setName] = useState('')
+    const [bio, setBio] = useState('')
     const params = useParams()
     const history = useHistory()
 
@@ -40,7 +40,7 @@ const SettingsProfile = () => {
                 toast.error('Please enter valid username')
             }
         }
-    };
+    }
 
     const handlerBlurUsername = () => { setUsernameError(usernameValidator(name)) }
 
