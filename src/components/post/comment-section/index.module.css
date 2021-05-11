@@ -16,3 +16,7 @@
 .textComment {
     word-break: break-word;
 }
+
+.comment span {
+    color: black;
+}

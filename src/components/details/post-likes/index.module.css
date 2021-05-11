@@ -1,3 +1,7 @@
+.container {
+    padding-top: 10px;
+}
+
 .comment {
     font-size: 14px;
     font-weight: bold;
@@ -9,4 +13,9 @@
     font-size: 14px;
     margin-bottom: 7px;
     margin-top: 3px;
+}
+
+.action {
+    cursor: pointer;
+    height: 25px;
 }

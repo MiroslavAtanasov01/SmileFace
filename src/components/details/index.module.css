@@ -1,62 +1,27 @@
 .container {
-    display: flex;
-    width: 60em;
+    min-height: 74vh;
+    max-width: 60em;
     margin: 0 auto;
-    margin-top: 5em;
-    height: 85vh;
+    margin-top: 6em;
 }
 
-.header {
-    padding: 0.5em;
+.main {
     display: flex;
-    justify-content: space-between;
-}
-
-.photo {}
-
-.image {
-    width: 614px;
     height: 600px;
-    object-fit: cover;
 }
 
 .info {
     background-color: #fff;
-    width: 335px;
-    padding: 0.5em;
+    border: 1px solid lightgray;
+    width: 23em;
+    padding: 15px 15px 0 15px;
+    height: 100%;
 }
 
-.description {
-    padding: 0.5em;
-}
-
-.comments {
-    flex-direction: column;
-    height: 50%;
-    width: auto;
-    border-bottom: 1px solid rgb(219, 219, 219);
-    overflow-y: scroll;
-}
-
-.comments::-webkit-scrollbar {
-    width: 0 !important
-}
-
-.com {
-    word-break: break-word;
-}
-
-.comment {
-    display: flex;
-}
-
-.comment span {
-    cursor: pointer;
-}
-
-.comments p {
-    margin-right: 0.5em;
-    font-size: 15px;
+.date {
+    color: rgb(153, 153, 153);
+    font-size: 12px;
+    margin: 10px 0;
 }
 
 .post-comments {
