@@ -1,8 +1,16 @@
-.form {
-    width: 30%;
-    min-height: 87vh;
+.container {
+    width: 60em;
     margin: 0 auto;
+    min-height: 87vh;
     padding-top: 12em;
+}
+
+.form {
+    width: 60%;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    padding: 30px;
 }
 
 .actions {

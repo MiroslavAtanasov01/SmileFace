@@ -65,7 +65,7 @@ const AddPost = () => {
                     </div>
                     <div className={styles.form}>
                         <form onSubmit={submitPost}>
-                            <Input value={location} onChange={(event) => setLocation(event.target.value)} type='post' placeholder="Location" />
+                            <Input value={location} onChange={(event) => setLocation(event.target.value)} placeholder="Location" />
                             <Textarea placeholder='Description' value={description} onChange={(event) => setDescription(event.target.value)} />
                             <Button type='post' title="Post" />
                         </form>

@@ -1,41 +1,4 @@
-.login-container {
-    background: #fafafa;
-    background: rgba(var(--b3f, 250, 250, 250), 1);
-    border: 1px solid #dbdbdb;
-    border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
-    border-radius: 3px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    color: #262626;
-    color: rgba(var(--i1d, 38, 38, 38), 1);
-    display: flex;
-    font-size: 14px;
-    position: relative;
-    margin: 0 40px 6px;
-}
-
-.login-input {
-    width: 100%;
-    font-size: 16px;
-    background: #fafafa;
-    background: rgba(var(--b3f, 250, 250, 250), 1);
-    border: 0;
-    margin: 0;
-    outline: 0;
-    overflow: hidden;
-    padding: 9px 0 7px 8px;
-    text-overflow: ellipsis;
-    color: #262626;
-    color: rgba(var(--i1d, 38, 38, 38), 1);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-        Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    line-height: 18px;
-}
-
-
-
-.post-input {
+.input {
     border-radius: 3px;
     border: 1px solid rgb(219, 219, 219);
     color: rgb(38, 38, 38);
@@ -47,7 +10,7 @@
     padding: 0.5em;
 }
 
-.post-input::placeholder {
+.input::placeholder {
     color: #000;
 }
 
@@ -58,5 +21,5 @@
     min-height: 20px;
     text-align: left;
     width: auto;
-    padding-left: 4em;
+    padding-left: 1em;
 }

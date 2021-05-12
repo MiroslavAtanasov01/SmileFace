@@ -43,7 +43,7 @@ const Edit = ({ closeMenu }) => {
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
                         placeholder="Location"
-                        type="post" />
+                    />
                     <Textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}

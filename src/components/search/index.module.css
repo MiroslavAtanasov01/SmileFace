@@ -1,10 +1,10 @@
-.custom-input::placeholder {
+.input::placeholder {
     color: #000;
     font-weight: 400;
     text-align: center;
 }
 
-.custom-input {
+.input {
     padding: 9px;
     min-width: 100%;
     border-radius: 4px;
@@ -14,13 +14,13 @@
     background: rgb(235, 235, 235);
 }
 
-.input-container {
+.container {
     position: relative;
     margin: 10px 0;
     min-width: 250px;
 }
 
-.input-container::after {
+.container::after {
     content: '';
     display: block;
     position: absolute;
