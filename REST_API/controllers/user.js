@@ -112,7 +112,7 @@ module.exports = {
                     const token = jwt.createToken({ id: user._id })
                     res.header('Authorization', token).send(user)
                 } catch (err) {
-                    next(err)
+                    res.send({ error: 'Invalid user e-mail or password!' })
                 }
             } else {
                 res.status(401).send({ error: 'Please enter valid credentials' })
