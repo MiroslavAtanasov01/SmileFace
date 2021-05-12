@@ -45,17 +45,16 @@ const SettingsProfile = () => {
     const handlerBlurUsername = () => { setUsernameError(usernameValidator(name)) }
 
     return (
-        <div>
-            <PageTitle title="Settings | Smile" />
-            <ToastContainer transition={Zoom} />
-            <PageLayout>
+        <PageLayout>
+            <div className={styles.container}>
+                <PageTitle title="Settings | Smile" />
+                <ToastContainer transition={Zoom} />
                 <form className={styles.form}>
                     <Input
                         value={name}
                         onChange={(event) => setName(event.target.value)}
                         onBlur={handlerBlurUsername}
                         id="username"
-                        type='post'
                         placeholder="Username"
                         error={usernameError}
                     />
@@ -67,8 +66,8 @@ const SettingsProfile = () => {
                         <Link to="/changePassword">Change password</Link>
                     </div>
                 </form>
-            </PageLayout>
-        </div>
+            </div>
+        </PageLayout>
     )
 };
 

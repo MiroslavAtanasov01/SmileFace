@@ -5,12 +5,12 @@ import PageTitle from '../../components/helmet'
 import PageLayout from '../../components/page-layout'
 import UserContext from '../../Context'
 import Input from '../../components/input'
-import { Link } from 'react-router-dom'
 import getCookie from '../../utils/getCookie'
 import { rePasswordValidator, passwordValidator, oldPasswordValidator } from '../../utils/registerValidators'
 import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import dataService from '../../services/dataService'
+import { Link } from 'react-router-dom'
 
 const ChangePassword = () => {
     const context = useContext(UserContext)
@@ -61,18 +61,14 @@ const ChangePassword = () => {
                 <PageTitle title="Change Password | SmileFace" />
                 <ToastContainer transition={Zoom} />
                 <div className={styles.container}>
-                    <div className={styles["form-container"]}>
-                        <div className={styles.logo}>
-                            <Link to='/'>SmileFace</Link>
-                        </div>
-                        <form className={styles.form}>
+                    <div className={styles.form}>
+                        <form >
                             <Input
                                 name='password'
                                 value={oldPassword}
                                 onChange={(event) => setOldPassword(event.target.value)}
                                 onBlur={handlerBlurOldPassword}
                                 id="oldPassword"
-                                type='login'
                                 placeholder="Old-Password"
                                 error={oldPasswordError}
                             />
@@ -82,7 +78,6 @@ const ChangePassword = () => {
                                 onChange={(event) => setPassword(event.target.value)}
                                 onBlur={handlerBlurPassword}
                                 id="password"
-                                type='login'
                                 placeholder="Password"
                                 error={passwordError}
                             />
@@ -92,11 +87,13 @@ const ChangePassword = () => {
                                 onChange={(event) => setRePassword(event.target.value)}
                                 onBlur={handlerBlurRePassword}
                                 id="rePassword"
-                                type='login'
                                 placeholder="Re-Password"
                                 error={rePasswordError}
                             />
-                            <button onClick={changePassword} className={styles.btn}>Change password</button>
+                            <div className={styles.actions}>
+                                <button onClick={changePassword}>Change password</button>
+                                <Link to={context.user ? `/profile/${context.user.id}` : null}>Cancel</Link>
+                            </div>
                         </form>
                     </div>
                 </div>

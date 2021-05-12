@@ -1,19 +1,22 @@
 import React from 'react'
 import styles from './index.module.css'
 
-const Input = ({ label, id, value, onChange, onBlur, placeholder, type, name, error }) => {
+const Input = ({ id, value, onChange, onBlur, placeholder, name, error }) => {
     return (
         <div>
-            <div className={styles[`${type}-container`]}>
-                <div className={styles[`${type}-inner-container`]}>
-                    <label className={styles[`${type}-label`]} htmlFor={id}>{label}</label>
-                </div>
-                <input type={name || 'text'} className={styles[`${type}-input`]} id={id} value={value} onChange={onChange} onBlur={onBlur} placeholder={placeholder} />
+            <div >
+                <input className={styles.input}
+                    type={name || 'text'}
+                    id={id}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    placeholder={placeholder}
+                />
             </div>
             <div className={styles.error}>{error ? error : ''}</div>
         </div>
     )
-
 }
 
 export default Input

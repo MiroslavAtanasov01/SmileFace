@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Input2 from '../input2'
 import SearchBox from './search-box'
+import styles from './index.module.css'
 
 const Search = () => {
     const [displaySearch, setDisplay] = useState(false)
@@ -8,14 +8,19 @@ const Search = () => {
 
     return (
         <div>
-            <Input2
-                name="search"
-                onChange={(e) => {
-                    setDisplay(true);
-                    setQuery(e.target.value)
-                }}
-                type="text"
-                placeholder="Search" />
+            <div className={styles.container}>
+                <input
+                    className={styles.input}
+                    autoComplete="off"
+                    name="search"
+                    onChange={(e) => {
+                        setDisplay(true);
+                        setQuery(e.target.value)
+                    }}
+                    type="text"
+                    placeholder="Search"
+                />
+            </div>
             {displaySearch ? <SearchBox query={query} onMouseLeave={() => setDisplay(false)} /> : null}
         </div>
     )
