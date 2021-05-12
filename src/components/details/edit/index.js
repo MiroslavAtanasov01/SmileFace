@@ -29,7 +29,7 @@ const Edit = ({ closeMenu }) => {
                 })
                 closeMenu()
             } catch (err) {
-                console.error(err)
+                return err
             }
         }
     }
