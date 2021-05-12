@@ -23,7 +23,7 @@ const AddComment = ({ _id }) => {
             }
             setComment('')
         } catch (err) {
-            console.error(err)
+            return err
         }
 
     }

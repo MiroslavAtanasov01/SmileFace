@@ -25,7 +25,7 @@ const AddComment = ({ setComment, comment }) => {
             }
             setComment('')
         } catch (err) {
-            console.error(err)
+            return err
         }
     }
 

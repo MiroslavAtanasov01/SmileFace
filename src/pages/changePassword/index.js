@@ -44,7 +44,7 @@ const ChangePassword = () => {
                     toast.error(response.error)
                 }
             } catch (err) {
-                console.error(err)
+                return err
             }
         } else {
             toast.error('Please enter valid credentials')
