@@ -105,9 +105,9 @@ const LoginPage = () => {
                         autoFocus
                         onChange={(event) => setEmail(event.target.value)}
                         onBlur={handlerBlurEmail}
-                        error={emailError}
+                        error={emailError.length > 0}
                     />
-                    <FormControl fullWidth variant="outlined" error={passwordError} required margin="normal">
+                    <FormControl fullWidth variant="outlined" error={passwordError.length > 0} required margin="normal">
                         <InputLabel>{passwordError ? passwordError : 'Password'}</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
