@@ -9,6 +9,6 @@ require('./config/database')().then(() => {
     require('./config/express')(app)
     require('./config/routes')(app)
 
-    app.listen(config.port, console.log(`Listening on port ${config.port}! Now its up to you...`))
+    app.listen(process.env.PORT || 3333, console.log(`Listening on port ${process.env.PORT || 3333}! Now its up to you...`))
 
 }).catch(console.error)

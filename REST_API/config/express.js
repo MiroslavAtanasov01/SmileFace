@@ -5,7 +5,6 @@ const path = require('path')
 
 module.exports = (app) => {
     app.use(cors({ exposedHeaders: 'Authorization' }))
-    app.use(express.static(path.join(__dirname, '../build')))
     app.use(cookieParser())
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
