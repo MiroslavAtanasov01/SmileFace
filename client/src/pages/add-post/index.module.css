@@ -1,0 +1,37 @@
+.main {
+    padding-top: 6em;
+}
+
+.container {
+    min-height: 68vh;
+    max-width: 50em;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    text-align: center;
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 300;
+}
+
+.upload {
+    width: 33%;
+    height: 50vh;
+    margin-top: 3em;
+    background-color: rgb(235, 235, 235);
+    border: 1px solid rgb(219, 219, 219);
+    text-align: center;
+}
+
+.preview {
+    width: 100%;
+    height: auto;
+}
+
+.form {
+    padding-top: 3em;
+    width: 60%;
+}

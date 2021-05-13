@@ -1,0 +1,4 @@
+.container li {
+    display: inline-block;
+    margin-right: 3em;
+}

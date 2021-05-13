@@ -1,0 +1,61 @@
+.login-container {
+    margin: 8px 40px;
+    padding-top: 10px;
+}
+
+.login-btn {
+    background-color: rgba(0, 149, 246, 0.3);
+    background-color: rgba(var(--d69, 0, 149, 246), 0.3);
+    border: none;
+    width: 100%;
+    padding: 6px 0;
+    border-radius: 4px;
+    color: #fff;
+    color: rgba(var(--eca, 255, 255, 255), 1);
+    position: relative;
+    font-size: 14px;
+    line-height: 18px;
+    cursor: pointer;
+}
+
+.post-btn {
+    border: 1px solid transparent;
+    color: white;
+    background-color: #0095f6;
+    background-color: rgba(var(--d69, 0, 149, 246), 1);
+    border-radius: 4px;
+    margin-top: 0.5em;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.postComment-btn {
+    border: 1px solid transparent;
+    color: #0095f6;
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+}
+
+.postComment-container {
+    width: 10%;
+}
+
+.postComment-btn:disabled {
+    color: #a7dafc;
+    cursor: default;
+}
+
+.plus-btn {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    outline: 0;
+    margin-top: 80px;
+    margin-bottom: 28px;
+    background-repeat: no-repeat;
+    background-position: -114px -424px;
+    height: 60px;
+    width: 61px;
+    background-image: url(https://www.instagram.com/static/bundles/es6/sprite_felix_4800bc114a3a.png/4800bc114a3a.png);
+}

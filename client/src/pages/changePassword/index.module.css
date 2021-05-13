@@ -1,0 +1,40 @@
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top: 6em;
+    min-height: 87vh;
+}
+
+.form {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 1px;
+    padding: 30px;
+    margin-top: 90px;
+}
+
+.actions {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.actions button {
+    background-color: #3897f0;
+    border: 1px solid #3897f0;
+    border-radius: 4px;
+    text-align: center;
+    padding: 5px;
+    color: #fff;
+}
+
+.actions button:hover {
+    border: 1px solid #0095f6;
+    background-color: #fff;
+    color: #0095f6;
+}
+
+.actions a {
+    color: red;
+}
