@@ -1,0 +1,27 @@
+.container {
+    background-color: #fff;
+    border-bottom: 1.2px solid rgb(235, 235, 235);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+}
+
+.nav-icons {
+    list-style: none;
+    display: flex;
+}
+
+.icon {
+    height: 3vh;
+    margin-right: 2rem;
+}

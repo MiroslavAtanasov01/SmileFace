@@ -1,0 +1,50 @@
+.container {
+    flex-direction: column;
+    width: auto;
+    border-bottom: 1px solid rgb(219, 219, 219);
+    overflow-y: scroll;
+    margin-top: 15px;
+    height: 66%;
+}
+
+.container::-webkit-scrollbar {
+    width: 0 !important
+}
+
+.container p {
+    margin-right: 0.5em;
+    font-size: 14px;
+}
+
+.com {
+    word-break: break-word;
+}
+
+.comment {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.comment div {
+    display: flex;
+}
+
+.comment span {
+    cursor: pointer;
+}
+
+.icon {
+    width: 12px;
+    height: 12px;
+}
+
+.description {
+    font-size: 14px;
+    margin: 10px 0;
+    word-break: break-word;
+}
+
+.description strong {
+    margin-right: 5px;
+}
