@@ -66,7 +66,7 @@ module.exports = {
             if (description.length <= 200) {
                 try {
                     const newPost = await models.post.create({ description, imageUrl, location, createdAt: Date.now(), postedBy: { _id } })
-                    const post = await models.user.updateOne({ _id }, { $addToSet: { posts: newPost } })
+                    const post = await models.user.update({ _id }, { $addToSet: { posts: newPost } })
                     return res.send(post)
                 } catch (err) {
                     return res.status(500).send(err)
@@ -134,7 +134,7 @@ module.exports = {
 
         try {
             await models.post.findByIdAndDelete(postId)
-            const user = await models.user.updateOne({ id }, { $pull: { posts: postId } })
+            const user = await models.user.findByIdAndUpdate(id, { $pull: { posts: postId } })
             return res.send(user)
         } catch (err) {
             return res.status(500).send(err)
@@ -146,7 +146,7 @@ module.exports = {
 
         try {
             await models.comment.findByIdAndDelete(id)
-            const post = await models.post.updateOne({ postId }, { $pull: { comments: id } })
+            const post = await models.post.findByIdAndUpdate(postId, { $pull: { comments: id } })
             return res.send(post)
         } catch (err) {
             return res.status(500).send(err)
