@@ -27,24 +27,19 @@ const ChangePassword = () => {
         e.preventDefault()
 
         if (password && rePassword && password === rePassword && passwordError === "" && rePasswordError === "") {
+            const promise = await dataService({
+                method: 'PUT', url: `/user/changePassword`, data: {
+                    oldPassword, password, repeatPassword: rePassword
+                }, token: getCookie('auth-token')
+            })
 
-            try {
-                const promise = await dataService({
-                    method: 'PUT', url: `/user/changePassword`, data: {
-                        oldPassword, password, repeatPassword: rePassword
-                    }, token: getCookie('auth-token')
-                })
+            const response = await promise.json()
 
-                const response = await promise.json()
-
-                if (!response.error) {
-                    context.logOut()
-                    history.push("/login")
-                } else {
-                    toast.error(response.error)
-                }
-            } catch (err) {
-                return err
+            if (!response.error) {
+                context.logOut()
+                history.push("/login")
+            } else {
+                toast.error(response.error)
             }
         } else {
             toast.error('Please enter valid credentials')
@@ -87,7 +82,7 @@ const ChangePassword = () => {
                                 onChange={(event) => setRePassword(event.target.value)}
                                 onBlur={handlerBlurRePassword}
                                 id="rePassword"
-                                placeholder="Re-Password"
+                                placeholder="Confirm Password"
                                 error={rePasswordError}
                             />
                             <div className={styles.actions}>

@@ -64,23 +64,19 @@ const RegisterPage = () => {
 
         if (email && username && password && rePassword && password === rePassword
             && emailError === "" && usernameError === "" && passwordError === "" && rePasswordError === "") {
-            try {
-                const promise = await dataService({
-                    method: 'POST', url: '/user/register',
-                    data: { email, username, password, rePassword }
-                })
-                const authToken = promise.headers.get('Authorization')
-                document.cookie = `auth-token=${authToken}`
-                const response = await promise.json()
+            const promise = await dataService({
+                method: 'POST', url: '/user/register',
+                data: { email, username, password, rePassword }
+            })
+            const authToken = promise.headers.get('Authorization')
+            document.cookie = `auth-token=${authToken}`
+            const response = await promise.json()
 
-                if (response.email && authToken) {
-                    context.logIn({ email: response.email, id: response._id })
-                    history.push(`/`)
-                } else {
-                    toast.error(response.error)
-                }
-            } catch (err) {
-                return err
+            if (response.email && authToken) {
+                context.logIn({ email: response.email, id: response._id })
+                history.push(`/`)
+            } else {
+                toast.error(response.error)
             }
         } else {
             toast.error('Please enter valid credentials')
@@ -153,7 +149,7 @@ const RegisterPage = () => {
                         />
                     </FormControl>
                     <FormControl fullWidth variant="outlined" error={rePasswordError} required margin="normal">
-                        <InputLabel>{rePasswordError ? rePasswordError : 'Re-Password'}</InputLabel>
+                        <InputLabel>{rePasswordError ? rePasswordError : 'Confirm Password'}</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-repassword"
                             type={showRePassword ? 'text' : 'password'}
