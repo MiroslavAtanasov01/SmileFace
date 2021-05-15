@@ -31,7 +31,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         getData()
-    }, [userInfo, getData])
+    }, [getData])
 
 
     if (userInfo.username === '') {

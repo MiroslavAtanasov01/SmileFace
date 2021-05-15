@@ -39,7 +39,7 @@ const Main = () => {
 
     useEffect(() => {
         getData()
-    }, [getData, userInfo])
+    }, [getData])
 
     return (
         <div>

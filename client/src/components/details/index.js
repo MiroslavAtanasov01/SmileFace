@@ -51,7 +51,7 @@ const DetailsPage = () => {
 
     useEffect(() => {
         getData()
-    }, [userInfo, comment, getData])
+    }, [comment, getData])
 
     if (user.username === '') {
         return (
