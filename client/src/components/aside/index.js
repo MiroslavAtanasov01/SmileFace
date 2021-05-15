@@ -57,7 +57,7 @@ const Aside = () => {
 
     useEffect(() => {
         getData()
-    }, [getData, userInfo])
+    }, [getData])
 
     return (
         <div className={styles.aside}>
