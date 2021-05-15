@@ -1,4 +1,5 @@
-# SmileFace
+# SmileFace is uploaded on https://smileface-app.herokuapp.com/.
+
 
 SmileFace is an Instagram-like social network. You have the same basic features, like uploading photos, following people, liking and commenting their posts. But what sets us apart is our privacy in mind approach and ad-free experience. SmileFace is the perfect choice if you want a private and ad-free environment where you can share unforgettable moments with other people.
 
