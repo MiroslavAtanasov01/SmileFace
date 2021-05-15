@@ -58,25 +58,20 @@ const LoginPage = () => {
         e.preventDefault()
 
         if (email && password && emailError === '' && passwordError === '') {
-            try {
-                const promise = await dataService({ method: 'POST', url: '/user/login', data: { email, password } })
-                const authToken = promise.headers.get('Authorization')
-                document.cookie = `auth-token=${authToken}`
-                const response = await promise.json()
+            const promise = await dataService({ method: 'POST', url: '/user/login', data: { email, password } })
+            const authToken = promise.headers.get('Authorization')
+            document.cookie = `auth-token=${authToken}`
+            const response = await promise.json()
 
-                if (response.email && authToken) {
-                    context.logIn({ email: response.email, id: response._id })
-                    history.push(`/`)
-                } else {
-                    toast.error('Invalid user e-mail or password!')
-                }
-            } catch (err) {
-                return err
+            if (response.email && authToken) {
+                context.logIn({ email: response.email, id: response._id })
+                history.push(`/`)
+            } else {
+                toast.error('Invalid user e-mail or password!')
             }
         } else {
             toast.error('Please enter valid credentials')
         }
-
     }
 
     const handlerBlurEmail = () => { setEmailError(emailValidator(email)) }

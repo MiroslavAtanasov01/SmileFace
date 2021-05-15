@@ -39,15 +39,11 @@ const AddPost = () => {
         } else if (description.length > 200) {
             toast.error('The Description should be max 200 character')
         } else {
-            try {
-                await dataService({
-                    method: 'POST', url: `/post`, data:
-                        { imageUrl, location, description }, token: getCookie('auth-token')
-                })
-                history.push('/')
-            } catch (err) {
-                return err
-            }
+            await dataService({
+                method: 'POST', url: `/post`, data:
+                    { imageUrl, location, description }, token: getCookie('auth-token')
+            })
+            history.push('/')
         }
     }
 

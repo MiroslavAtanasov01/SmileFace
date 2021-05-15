@@ -15,18 +15,14 @@ const AddComment = ({ setComment, comment }) => {
         e.preventDefault()
         const postId = params.id
 
-        try {
-            if (comment && comment.length <= 200) {
-                await dataService({
-                    method: 'PUT', url: `/post/postComment`, data: { postId, comment }, token: getCookie('auth-token')
-                })
-            } else {
-                toast.error('The comment should be max 200 character')
-            }
-            setComment('')
-        } catch (err) {
-            return err
+        if (comment && comment.length <= 200) {
+            await dataService({
+                method: 'PUT', url: `/post/postComment`, data: { postId, comment }, token: getCookie('auth-token')
+            })
+        } else {
+            toast.error('The comment should be max 200 character')
         }
+        setComment('')
     }
 
     return (
