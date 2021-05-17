@@ -6,7 +6,7 @@ import dataService from '../../../services/dataService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons"
 
-const Comments = ({ userInfo, user }) => {
+const Comments = ({ userInfo, user, dummy }) => {
     const params = useParams()
 
     const DeleteComment = (id) => {
@@ -42,6 +42,7 @@ const Comments = ({ userInfo, user }) => {
         <div className={styles.container}>
             {userInfo.description ? <div className={styles.description}><strong>{userInfo.postedBy.username}</strong>{userInfo.description}</div> : null}
             <div >{renderComments()}</div>
+            <span ref={dummy}></span>
         </div>
 
     )

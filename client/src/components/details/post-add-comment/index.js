@@ -8,7 +8,7 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 
-const AddComment = ({ setComment, comment }) => {
+const AddComment = ({ setComment, comment, dummy }) => {
     const params = useParams()
 
     const AddComment = async (e) => {
@@ -23,6 +23,7 @@ const AddComment = ({ setComment, comment }) => {
             toast.error('The comment should be max 200 character')
         }
         setComment('')
+        dummy.current.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
     }
 
     return (
