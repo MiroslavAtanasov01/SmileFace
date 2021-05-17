@@ -6,7 +6,7 @@ import dataService from '../../../services/dataService'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons"
 
-const Comments = ({ userInfo, user, dummy }) => {
+const Comments = ({ userInfo, user, dummy, setUpdate }) => {
     const params = useParams()
 
     const DeleteComment = (id) => {
@@ -15,6 +15,7 @@ const Comments = ({ userInfo, user, dummy }) => {
             await dataService({
                 method: 'DELETE', url: `/post/deleteComment/${id}`, data: { postId }, token: getCookie('auth-token')
             })
+            setUpdate()
         }
     }
 
