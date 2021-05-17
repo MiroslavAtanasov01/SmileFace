@@ -23,6 +23,7 @@ const DetailsPage = () => {
     const [userInfo, setUserInfo] = useState(
         { postedBy: '', createdAt: '', location: '', imageUrl: '', description: '', likes: [], comments: [] })
     const [comment, setComment] = useState('')
+    const [update, setUpdate] = useState()
 
     const formatDate = (date) => { return date.substring(0, 10).split('-').join(' ') }
 
@@ -52,7 +53,7 @@ const DetailsPage = () => {
 
     useEffect(() => {
         getData()
-    }, [comment, getData])
+    }, [update, getData])
 
     if (user.username === '') {
         return (
@@ -68,10 +69,10 @@ const DetailsPage = () => {
                     <PostImage userInfo={userInfo} />
                     <div className={styles.info}>
                         <PostHeader userInfo={userInfo} user={user} />
-                        <Comments userInfo={userInfo} user={user} dummy={dummy} />
+                        <Comments userInfo={userInfo} user={user} dummy={dummy} setUpdate={() => setUpdate(!update)} />
                         <PostLikes userInfo={userInfo} user={user} />
                         <div className={styles.date}>{formatDate(userInfo.createdAt)}</div>
-                        <AddComment setComment={setComment} comment={comment} dummy={dummy} />
+                        <AddComment setComment={setComment} comment={comment} dummy={dummy} setUpdate={() => setUpdate(!update)} />
                     </div>
                 </div>
             </div>

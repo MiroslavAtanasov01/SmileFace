@@ -6,7 +6,7 @@ import { ToastContainer, toast, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import dataService from '../../../services/dataService'
 
-const AddComment = ({ _id }) => {
+const AddComment = ({ _id, setUpdate }) => {
     const [comment, setComment] = useState('')
 
     const onSubmit = async (e) => {
@@ -21,9 +21,8 @@ const AddComment = ({ _id }) => {
             toast.error('The comment should be max 200 character')
         }
         setComment('')
+        setUpdate()
     }
-
-    useEffect(() => { }, [comment])
 
     return (
         <form className={styles.container} onSubmit={onSubmit}>

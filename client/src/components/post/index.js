@@ -6,7 +6,7 @@ import Likes from './likes'
 import CommentSection from './comment-section'
 import AddComment from './add-comment'
 
-const Post = ({ description, location, createdAt, imageUrl, likes, postedBy, _id, comments }) => {
+const Post = ({ description, location, createdAt, imageUrl, likes, postedBy, _id, comments, setUpdate }) => {
     const formatDate = (date) => { return date.substring(0, 10).split('-').join(' ') }
 
     return (
@@ -19,7 +19,7 @@ const Post = ({ description, location, createdAt, imageUrl, likes, postedBy, _id
                 {description ? <div className={styles.description}><strong>{postedBy.username}</strong>{description}</div> : null}
                 <CommentSection comments={comments} _id={_id} />
                 <div className={styles.date}>{formatDate(createdAt)}</div>
-                <AddComment _id={_id} />
+                <AddComment _id={_id} setUpdate={setUpdate} />
             </div>
         </div>
     )

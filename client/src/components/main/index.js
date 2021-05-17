@@ -13,6 +13,7 @@ const Main = () => {
     const [posts, setPosts] = useState([])
     const [userInfo, setUserInfo] = useState({ email: '', username: '', profilePicture: '', followers: [], following: [], posts: [] })
     const context = useContext(UserContext)
+    const [update, setUpdate] = useState('')
 
     const getData = useCallback(async () => {
         if (context.loggedIn === true) {
@@ -32,14 +33,14 @@ const Main = () => {
     const renderPosts = () => {
         return posts.map(post => {
             return (
-                <Post key={post._id} {...post} />
+                <Post key={post._id} {...post} setUpdate={() => setUpdate(!update)} />
             )
         })
     }
 
     useEffect(() => {
         getData()
-    }, [getData])
+    }, [update, getData])
 
     return (
         <div>
