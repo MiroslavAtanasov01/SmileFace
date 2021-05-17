@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useContext } from "react"
+import React, { useCallback, useState, useEffect, useContext, useRef } from "react"
 import { useParams, useHistory } from 'react-router-dom'
 import styles from './index.module.css'
 import UserContext from '../../Context'
@@ -14,6 +14,7 @@ import AddComment from './post-add-comment'
 
 
 const DetailsPage = () => {
+    const dummy = useRef();
     const params = useParams()
     const history = useHistory()
     const context = useContext(UserContext)
@@ -67,10 +68,10 @@ const DetailsPage = () => {
                     <PostImage userInfo={userInfo} />
                     <div className={styles.info}>
                         <PostHeader userInfo={userInfo} user={user} />
-                        <Comments userInfo={userInfo} user={user} />
+                        <Comments userInfo={userInfo} user={user} dummy={dummy} />
                         <PostLikes userInfo={userInfo} user={user} />
                         <div className={styles.date}>{formatDate(userInfo.createdAt)}</div>
-                        <AddComment setComment={setComment} comment={comment} />
+                        <AddComment setComment={setComment} comment={comment} dummy={dummy} />
                     </div>
                 </div>
             </div>
